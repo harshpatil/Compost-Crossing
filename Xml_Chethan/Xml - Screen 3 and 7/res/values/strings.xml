@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Compost Crossing</string>
+    <string name="composterAddr">Address</string>
+</resources>
