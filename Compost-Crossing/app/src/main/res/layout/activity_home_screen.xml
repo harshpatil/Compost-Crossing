@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cs442.jkoblich.proj.MainActivity">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@mipmap/logo"
+        android:layout_marginBottom="57dp"
+        android:layout_above="@+id/compostButton"
+        android:layout_centerHorizontal="true" />
+
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="200px"
+        android:text="Composter"
+        android:textSize="50px"
+        android:id="@+id/compostButton"
+        android:layout_above="@+id/residentButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="200px"
+        android:text="Resident"
+        android:textSize="50px"
+        android:id="@+id/residentButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
