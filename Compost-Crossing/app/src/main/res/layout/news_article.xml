@@ -11,11 +11,11 @@
         android:textColor="@color/articleHeader"
         android:textSize="20dp"
         android:gravity="center"
-        android:textStyle="bold|italic"
+        android:textStyle="bold"
         android:layout_height="0dp"
         android:layout_weight="0.7"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -59,8 +59,8 @@
         android:gravity="center"
         android:layout_height="0dp"
         android:layout_weight="0.7"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="5dp"/>
 </LinearLayout>
