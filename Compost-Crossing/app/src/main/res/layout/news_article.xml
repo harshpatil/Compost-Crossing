@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10">
+
+    <TextView
+        android:id="@+id/articleHeader"
+        android:layout_width="match_parent"
+        android:text="@string/article_header"
+        android:textColor="@color/articleHeader"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.3">
+    <TextView
+        android:id="@+id/articleTitle"
+        android:layout_width="match_parent"
+        android:textColor="@color/articleHeader"
+        android:textSize="18dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.3"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+    </ScrollView>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7.3">
+    <TextView
+        android:id="@+id/articleBody"
+        android:layout_width="match_parent"
+        android:textColor="@color/articleHeader"
+        android:textSize="15dp"
+        android:layout_height="0dp"
+        android:layout_weight="7.3"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/backButtonArticlePage"
+        android:layout_width="match_parent"
+        android:textColor="@color/buttonText"
+        android:text="@string/article_page_button_text"
+        android:background="@color/buttonBackground"
+        android:textSize="16dp"
+        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"/>
+</LinearLayout>

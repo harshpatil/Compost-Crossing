@@ -25,7 +25,7 @@
         android:id="@+id/imageView"
         android:src="@mipmap/ic_launcher"
         android:layout_below="@+id/header"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="81dp" />
 
@@ -36,23 +36,32 @@
         android:textSize="50px"
         android:layout_marginBottom="15dp"
         android:id="@+id/textView2"
+        android:layout_above="@+id/readArticleButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:text="@string/compost_article"
+        android:textSize="20dp"
+        android:id="@+id/readArticleButton"
         android:layout_above="@+id/compostButton"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="fill_parent"
-        android:layout_height="200px"
+        android:layout_height="50dp"
         android:text="Composter"
-        android:textSize="50px"
+        android:textSize="20dp"
         android:id="@+id/compostButton"
         android:layout_above="@+id/residentButton"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="fill_parent"
-        android:layout_height="200px"
+        android:layout_height="50dp"
         android:text="Resident"
-        android:textSize="50px"
+        android:textSize="20dp"
         android:id="@+id/residentButton"
         android:layout_alignParentBottom="true"
         />
