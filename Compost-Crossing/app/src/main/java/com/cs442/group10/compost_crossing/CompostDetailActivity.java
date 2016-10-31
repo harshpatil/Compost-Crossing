@@ -1,10 +1,12 @@
 package com.cs442.group10.compost_crossing;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 
 public class CompostDetailActivity extends FragmentActivity {
 
@@ -27,4 +29,8 @@ public class CompostDetailActivity extends FragmentActivity {
         fragmentTransaction.commit();
     }
 
+    public void backToAdPage(View view) {
+        Intent mainActivityIntent = new Intent(this, MainActivity.class);
+        startActivity(mainActivityIntent);
+    }
 }

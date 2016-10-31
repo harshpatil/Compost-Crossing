@@ -13,7 +13,8 @@
         android:layout_width="103dp"
         android:layout_height="79dp"
         android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/default_person_image"
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/composterName"
