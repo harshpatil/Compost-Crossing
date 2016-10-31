@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.newsArticle.News;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity implements ViewListingFragment.OnListingSelectedListener {
 
     Button readArticle;
+    String articleTitle;
+    String articleBody;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
                     .add(R.id.fragment_container, firstFragment).commit();
 
         }
+//        fetchArticleFromDB();
     }
 
     public void onListingSelected(int position) {
@@ -113,8 +118,36 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
         startActivity(compostDetailIntent);
     }
 
+    public void fetchArticleFromDB(){
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("articlesList/news1");
+        ref.push();
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                News news = dataSnapshot.getValue(News.class);
+                Log.i("news", " : Title : " + news.getTitle());
+                Log.i("news", " : Body : " + news.getBody());
+                articleTitle = news.getTitle();
+                articleBody = news.getBody();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("DataBase", "Failed to read value.", databaseError.toException());
+            }
+        });
+
+    }
+
     public void onClickingReadArticleButton(){
+
         Intent readArticleIntent = new Intent(this, Article.class);
+//        readArticleIntent.putExtra(Constants.ARTICLE_TITLE, articleTitle);
+//        readArticleIntent.putExtra(Constants.ARTICLE_BODY, articleBody);
         startActivity(readArticleIntent);
     }
 }

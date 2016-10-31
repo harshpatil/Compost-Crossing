@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
+import com.cs442.group10.compost_crossing.constants.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,12 +37,17 @@ public class Article extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_article);
 
+        Intent intent = getIntent();
+
         articleTitle = (TextView) findViewById(R.id.articleTitle);
         articleBody = (TextView) findViewById(R.id.articleBody);
         image = (ImageView)findViewById(R.id.imageArticlePage);
         image.setImageResource(R.drawable.compost_1);
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        articleTitle.setText(intent.getStringExtra(Constants.ARTICLE_TITLE));
+//        articleBody.setText(intent.getStringExtra(Constants.ARTICLE_BODY));
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("articlesList/news1");
         ref.push();
 
