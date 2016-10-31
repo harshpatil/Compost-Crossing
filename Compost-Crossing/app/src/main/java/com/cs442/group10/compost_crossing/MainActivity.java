@@ -1,25 +1,52 @@
 package com.cs442.group10.compost_crossing;
 
 import android.content.Intent;
-import android.os.Build;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.ListFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import com.cs442.group10.compost_crossing.newsArticle.Article;
 
 public class MainActivity extends AppCompatActivity implements ViewListingFragment.OnListingSelectedListener {
-    /** Called when the activity is first created. */
+
+    Button readArticle;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        readArticle = (Button) findViewById(R.id.readArticleButton);
+        readArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickingReadArticleButton();
+            }
+        });
+
+        final Button Composter= (Button)findViewById(R.id.compostButton);
+        final Button residentButton= (Button)findViewById(R.id.residentButton);
+
+        Composter.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+//                Intent i = new Intent(getBaseContext(), ViewListFragment.class);
+//                startActivity(i);
+
+            }
+        });
+
+        residentButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+//                Intent i = new Intent(getBaseContext(), "give the required class name");
+//                startActivity(i);
+
+            }
+        });
 
         final Button button = (Button) findViewById(R.id.compostButton);
         button.setOnClickListener(new View.OnClickListener() {
@@ -77,5 +104,10 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
         /*Code for fragment transaction when clicking on item*/
         Intent compostDetailIntent = new Intent(this,CompostDetailActivity.class);
         startActivity(compostDetailIntent);
+    }
+
+    public void onClickingReadArticleButton(){
+        Intent readArticleIntent = new Intent(this, Article.class);
+        startActivity(readArticleIntent);
     }
 }

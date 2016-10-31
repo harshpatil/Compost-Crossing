@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "866936457849",
+    "firebase_url": "https://compost-crossing.firebaseio.com",
+    "project_id": "compost-crossing",
+    "storage_bucket": "compost-crossing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866936457849:android:1babf018e8e1f2cc",
+        "android_client_info": {
+          "package_name": "com.cs442.group10.compost_crossing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "866936457849-7srprg7pa6qu0nrccvellp4qjqc0a546.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEpIn70gxMSX4mClq41QJ2azioLvpSzrE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
