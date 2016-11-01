@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_height="wrap_content"
     android:weightSum="1"
-    tools:context=".CompostDetailActivity"
+    tools:context=".Composter.CompostDetailActivity"
     android:layout_width="600dp"
     android:scrollbars="vertical">
 

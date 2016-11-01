@@ -8,7 +8,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.cs442.group10.compost_crossing.Composter.CompostDetailActivity;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
+import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
 
 public class MainActivity extends AppCompatActivity implements ViewListingFragment.OnListingSelectedListener {
 
@@ -27,29 +30,19 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
             }
         });
 
-        final Button Composter= (Button)findViewById(R.id.compostButton);
         final Button residentButton= (Button)findViewById(R.id.residentButton);
-
-        Composter.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-
-//                Intent i = new Intent(getBaseContext(), ViewListFragment.class);
-//                startActivity(i);
-
-            }
-        });
 
         residentButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
-//                Intent i = new Intent(getBaseContext(), "give the required class name");
-//                startActivity(i);
+                Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
+                startActivity(residentListViewIntent);
 
             }
         });
 
-        final Button button = (Button) findViewById(R.id.compostButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button composterButton = (Button) findViewById(R.id.compostButton);
+        composterButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setContentView(R.layout.screen_2);
                 ListView lv = (ListView) findViewById(R.id.expandableListView);

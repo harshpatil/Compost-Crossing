@@ -1,4 +1,4 @@
-package com.cs442.group10.compost_crossing;
+package com.cs442.group10.compost_crossing.Composter;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -7,6 +7,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+
+import com.cs442.group10.compost_crossing.MainActivity;
+import com.cs442.group10.compost_crossing.R;
 
 public class CompostDetailActivity extends FragmentActivity {
 
@@ -21,9 +24,9 @@ public class CompostDetailActivity extends FragmentActivity {
         int orientation = getResources().getConfiguration().orientation;
         if(orientation == Configuration.ORIENTATION_LANDSCAPE){//For Landscape mode
             //fragmentTransaction.replace(R.id.compostDetailViewFragment, new CompostDetailViewFragment()); // list view fragment
-            fragmentTransaction.replace(R.id.compostDetailViewFragment, new CompostDetailViewFragment());
+            fragmentTransaction.replace(R.id.compostDetailViewContainer, new CompostDetailViewFragment());
         } else {//for Portrait mode
-            fragmentTransaction.replace(R.id.compostDetailViewFragment, new CompostDetailViewFragment());
+            fragmentTransaction.replace(R.id.compostDetailViewContainer, new CompostDetailViewFragment());
             fragmentTransaction.addToBackStack(null);
         }
         fragmentTransaction.commit();

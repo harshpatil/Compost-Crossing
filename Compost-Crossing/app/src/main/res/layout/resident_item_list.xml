@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/resident_item_list_layout"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:focusable="false">
+
+    <TextView
+        android:id="@+id/compostAdTextView"
+        android:layout_width="273dp"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnAdRemove"
+        android:layout_width="103dp"
+        android:layout_height="wrap_content"
+        android:text="@string/remove"/>
+</LinearLayout>

@@ -5,10 +5,10 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cs442.group10.compost_crossing.CompostDetailActivity">
+    tools:context="com.cs442.group10.compost_crossing.Composter.CompostDetailActivity">
 
     <FrameLayout
-        android:id="@+id/compostDetailViewFragment"
+        android:id="@+id/compostDetailViewContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/compost_detail_view_fragment" />
