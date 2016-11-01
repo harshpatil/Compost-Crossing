@@ -7,4 +7,5 @@ public class Constants {
 
     public static String ARTICLE_TITLE = "article_title";
     public static String ARTICLE_BODY = "article_body";
+    public static int ARTICLE_NOTIFICATION_ID = 1;
 }

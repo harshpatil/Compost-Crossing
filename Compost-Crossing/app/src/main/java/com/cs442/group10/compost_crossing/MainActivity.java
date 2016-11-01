@@ -1,5 +1,7 @@
 package com.cs442.group10.compost_crossing;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.cs442.group10.compost_crossing.newsArticle.Article;
+import com.cs442.group10.compost_crossing.newsArticle.ArticleNotificationService;
+import com.cs442.group10.compost_crossing.newsArticle.MyAlarm;
 import com.cs442.group10.compost_crossing.newsArticle.News;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        startAlarmService();
 
         readArticle = (Button) findViewById(R.id.readArticleButton);
         readArticle.setOnClickListener(new View.OnClickListener() {
@@ -119,8 +125,17 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
     public void onClickingReadArticleButton(){
 
         Intent readArticleIntent = new Intent(this, Article.class);
-//        readArticleIntent.putExtra(Constants.ARTICLE_TITLE, articleTitle);
-//        readArticleIntent.putExtra(Constants.ARTICLE_BODY, articleBody);
         startActivity(readArticleIntent);
+    }
+
+    public void startAlarmService(){
+
+        Log.i("ServiceClass", " Starting Service");
+        Intent alarmIntent = new Intent(this, MyAlarm.class);
+        long scTime = 6*100;
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + scTime, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), scTime , pendingIntent);
     }
 }

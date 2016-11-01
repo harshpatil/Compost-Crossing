@@ -16,6 +16,8 @@
         </activity>
         <activity android:name=".CompostDetailActivity"></activity>
         <activity android:name=".newsArticle.Article"></activity>
+        <service android:name=".newsArticle.ArticleNotificationService" />
+        <receiver android:process=":remote" android:name=".newsArticle.MyAlarm"></receiver>
     </application>
 
 </manifest>
