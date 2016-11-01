@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.newsArticle.News;
 import com.google.firebase.database.DataSnapshot;
@@ -43,28 +42,20 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
 
         Composter.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-
-//                Intent i = new Intent(getBaseContext(), ViewListFragment.class);
-//                startActivity(i);
-
             }
         });
 
         residentButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-
-//                Intent i = new Intent(getBaseContext(), "give the required class name");
-//                startActivity(i);
-
             }
         });
 
         final Button button = (Button) findViewById(R.id.compostButton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 setContentView(R.layout.screen_2);
                 ListView lv = (ListView) findViewById(R.id.expandableListView);
-                // We need to use a different list item layout for devices older than Honeycomb
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
                         android.R.layout.simple_list_item_1, android.R.id.text1, Listings.Names);
                 lv.setAdapter(adapter);
@@ -75,36 +66,18 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
                         startActivity(compostDetailIntent);
                     }
                 });
-                /*
-                //Fragment fragment = new RepeatEntry();
-                //FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                //category_cont is a linear layout container for my fragment
-                ViewListingFragment viewFrag = new ViewListingFragment();
-                ft.replace(R.id.fragment_container, viewFrag).addToBackStack("tag");
-                //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.commit();*/
             }
         });
-        // Check whether the activity is using the layout version with
-        // the fragment_container FrameLayout. If so, we must add the first fragment
+
         if (findViewById(R.id.fragment_container) != null) {
 
-            // However, if we're being restored from a previous state,
-            // then we don't need to do anything and should return or else
-            // we could end up with overlapping fragments.
             if (savedInstanceState != null) {
                 return;
             }
-
-            // Create an instance of ExampleFragment
             ViewListingFragment firstFragment = new ViewListingFragment();
 
-            // In case this activity was started with special instructions from an Intent,
-            // pass the Intent's extras to the fragment as arguments
             firstFragment.setArguments(getIntent().getExtras());
 
-            //Add the fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, firstFragment).commit();
 
@@ -113,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
     }
 
     public void onListingSelected(int position) {
-        /*Code for fragment transaction when clicking on item*/
+
         Intent compostDetailIntent = new Intent(this,CompostDetailActivity.class);
         startActivity(compostDetailIntent);
     }
@@ -129,8 +102,8 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 News news = dataSnapshot.getValue(News.class);
-                Log.i("news", " : Title : " + news.getTitle());
-                Log.i("news", " : Body : " + news.getBody());
+                Log.i("FETCH_FIRBASE", " : Title : " + news.getTitle());
+                Log.i("FETCH_FIRBASE", " : Body : " + news.getBody());
                 articleTitle = news.getTitle();
                 articleBody = news.getBody();
             }

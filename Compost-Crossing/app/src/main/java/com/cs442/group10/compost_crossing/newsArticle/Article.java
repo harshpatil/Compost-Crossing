@@ -48,7 +48,7 @@ public class Article extends AppCompatActivity {
 //        articleBody.setText(intent.getStringExtra(Constants.ARTICLE_BODY));
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("articlesList/news1");
+        DatabaseReference ref = database.getReference("articlesList/news0");
         ref.push();
 
         ref.addValueEventListener(new ValueEventListener() {
@@ -56,8 +56,8 @@ public class Article extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 News news = dataSnapshot.getValue(News.class);
-                Log.i("news", " : Title : " + news.getTitle());
-                Log.i("news", " : Body : " + news.getBody());
+                Log.i("FETCH_FIRBASE", " : Title : " + news.getTitle());
+                Log.i("FETCH_FIRBASE", " : Body : " + news.getBody());
                 articleTitle.setText(news.getTitle());
                 articleBody.setText(news.getBody());
             }
@@ -67,7 +67,6 @@ public class Article extends AppCompatActivity {
                 Log.w("DataBase", "Failed to read value.", databaseError.toException());
             }
         });
-
 //        writeToDB();
 
         goToHomePageButton = (Button)findViewById(R.id.backButtonArticlePage);
