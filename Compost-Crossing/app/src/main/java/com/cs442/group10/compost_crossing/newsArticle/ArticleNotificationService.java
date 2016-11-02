@@ -36,7 +36,7 @@ public class ArticleNotificationService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId){
 
         Log.i("ServiceClass", "Inside onStartCommand ");
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, Article.class), PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder notificationCompat = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle("Compost Article")
@@ -47,7 +47,6 @@ public class ArticleNotificationService extends Service {
         notificationCompat.setContentIntent(contentIntent);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(Constants.ARTICLE_NOTIFICATION_ID, notificationCompat.build());
-
         onDestroy();
         return Service.START_NOT_STICKY;
     }

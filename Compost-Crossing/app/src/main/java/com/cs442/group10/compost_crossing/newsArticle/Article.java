@@ -1,5 +1,7 @@
 package com.cs442.group10.compost_crossing.newsArticle;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +38,9 @@ public class Article extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_article);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(Constants.ARTICLE_NOTIFICATION_ID);
 
         Intent intent = getIntent();
 

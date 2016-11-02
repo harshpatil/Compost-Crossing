@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,6 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity implements ViewListingFragment.OnListingSelectedListener {
 
     Button readArticle;
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
         startAlarmService();
@@ -130,12 +135,23 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
 
     public void startAlarmService(){
 
-        Log.i("ServiceClass", " Starting Service");
+        Date date  = new Date();
+        Calendar calendarAlarm = Calendar.getInstance();
+        Calendar calendarNow = Calendar.getInstance();
+        calendarNow.setTime(date);
+        calendarAlarm.setTime(date);
+        calendarAlarm.set(Calendar.HOUR_OF_DAY,8);
+        calendarAlarm.set(Calendar.MINUTE, 0);
+        calendarAlarm.set(Calendar.SECOND,0);
+        if(calendarAlarm.before(calendarNow)){
+            calendarAlarm.add(Calendar.DATE,1);
+        }
+
+        Log.i("MainActivity", " Starting Alarm");
         Intent alarmIntent = new Intent(this, MyAlarm.class);
-        long scTime = 6*100;
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + scTime, pendingIntent);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), scTime , pendingIntent);
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendarAlarm.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
     }
 }
