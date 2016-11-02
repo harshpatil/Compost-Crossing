@@ -8,4 +8,5 @@
     <string name="remove">Remove</string>
     <string name="myAds">My Ads</string>
     <string name="postANewAd">Post a New Ad</string>
+    <string name="createANewAdToday">Create a new Ad Today</string>
 </resources>

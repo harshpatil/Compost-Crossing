@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.cs442.group10.compost_crossing.CompostAd;
 import com.cs442.group10.compost_crossing.R;
@@ -29,7 +30,7 @@ import static android.R.id.list;
 
 public class ResidentListViewFragment extends Fragment {
 
-
+    private static final String AD_TABLE = "adDetails";
     private static final String AD_ID_COL = "Ad_Id";
     private static final String TITLE_COL = "Title";
     private static final String WEIGHT_COL = "Weight";
@@ -53,9 +54,10 @@ public class ResidentListViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.resident_item, container, false);
         final ListView listView = (ListView) view.findViewById(R.id.residentItemListView);
+        final TextView emptyTextView = (TextView) view.findViewById(R.id.emptyAdListForResident);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("adDetails");
+        DatabaseReference reference = database.getReference(AD_TABLE);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -70,6 +72,7 @@ public class ResidentListViewFragment extends Fragment {
 
                     ResidentListViewAdapter residentListViewAdapter = new ResidentListViewAdapter(getActivity(), compostAdsMap);
                     listView.setAdapter(residentListViewAdapter);
+                    listView.setEmptyView(emptyTextView);
                 }
             }
 

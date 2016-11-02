@@ -20,6 +20,16 @@
         android:layout_marginLeft="20px"
         android:layout_marginRight="20px" />
 
+    <TextView
+        android:id="@+id/emptyAdListForResident"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+        android:text="@string/createANewAdToday"/>
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
