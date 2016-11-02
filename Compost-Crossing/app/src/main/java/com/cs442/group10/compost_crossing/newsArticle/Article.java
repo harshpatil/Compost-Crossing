@@ -38,24 +38,6 @@ public class Article extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
-        super.onCreate(savedInstanceState);
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.news_article);
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(Constants.ARTICLE_NOTIFICATION_ID);
-
-        Intent intent = getIntent();
-
-        articleTitle = (TextView) findViewById(R.id.articleTitle);
-        articleBody = (TextView) findViewById(R.id.articleBody);
-        image = (ImageView)findViewById(R.id.imageArticlePage);
-        image.setImageResource(R.drawable.compost_1);
-
-//        articleTitle.setText(intent.getStringExtra(Constants.ARTICLE_TITLE));
-//        articleBody.setText(intent.getStringExtra(Constants.ARTICLE_BODY));
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("articlesList/news0");
         ref.push();
@@ -76,6 +58,25 @@ public class Article extends AppCompatActivity {
                 Log.w("DataBase", "Failed to read value.", databaseError.toException());
             }
         });
+
+        super.onCreate(savedInstanceState);
+//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.news_article);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(Constants.ARTICLE_NOTIFICATION_ID);
+
+        Intent intent = getIntent();
+
+        articleTitle = (TextView) findViewById(R.id.articleTitle);
+        articleBody = (TextView) findViewById(R.id.articleBody);
+        image = (ImageView)findViewById(R.id.imageArticlePage);
+        image.setImageResource(R.drawable.compost_1);
+
+//        articleTitle.setText(intent.getStringExtra(Constants.ARTICLE_TITLE));
+//        articleBody.setText(intent.getStringExtra(Constants.ARTICLE_BODY));
+
 //        writeToDB();
 
         goToHomePageButton = (Button)findViewById(R.id.backButtonArticlePage);
