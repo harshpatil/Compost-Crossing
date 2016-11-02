@@ -9,8 +9,9 @@
 
     <TextView
         android:id="@+id/compostAdTextView"
-        android:layout_width="273dp"
-        android:layout_height="wrap_content"/>
+        android:layout_width="253dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     <Button
         android:id="@+id/btnAdRemove"
         android:layout_width="103dp"
