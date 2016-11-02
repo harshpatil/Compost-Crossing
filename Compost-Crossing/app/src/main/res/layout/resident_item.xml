@@ -20,11 +20,25 @@
         android:layout_marginLeft="20px"
         android:layout_marginRight="20px" />
 
-    <Button
-        android:id="@+id/btnBackResidentListView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Back"
-        android:layout_gravity="center"
-        android:onClick="back" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="40px">
+        <Button
+            android:id="@+id/btnBackResidentListView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:onClick="back"
+            android:layout_marginRight="50px" />
+
+        <Button
+            android:id="@+id/btnPostAd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/postANewAd"
+            android:onClick="navigateToNewAdForm" />
+    </LinearLayout>
 </LinearLayout>

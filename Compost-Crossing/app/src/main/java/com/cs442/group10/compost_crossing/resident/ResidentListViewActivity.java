@@ -20,4 +20,8 @@ public class ResidentListViewActivity extends AppCompatActivity {
     public void back(View v){
         onBackPressed();
     }
+
+    public void navigateToNewAdForm(View v){
+        //navigating to posting new ad fragment goes here
+    }
 }
