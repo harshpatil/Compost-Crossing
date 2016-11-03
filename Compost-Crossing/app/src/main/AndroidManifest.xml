@@ -16,8 +16,9 @@
         </activity>
         <activity android:name=".CompostDetailActivity"></activity>
         <activity android:name=".newsArticle.Article"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <!--android:theme="@style/NoTitleTheme">-->
+            android:theme="@style/NoTitleTheme">
+            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar">-->
+            <!--android:theme="@style/Theme.AppCompat.NoActionBar">-->
         </activity>
         <service android:name=".newsArticle.ArticleNotificationService" />
         <receiver android:process=":remote" android:name=".newsArticle.MyAlarm"></receiver>
