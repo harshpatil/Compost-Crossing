@@ -22,6 +22,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -38,8 +42,17 @@ public class Article extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
+        DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        Date date = new Date();
+        Log.i("Today's date :", dateFormat.format(date));
+        String articleNumber = dateFormat.format(date);
+        Log.i("ArticleNumber : ", articleNumber);
+        DateFormat format2=new SimpleDateFormat("EEEE");
+        String dayOfTheWeek = format2.format(date);
+        Log.i("Today is :", dayOfTheWeek);
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("articlesList/news0");
+        DatabaseReference ref = database.getReference("articlesList/news_"+articleNumber);
         ref.push();
 
         ref.addValueEventListener(new ValueEventListener() {
@@ -67,17 +80,24 @@ public class Article extends AppCompatActivity {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(Constants.ARTICLE_NOTIFICATION_ID);
 
-        Intent intent = getIntent();
-
         articleTitle = (TextView) findViewById(R.id.articleTitle);
         articleBody = (TextView) findViewById(R.id.articleBody);
         image = (ImageView)findViewById(R.id.imageArticlePage);
-        image.setImageResource(R.drawable.compost_1);
-
-//        articleTitle.setText(intent.getStringExtra(Constants.ARTICLE_TITLE));
-//        articleBody.setText(intent.getStringExtra(Constants.ARTICLE_BODY));
-
-//        writeToDB();
+        if(dayOfTheWeek.equals("Monday")){
+            image.setImageResource(R.drawable.compost_2);
+        }else if(dayOfTheWeek.equals("Tuesday")){
+            image.setImageResource(R.drawable.compost_3);
+        }else if(dayOfTheWeek.equals("Wednesday")){
+            image.setImageResource(R.drawable.compost_4);
+        }else if(dayOfTheWeek.equals("Thursday")){
+            image.setImageResource(R.drawable.compost_5);
+        }else if(dayOfTheWeek.equals("Friday")){
+            image.setImageResource(R.drawable.compost_6);
+        }else if(dayOfTheWeek.equals("Saturday")){
+            image.setImageResource(R.drawable.compost_7);
+        }else{
+            image.setImageResource(R.drawable.compost_8);
+        }
 
         goToHomePageButton = (Button)findViewById(R.id.backButtonArticlePage);
         goToHomePageButton.setOnClickListener(new View.OnClickListener() {
@@ -91,31 +111,5 @@ public class Article extends AppCompatActivity {
     public void onClickingGoToHomePageButton(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-    }
-
-    public void writeToDB(){
-
-        String title = "Title !!";
-        String body = "Body !!!";
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("articlesList");
-        News news = new News();
-        news.setTitle(title);
-        news.setBody(body);
-        myRef.child("news2").setValue(news);
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                Log.i("DataBase", "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-                Log.w("DataBase", "Failed to read value.", error.toException());
-            }
-        });
     }
 }

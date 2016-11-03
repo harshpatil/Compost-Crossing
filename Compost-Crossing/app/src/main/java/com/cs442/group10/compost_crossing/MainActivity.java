@@ -29,11 +29,12 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity implements ViewListingFragment.OnListingSelectedListener {
 
     Button readArticle;
-    String articleTitle;
-    String articleBody;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+//        writeArticleToDB();
+
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
                     .add(R.id.fragment_container, firstFragment).commit();
 
         }
-//        fetchArticleFromDB();
+
     }
 
     public void onListingSelected(int position) {
@@ -102,30 +103,6 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
         startActivity(compostDetailIntent);
     }
 
-    public void fetchArticleFromDB(){
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("articlesList/news1");
-        ref.push();
-
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                News news = dataSnapshot.getValue(News.class);
-                Log.i("FETCH_FIRBASE", " : Title : " + news.getTitle());
-                Log.i("FETCH_FIRBASE", " : Body : " + news.getBody());
-                articleTitle = news.getTitle();
-                articleBody = news.getBody();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("DataBase", "Failed to read value.", databaseError.toException());
-            }
-        });
-
-    }
 
     public void onClickingReadArticleButton(){
 
@@ -154,4 +131,41 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
 
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendarAlarm.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
     }
+
+//    public void writeArticleToDB(){
+//
+//        String title = "Bagged soils can contain herbicides, gnats, and other unsavory problems.";
+//        String body = "Stories about compost possibly contaminated with heavy metals from sewage waste and disastrous herbicides turning up in potting soil aren’t new. In 2010, the University of Maryland Extension put out a “Gardener’s Alert! Beware of Herbicide-Contaminated Compost and Manure.” The Ohio State University Extension put out a fact sheet (PDF) on one persistent pesticide showing up in compost that kills off tomato, eggplant and other nightshade family vegetables as well as beans and sunflower.\n" +
+//                "But it seems more recently that gardeners are starting to pay attention to other problems that come with mass-produced, commercial potting soils and compost: the importation of pests and disease into your garden or indoor grow space.\n" +
+//                "Potting soil, whether it comes in bags or in pots with nursery stock you buy, is a great contaminator. It’s singled out for importing root aphids, once little known, into greenhouses and gardens across the country in epidemic-like proportions. It also has been known to carry fungus gnats.\n" +
+//                "One popular brand of potting soil is so well-known to carry the nuisance of otherwise harmless gnats that Consumer Affairs has a page devoted to complaints.\n" +
+//                "The internet also hosts complaints of low-end soils and compost from big chain stores that included plastic and other trash.\n" +
+//                "It’s hard to track the spread of plant diseases and fungal diseases in home gardens. But potting soil is highly suspect in the introduction of disease and molds and fungus where it is used. Buy only the best quality from someone you trust.\n" +
+//                "Root aphids often arrive in the soil that potted plants are rooted in. These aphids sap strength and vigor from plants, making for inferior fruiting and flowering. Buying clones and nursery stock from trusted, preferably local growers who you can question is a big plus. Avoid the kind of nursery stock sold out front chain supermarkets and big box stores.\n" +
+//                "Buying trusted brands from trusted sources is also important when purchasing manures and compost. Any compost made from city lawn clippings and other green waste may contain residual herbicides. The City of Seattle learned a tough lesson back in the 1990s when the compost made of recycled yard waste started killing off vegetable plants. The problem eventually led to the ban of clopyralid for lawn use.\n" +
+//                "Now another persistent herbicide, aminopyralid, is turning up in compost. Aminopyralid is widely used in hayfields and pastures to kill off broad leaf weeds. Like clopyralid, it affects a variety of broad leaf vegetable plants, including peas, beans and tomatoes. Also like clopyralid, it can persist in soil and compost for months and even years (the composting process does not speed its decay).\n" +
+//                "Amniopyralid, manufactured by Dow AgroSciences, shows up in dairy and cattle manure. That manure is widely reapplied to farms and fields but also makes its way into manures and composts sold to home gardeners.\n" +
+//                "Problems with the pesticide first introduced in 2005 began showing up in England by 2008. Dow suspended the use of the spray until it could issue warnings (note Dow’s chart where potato, lettuce, beans, tomato, and “etc.” are crossed out in red).\n" +
+//                "Short of being able to buy compost and grow-soil from organic sources, it’s safest to make your owncomposts and potting soils. That way you’ll know exactly what’s going in and what’s not. You can’t always buy peace of mind.\n\nBy E. Vinje\n";
+//
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("articlesList");
+//        News news = new News();
+//        news.setTitle(title);
+//        news.setBody(body);
+//        myRef.child("news_08112016").setValue(news);
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String value = dataSnapshot.getValue(String.class);
+//                Log.i("DataBase", "Value is: " + value);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//
+//                Log.w("DataBase", "Failed to read value.", error.toException());
+//            }
+//        });
+//    }
 }

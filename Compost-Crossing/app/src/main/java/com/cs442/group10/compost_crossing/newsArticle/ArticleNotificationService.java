@@ -20,7 +20,6 @@ import com.cs442.group10.compost_crossing.constants.Constants;
  */
 public class ArticleNotificationService extends Service {
 
-
     @Override
     public void onCreate() {
         Log.i("ServiceClass", "Inside onCreate");

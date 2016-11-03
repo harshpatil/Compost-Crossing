@@ -44,7 +44,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"
         android:adjustViewBounds="false"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerInside" />
 
     <ScrollView
         android:layout_width="match_parent"
