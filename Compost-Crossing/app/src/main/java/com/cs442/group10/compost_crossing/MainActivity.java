@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.cs442.group10.compost_crossing.Composter.ComposterRegistration;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.newsArticle.News;
 import com.google.firebase.database.DataSnapshot;
@@ -20,9 +22,11 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity implements ViewListingFragment.OnListingSelectedListener {
 
     Button readArticle;
+    DbMain db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        db = new DbMain(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -40,9 +44,15 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
         Composter.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
-//                Intent i = new Intent(getBaseContext(), ViewListFragment.class);
-//                startActivity(i);
-
+                int count = db.numberOfentries();
+                if(count >= 1){
+                    Intent compostDetailIntent = new Intent(getApplicationContext(),CompostDetailActivity.class);
+                    startActivity(compostDetailIntent);
+                }
+                else{
+                    Intent composterregistration = new Intent(getApplicationContext(),ComposterRegistration.class);
+                    startActivity(composterregistration);
+                }
             }
         });
 
