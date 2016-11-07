@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#08135b</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="articleHeader">#050505</color>
+    <color name="colorPrimary">#188118</color>
+    <color name="colorPrimaryDark">#156115</color>
+    <color name="colorAccent">#408f40</color>
+    <color name="articleHeader">#156115</color>
+    <color name="articleHeaderNewsPage">#ffffff</color>
+    <color name="articleText">#050505</color>
     <color name="buttonText">#ffffff</color>
-    <color name="buttonBackground">#4c61d7</color>
+    <color name="buttonBackground">#5db45d</color>
 </resources>

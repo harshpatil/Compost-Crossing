@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/logo5"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -20,9 +20,15 @@
             android:label="@string/app_name">
 
         </activity>
-        <activity android:name=".Composter.CompostDetailActivity" />
-        <activity android:name=".newsArticle.Article" />
         <activity android:name=".resident.ResidentListViewActivity"></activity>
+        <activity android:name=".Composter.CompostDetailActivity"></activity>
+        <activity android:name=".newsArticle.Article"
+            android:theme="@style/NoTitleTheme">
+            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar">-->
+            <!--android:theme="@style/Theme.AppCompat.NoActionBar">-->
+        </activity>
+        <service android:name=".newsArticle.ArticleNotificationService" />
+        <receiver android:process=":remote" android:name=".newsArticle.MyAlarm"></receiver>
     </application>
 
 </manifest>
