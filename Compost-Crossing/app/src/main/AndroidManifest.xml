@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".resident.ResidentListViewActivity"></activity>
         <activity android:name=".Composter.CompostDetailActivity"></activity>
+        <activity android:name=".Composter.ComposterRegistration"></activity>
         <activity android:name=".newsArticle.Article"
             android:theme="@style/NoTitleTheme">
             <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar">-->

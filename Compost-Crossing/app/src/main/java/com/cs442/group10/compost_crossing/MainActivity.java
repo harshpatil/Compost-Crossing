@@ -14,7 +14,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.cs442.group10.compost_crossing.Composter.CompostDetailActivity;
-
+import com.cs442.group10.compost_crossing.Composter.ComposterRegistration;
+import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
 import com.cs442.group10.compost_crossing.newsArticle.ArticleNotificationService;
@@ -34,10 +35,12 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
     Button readArticle;
     Button residentButton;
     Button composterButton;
+    DbMain db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
+//        db = new DbMain(this);
 //        writeArticleToDB();
 
         super.onCreate(savedInstanceState);
@@ -53,6 +56,22 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
                 onClickingReadArticleButton();
             }
         });
+
+//        composterButton = (Button)findViewById(R.id.compostButton);
+//        composterButton.setOnClickListener(new Button.OnClickListener() {
+//            public void onClick(View v) {
+//
+//                int count = db.numberOfentries();
+//                if(count >= 1){
+//                    Intent compostDetailIntent = new Intent(getApplicationContext(),CompostDetailActivity.class);
+//                    startActivity(compostDetailIntent);
+//                }
+//                else{
+//                    Intent composterregistration = new Intent(getApplicationContext(),ComposterRegistration.class);
+//                    startActivity(composterregistration);
+//                }
+//            }
+//        });
 
         residentButton = (Button)findViewById(R.id.residentButton);
         residentButton.setOnClickListener(new Button.OnClickListener() {
@@ -83,19 +102,17 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
             }
         });
 
-        if (findViewById(R.id.fragment_container) != null) {
-
-            if (savedInstanceState != null) {
-                return;
-            }
-            ViewListingFragment firstFragment = new ViewListingFragment();
-
-            firstFragment.setArguments(getIntent().getExtras());
-
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).commit();
-
-        }
+//        if (findViewById(R.id.fragment_container) != null) {
+//
+//            if (savedInstanceState != null) {
+//                return;
+//            }
+//            ViewListingFragment firstFragment = new ViewListingFragment();
+//            firstFragment.setArguments(getIntent().getExtras());
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.fragment_container, firstFragment).commit();
+//
+//        }
 
     }
 
