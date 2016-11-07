@@ -15,8 +15,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".CompostDetailActivity"></activity>
+<<<<<<< HEAD
         <activity android:name=".newsArticle.Article"></activity>
         <activity android:name=".Composter.ComposterRegistration"></activity>
+=======
+        <activity android:name=".newsArticle.Article"
+            android:theme="@style/NoTitleTheme">
+            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar">-->
+            <!--android:theme="@style/Theme.AppCompat.NoActionBar">-->
+        </activity>
+        <service android:name=".newsArticle.ArticleNotificationService" />
+        <receiver android:process=":remote" android:name=".newsArticle.MyAlarm"></receiver>
+>>>>>>> e7b7fda7f628e9c09fac7cfcdb7eb0f2101784c3
     </application>
 
 </manifest>

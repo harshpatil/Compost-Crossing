@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="10">
+    android:weightSum="10" >
 
     <TextView
         android:id="@+id/articleHeader"
         android:layout_width="match_parent"
         android:text="@string/article_header"
-        android:textColor="@color/articleHeader"
+        android:textColor="@color/articleHeaderNewsPage"
+        android:background="@color/colorPrimary"
         android:textSize="20dp"
         android:gravity="center"
-        android:textStyle="bold"
         android:layout_height="0dp"
         android:layout_weight="0.7"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,9 +25,10 @@
     <TextView
         android:id="@+id/articleTitle"
         android:layout_width="match_parent"
-        android:textColor="@color/articleHeader"
+        android:textColor="@color/articleText"
         android:textSize="18dp"
         android:textStyle="bold"
+        android:ellipsize="marquee"
         android:layout_height="0dp"
         android:layout_weight="1.3"
         android:layout_marginLeft="10dp"
@@ -37,24 +39,25 @@
         android:id="@+id/imageArticlePage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="2.6"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"
         android:adjustViewBounds="false"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerInside" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5">
+        android:layout_weight="4.7">
     <TextView
         android:id="@+id/articleBody"
         android:layout_width="match_parent"
-        android:textColor="@color/articleHeader"
+        android:textColor="@color/articleText"
         android:textSize="15dp"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="4.7"
+        android:ellipsize="marquee"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
@@ -69,7 +72,7 @@
         android:textSize="16dp"
         android:gravity="center"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.7"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
