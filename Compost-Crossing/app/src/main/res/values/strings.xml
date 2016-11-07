@@ -7,7 +7,9 @@
     <string name="article_page_button_text">Home Page</string>
     <string name="text_home_screen">Welcome! Are you a </string>
     <string name="remove">Remove</string>
-    <string name="myAds">My Ads</string>
+    <string name="activeAds">Active Ads</string>
+    <string name="residentHistory">History</string>
     <string name="postANewAd">Post a New Ad</string>
+    <string name="composterNearBy">Nearby Composter</string>
     <string name="createANewAdToday">Create a new Ad Today</string>
 </resources>
