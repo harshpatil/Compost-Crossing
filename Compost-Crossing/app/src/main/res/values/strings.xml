@@ -15,5 +15,6 @@
     <string name="residentPastAds">Your Past Ads</string>
     <string name="residentNearByComposter">Nearby Composters</string>
     <string name="back">Back</string>
+    <string name="createAd">Create Ad</string>
 
 </resources>

@@ -1,119 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textColor="@color/buttonText"
+        android:background="@color/buttonBackground"
+        android:textSize="18dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:text="@string/createAd"
+        android:layout_marginBottom="3dp"
+        />
 
     <EditText
         android:id="@+id/compostType"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1.14"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
-        android:hint="Compost Type"
+        android:hint="Compost Name"
         android:textColor="#000000"
         android:textColorHint="#f1434343"/>
 
     <EditText
         android:id="@+id/pickupLocation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1.14"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
-        android:hint="Pickup Location (Address, City, State)"
+        android:hint="Pickup Location (Street, House #)"
         android:textColorHint="#f1434343"/>
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/pickupCity"
         android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.14"
+        android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Payment Accepted"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="City (Chicago)"
+        android:textColorHint="#f1434343"/>
 
-        <Switch
-            android:id="@+id/paymentAccepted"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:showText="true"
-            android:textOff="No"
-            android:textOn="Yes"
-            android:textSize="5dp"
-            android:layout_weight="0.62"
-            android:splitTrack="false"
-            style="@android:style/Widget.Material.CompoundButton.Switch" />
-    </LinearLayout>
+
+    <EditText
+        android:id="@+id/state"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.14"
+        android:layout_gravity="center_horizontal|start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="State (Illinois)"
+        android:textColorHint="#f1434343"/>
+
+
+    <EditText
+        android:id="@+id/zipCode"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.14"
+        android:layout_gravity="center_horizontal|start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:inputType="phone"
+        android:ems="10"
+        android:hint="Zip Code (60616)"
+        android:textColor="#000000"
+        android:textColorHint="#f1434343"/>
 
     <EditText
         android:id="@+id/compWeight"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1.14"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:inputType="phone"
         android:ems="10"
-        android:hint="Compost Weight (lbs)"
+        android:hint="Weight (lbs)"
         android:textColor="#000000"
         android:textColorHint="#f1434343"/>
     <EditText
         android:id="@+id/compPrice"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1.14"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:inputType="phone"
         android:ems="10"
         android:hint="Price ($)"
         android:textColor="#000000"
         android:textColorHint="#f1434343"/>
-    <!--
-    <EditText
-        android:id="@+id/compostAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|start"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:hint="Address"
-        android:textColor="#000000"
-        android:textColorHint="#f1434343"
-        android:layout_weight="0.28" />
-    -->
 
     <Button
+        android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:textColor="@color/buttonText"
         android:background="@color/buttonBackground"
         android:layout_marginBottom="5dp"
         android:text="Submit"
         android:textSize="16dp"
-        android:id="@+id/btnSubmit"
         />
-</LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+
