@@ -29,7 +29,7 @@
         android:id="@+id/compostType"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.14"
+        android:layout_weight="1"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -43,7 +43,7 @@
         android:id="@+id/pickupLocation"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.14"
+        android:layout_weight="1"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -56,7 +56,7 @@
         android:id="@+id/pickupCity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.14"
+        android:layout_weight="1"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -70,7 +70,7 @@
         android:id="@+id/state"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.14"
+        android:layout_weight="1"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -84,7 +84,7 @@
         android:id="@+id/zipCode"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.14"
+        android:layout_weight="1"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -99,7 +99,7 @@
         android:id="@+id/compWeight"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.14"
+        android:layout_weight="1"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -113,7 +113,7 @@
         android:id="@+id/compPrice"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.14"
+        android:layout_weight="1"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -140,6 +140,23 @@
         android:textSize="16dp"
         />
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/backButtonCreateAdPage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:textColor="@color/buttonText"
+        android:background="@color/buttonBackground"
+        android:layout_marginBottom="5dp"
+        android:text="Back"
+        android:textSize="16dp"
+        />
+
+
+</LinearLayout>
 </ScrollView>
 

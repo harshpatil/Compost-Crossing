@@ -1,7 +1,9 @@
 package com.cs442.group10.compost_crossing.resident.createAd;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,78 +11,102 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.cs442.group10.compost_crossing.R;
+import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AdCreation extends AppCompatActivity {
 
+    EditText compostTitle;
+    EditText address;
+    EditText city;
+    EditText state;
+    EditText zipCode;
+    EditText weight;
+    EditText price;
     Button submitButton;
-    EditText compostType;
-    EditText pickupLocation;
-    Switch paymentAccepted;
-    EditText compWeight;
-    EditText compPrice;
-
-    String firstName = "John";//get from login
-    String lastName  = "Sebastien";//get from login
-    String type = "";
-    String address = "";
-    String state = "";
-    String city = "";
-    String payAccept = "Unavailable";
-    double weight = 0.0;
-    double price = 0.0;
-
+    Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resident_ad_creation_activity);
 
-        compostType = (EditText) findViewById(R.id.compostType);
-        pickupLocation = (EditText) findViewById(R.id.pickupLocation);
-        paymentAccepted = (Switch) findViewById(R.id.paymentAccepted);
-        compWeight = (EditText) findViewById(R.id.compWeight);
-        compPrice = (EditText) findViewById(R.id.compPrice);
-
+        compostTitle = (EditText) findViewById(R.id.compostType);
+        address = (EditText) findViewById(R.id.pickupLocation);
+        city = (EditText) findViewById(R.id.pickupCity);
+        state = (EditText) findViewById(R.id.state);
+        zipCode = (EditText) findViewById(R.id.zipCode);
+        weight = (EditText) findViewById(R.id.compWeight);
+        price = (EditText) findViewById(R.id.compPrice);
         submitButton = (Button) findViewById(R.id.btnSubmit);
+        backButton = (Button) findViewById(R.id.backButtonCreateAdPage);
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(compostType.getText().toString().equals("") || pickupLocation.getText().toString().equals("") || compWeight.getText().toString().equals("") || compPrice.getText().toString().equals("")){
+                if(compostTitle.getText().toString().equals("") || address.getText().toString().equals("") || weight.getText().toString().equals("") || price.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(),"Please fill out all fields.", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    writetoDB();
+                    writeToDB();
                 }
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickingBackButton();
             }
         });
     }
 
-    protected void writetoDB(){
-        type = compostType.getText().toString();
-        String location = pickupLocation.getText().toString();
-        if(paymentAccepted.isChecked()){
-            payAccept = "Available";
-        }else{
-            payAccept = "Unavailable";
-        }
-        String[] result = location.split(", ");
-        address = result[0];
-        city = result[1];
-        state = result[2];
-        weight = Double.parseDouble(compWeight.getText().toString());
-        price = Double.parseDouble(compPrice.getText().toString());
+    protected void writeToDB(){
 
-        final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("adDetails/ad3");
-        mDatabase.child("Ad_id").setValue(3);
-        mDatabase.child("Address").setValue(address);
-        mDatabase.child("City").setValue(city);
-        mDatabase.child("Cost").setValue(price);
-        mDatabase.child("Drop").setValue(payAccept);
-        mDatabase.child("State").setValue(state);
-        mDatabase.child("Title").setValue(type);
-        mDatabase.child("Weight").setValue(weight);
-        mDatabase.push();
+        String buyerId = "9595995";
+        String idSuffix = "ad2";
+        String adId = buyerId + "_" + idSuffix;
+
+        CompostAd compostAd = new CompostAd();
+        compostAd.setTitle(compostTitle.getText().toString());
+        compostAd.setAddress(address.getText().toString());
+        compostAd.setCity(city.getText().toString());
+        compostAd.setState(state.getText().toString());
+        compostAd.setZipCode(zipCode.getText().toString());
+        compostAd.setWeight(weight.getText().toString());
+        compostAd.setCost(price.getText().toString());
+        compostAd.setDrop("available");
+        compostAd.setBuyerId("NULL");
+        compostAd.setId(adId);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("adDetails");
+        myRef.child(adId).setValue(compostAd);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+                Log.w("DataBase", "Failed to read value.", error.toException());
+            }
+        });
+
+        Toast.makeText(this, "Compost Ad : " + compostAd.getTitle() + " has been created", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, AdCreation.class);
+        startActivity(intent);
+    }
+
+    public void onClickingBackButton(){
+
+        Intent intent = new Intent(this, ResidentListViewActivity.class);
+        startActivity(intent);
     }
 }

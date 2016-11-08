@@ -33,6 +33,8 @@ public class ResidentAdsHistory extends AppCompatActivity {
     List<Ads> adsList = new ArrayList<Ads>();
     ResidentHistoryAdapter residentHistoryAdapter;
     ListView residentHistoryListView;
+    String buyerName = "";
+    Ads ads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +55,32 @@ public class ResidentAdsHistory extends AppCompatActivity {
 
                     if(String.valueOf(compostAdMap.get("sold")).contains("true")){
 
-                        Log.i("ADSLIST",compostAdMap.get("Title"));
+                        ads = new Ads();
+                        String buyerId = String.valueOf(compostAdMap.get("buyerId"));
+
+                        FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+                        DatabaseReference ref2 = database2.getReference("composterRegisteration/"+buyerId + "/name");
+                        ref2.push();
+                        ref2.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                buyerName = dataSnapshot.getValue(String.class);
+                                ads.setBuyerName(buyerName);
+                                Log.i("BUYERNAME:", buyerName);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        Log.i("ADSLIST",compostAdMap.get("title"));
                         Log.i("ADSLIST",compostAdMap.get("sold"));
-                        Ads ads = new Ads();
-                        ads.setTitle(String.valueOf(compostAdMap.get("Title")));
-                        ads.setBuyerName(String.valueOf(compostAdMap.get("Buyer_Name")));
-                        ads.setCost(String.valueOf(compostAdMap.get("Cost")));
-                        ads.setWeight(String.valueOf(compostAdMap.get("Weight")));
+
+                        ads.setTitle(String.valueOf(compostAdMap.get("title")));
+                        ads.setCost(String.valueOf(compostAdMap.get("cost")));
+                        ads.setWeight(String.valueOf(compostAdMap.get("weight")));
                         ads.setSold(String.valueOf(compostAdMap.get("sold")));
 
                         adsList.add(ads);
