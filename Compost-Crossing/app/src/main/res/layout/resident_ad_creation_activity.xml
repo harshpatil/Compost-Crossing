@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/compostType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Compost Type"
+        android:textColor="#000000"
+        android:textColorHint="#f1434343"/>
+
+    <EditText
+        android:id="@+id/pickupLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Pickup Location (Address, City, State)"
+        android:textColorHint="#f1434343"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Payment Accepted"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <Switch
+            android:id="@+id/paymentAccepted"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:showText="true"
+            android:textOff="No"
+            android:textOn="Yes"
+            android:textSize="5dp"
+            android:layout_weight="0.62"
+            android:splitTrack="false"
+            style="@android:style/Widget.Material.CompoundButton.Switch" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/compWeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:inputType="phone"
+        android:ems="10"
+        android:hint="Compost Weight (lbs)"
+        android:textColor="#000000"
+        android:textColorHint="#f1434343"/>
+    <EditText
+        android:id="@+id/compPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:inputType="phone"
+        android:ems="10"
+        android:hint="Price ($)"
+        android:textColor="#000000"
+        android:textColorHint="#f1434343"/>
+    <!--
+    <EditText
+        android:id="@+id/compostAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:hint="Address"
+        android:textColor="#000000"
+        android:textColorHint="#f1434343"
+        android:layout_weight="0.28" />
+    -->
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center"
+        android:textColor="@color/buttonText"
+        android:background="@color/buttonBackground"
+        android:layout_marginBottom="5dp"
+        android:text="Submit"
+        android:textSize="16dp"
+        android:id="@+id/btnSubmit"
+        />
+</LinearLayout>
