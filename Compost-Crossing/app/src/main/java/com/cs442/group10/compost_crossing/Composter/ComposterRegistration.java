@@ -59,7 +59,6 @@ public class ComposterRegistration extends AppCompatActivity {
             }
         });
 
-
     }
 
     protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode){

@@ -12,4 +12,8 @@
     <string name="postANewAd">Post a New Ad</string>
     <string name="composterNearBy">Nearby Composter</string>
     <string name="createANewAdToday">Create a new Ad Today</string>
+    <string name="residentPastAds">Your Past Ads</string>
+    <string name="residentNearByComposter">Nearby Composters</string>
+    <string name="back">Back</string>
+
 </resources>
