@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Hey Resident! Tell us more about you..."
+        android:textAlignment="center"
+        android:id="@+id/header"
+        android:textSize="40px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/firstName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:hint="Given Name"
+        android:layout_below="@+id/textScreen6"/>
+
+    <EditText
+        android:inputType="phone"
+        android:id="@+id/phoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:hint="Contact Number"
+        android:layout_below="@+id/lastName"/>
+
+    <EditText
+        android:inputType="text"
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:hint="Address"
+        android:layout_below="@+id/phoneNumber"/>
+
+    <EditText
+        android:inputType="text"
+        android:id="@+id/city"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:hint="City"
+        android:layout_below="@+id/phoneNumber"/>
+
+    <EditText
+        android:inputType="text"
+        android:id="@+id/state"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:hint="State"
+        android:layout_below="@+id/phoneNumber"/>
+
+
+    <EditText
+        android:inputType="number"
+        android:id="@+id/zipcode"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:hint="Zipcode"
+        android:layout_below="@+id/address"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="150px" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Submit"
+        android:textSize="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/createProfileButton"
+        android:layout_marginBottom="52dp"
+        android:textColor="@color/buttonText"
+        android:background="@color/buttonBackground"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</LinearLayout>

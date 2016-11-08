@@ -16,6 +16,7 @@ public class DbMain extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "CompostCrossing.db";
     public static final String COMPOST_REGISTER_TABLE_NAME = "composter_register";
+    public static final String RESIDENT_REGISTER_TABLE_NAME = "resident_register";
     public static final String COMPOST_REGISTER_COLUMN_ID = "id";
     public static final String COMPOST_REGISTER_COLUMN_TS = "tstamp";
     public static final String COMPOST_REGISTER_COLUMN_NAME = "name";
@@ -36,15 +37,21 @@ public class DbMain extends SQLiteOpenHelper {
                 "create table composter_register " +
                         "(id integer primary key autoincrement, tstamp text, name text, phone text,city text,state text,zipcode text,address text)"
         );
+
+        db.execSQL(
+                "create table resident_register " +
+                        "(id integer primary key autoincrement, tstamp text, name text, phone text,city text,state text,zipcode text,address text)"
+        );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS composter_register");
+        db.execSQL("DROP TABLE IF EXISTS resident_register");
         onCreate(db);
     }
 
-    public boolean insertOrder (String tstamp, String name, String phone, String city,String state,String zipcode,String address)
+    public boolean insertComposter (String tstamp, String name, String phone, String city,String state,String zipcode,String address)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -60,9 +67,32 @@ public class DbMain extends SQLiteOpenHelper {
         return true;
     }
 
-    public int numberOfentries(){
+
+    public boolean insertResident (String tstamp, String name, String phone, String city,String state,String zipcode,String address)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("tstamp", tstamp);
+        contentValues.put("name", name);
+        contentValues.put("phone", phone);
+        contentValues.put("city", city);
+        contentValues.put("state", state);
+        contentValues.put("zipcode", zipcode);
+        contentValues.put("address", address);
+        db.insert("resident_register", null, contentValues);
+        db.close();
+        return true;
+    }
+
+    public int numberOfDataComposter(){
         SQLiteDatabase db = this.getReadableDatabase();
         int ordCount = (int) DatabaseUtils.queryNumEntries(db, COMPOST_REGISTER_TABLE_NAME);
+        return ordCount;
+    }
+
+    public int numberOfDataResident(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int ordCount = (int) DatabaseUtils.queryNumEntries(db, RESIDENT_REGISTER_TABLE_NAME);
         return ordCount;
     }
 
