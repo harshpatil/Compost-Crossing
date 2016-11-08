@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
     public void onCreate(Bundle savedInstanceState) {
 
 //        db = new DbMain(this);
-//        writeArticleToDB();
 
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);

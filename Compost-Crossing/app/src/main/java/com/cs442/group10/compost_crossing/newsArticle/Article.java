@@ -42,6 +42,13 @@ public class Article extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
+//        WriteArticleToDB writeArticleToDB = new WriteArticleToDB();
+//        try{
+//            writeArticleToDB.writeToDb();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+
         DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
         Date date = new Date();
         Log.i("Today's date :", dateFormat.format(date));
