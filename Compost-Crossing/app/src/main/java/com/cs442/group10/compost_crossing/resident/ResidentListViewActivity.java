@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.cs442.group10.compost_crossing.R;
+import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
 import com.cs442.group10.compost_crossing.resident.historyPage.ResidentAdsHistory;
 import com.cs442.group10.compost_crossing.resident.nearByComposter.NearByComposter;
 
@@ -17,6 +18,7 @@ public class ResidentListViewActivity extends AppCompatActivity {
 
     Button history;
     Button nearByComposter;
+    Button postNewAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class ResidentListViewActivity extends AppCompatActivity {
 
         history = (Button) findViewById(R.id.btnResidentHistory);
         nearByComposter = (Button) findViewById(R.id.btnComposterNearBy);
+        postNewAd = (Button) findViewById(R.id.btnPostAd);
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +40,13 @@ public class ResidentListViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onClickNearByComposterButton();
+            }
+        });
+
+        postNewAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickingPostNewAd();
             }
         });
     }
@@ -58,6 +68,11 @@ public class ResidentListViewActivity extends AppCompatActivity {
     public void onClickNearByComposterButton(){
 
         Intent intent = new Intent(this, NearByComposter.class);
+        startActivity(intent);
+    }
+
+    public void onClickingPostNewAd(){
+        Intent intent = new Intent(this, AdCreation.class);
         startActivity(intent);
     }
 }
