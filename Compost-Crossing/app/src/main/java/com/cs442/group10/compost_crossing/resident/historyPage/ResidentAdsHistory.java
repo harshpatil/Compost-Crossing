@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
@@ -32,9 +33,15 @@ public class ResidentAdsHistory extends AppCompatActivity {
     ListView residentHistoryListView;
     Ads ads;
     int imageId = 0;
+    RelativeLayout loadingLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.resident_ads_history);
+
+        loadingLayout = (RelativeLayout) findViewById(R.id.loadingPanelResidentHistoryPage);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("adDetails");
@@ -44,6 +51,7 @@ public class ResidentAdsHistory extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                loadingLayout.setVisibility(View.GONE);
                 Map<String, Map<String,String>> compostInfoMap = (Map<String, Map<String,String>>) dataSnapshot.getValue();
 
                 for(Map.Entry<String, Map<String,String>> compostAdListMap: compostInfoMap.entrySet()){
@@ -110,9 +118,6 @@ public class ResidentAdsHistory extends AppCompatActivity {
         });
 
         Log.i("ADSLIST", String.valueOf(adsList.size()));
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.resident_ads_history);
 
         FragmentManager fragmentManager = getFragmentManager();
         ResidentHistoryFragment residentHistoryFragment = (ResidentHistoryFragment) fragmentManager.findFragmentById(R.id.ResidentHistoryFragment);

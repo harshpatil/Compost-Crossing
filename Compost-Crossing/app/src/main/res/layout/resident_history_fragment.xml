@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="10"
     android:layout_marginTop="5dp"
     >
 
     <ImageView
         android:id="@+id/imageResidentHistoryPage"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
+        android:layout_weight="3"
         android:layout_height="110dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
@@ -18,10 +21,12 @@
         />
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="7"
         android:layout_height="120dp"
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
+        android:layout_marginRight="10dp"
         >
 
         <TextView
@@ -32,9 +37,9 @@
             android:paddingTop="4dp"
             android:textSize="16dp"
             android:textAlignment="center"
-            android:textStyle="bold"
             android:fontFamily="sans-serif-light"
             android:scaleType="center"
+            android:textStyle="bold"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 

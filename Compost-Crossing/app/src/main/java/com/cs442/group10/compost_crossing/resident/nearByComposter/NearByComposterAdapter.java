@@ -48,7 +48,7 @@ public class NearByComposterAdapter extends ArrayAdapter<Composter> {
         TextView composterAddress = (TextView) composterListView.findViewById(R.id.ComposterAddressResidentNearByComposterPage);
         ImageView imageView = (ImageView) composterListView.findViewById(R.id.imageResidentNearByComposterPage);
 
-        composterName.setText("Composter Name : "+ composter.getName());
+        composterName.setText("Composter : "+ composter.getName());
         composterAddress.setText("Address : "+ String.valueOf(composter.getAddress()));
         imageView.setImageResource(composter.getImageId());
 

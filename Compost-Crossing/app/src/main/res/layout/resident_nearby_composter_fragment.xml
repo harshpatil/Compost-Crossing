@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:weightSum="10"
     android:layout_marginTop="5dp"
     >
 
     <ImageView
         android:id="@+id/imageResidentNearByComposterPage"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
+        android:layout_weight="3"
         android:layout_height="110dp"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
         android:adjustViewBounds="false"
@@ -20,7 +23,8 @@
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="7"
         android:layout_height="120dp"
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
@@ -54,7 +58,6 @@
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-light"
                 android:layout_below="@+id/ComposterNameResidentNearbyComposterPage" />
-
         </RelativeLayout>
 
 </LinearLayout>

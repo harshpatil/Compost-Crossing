@@ -33,6 +33,7 @@
         android:layout_weight="1.3"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
+
     </ScrollView>
 
     <ImageView
@@ -45,6 +46,21 @@
         android:layout_marginBottom="5dp"
         android:adjustViewBounds="false"
         android:scaleType="centerInside" />
+
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="100dp">
+
+        <ProgressBar
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/buttonBackground"/>
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"

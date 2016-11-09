@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cs442.group10.compost_crossing.MainActivity;
@@ -38,6 +39,7 @@ public class Article extends AppCompatActivity {
     TextView articleBody;
     ImageView image;
     Button goToHomePageButton;
+    RelativeLayout loadingLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -48,6 +50,12 @@ public class Article extends AppCompatActivity {
 //        }catch (Exception e){
 //            e.printStackTrace();
 //        }
+
+        super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.news_article);
+
+        loadingLayout = (RelativeLayout) findViewById(R.id.loadingPanel);
 
         DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
         Date date = new Date();
@@ -65,7 +73,7 @@ public class Article extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                loadingLayout.setVisibility(View.GONE);
                 News news = dataSnapshot.getValue(News.class);
                 Log.i("FETCH_FIRBASE", " : Title : " + news.getTitle());
                 Log.i("FETCH_FIRBASE", " : Body : " + news.getBody());
@@ -79,16 +87,13 @@ public class Article extends AppCompatActivity {
             }
         });
 
-        super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.news_article);
-
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(Constants.ARTICLE_NOTIFICATION_ID);
 
         articleTitle = (TextView) findViewById(R.id.articleTitle);
         articleBody = (TextView) findViewById(R.id.articleBody);
         image = (ImageView)findViewById(R.id.imageArticlePage);
+
         if(dayOfTheWeek.equals("Monday")){
             image.setImageResource(R.drawable.compost_2);
         }else if(dayOfTheWeek.equals("Tuesday")){

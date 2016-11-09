@@ -19,6 +19,22 @@
         android:layout_marginBottom="5dp"
         />
 
+    <RelativeLayout
+        android:id="@+id/loadingPanelNearByComposterPage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="100dp">
+
+        <ProgressBar
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/buttonBackground"/>
+    </RelativeLayout>
+
+
     <fragment android:name="com.cs442.group10.compost_crossing.resident.nearByComposter.NearByComposterFragment"
         android:id="@+id/ResidentNearByComposterFragment"
         android:layout_width="match_parent"

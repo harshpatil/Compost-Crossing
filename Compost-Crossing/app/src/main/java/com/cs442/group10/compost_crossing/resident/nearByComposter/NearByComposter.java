@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
@@ -30,9 +31,15 @@ public class NearByComposter extends AppCompatActivity {
     ListView nearByComposterListView;
     String currentUserZipCode = "60616";
     int imageId = 0;
+    RelativeLayout loadingLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.near_by_composter_activity);
+
+        loadingLayout = (RelativeLayout) findViewById(R.id.loadingPanelNearByComposterPage);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("composterRegisteration");
@@ -42,6 +49,7 @@ public class NearByComposter extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                loadingLayout.setVisibility(View.GONE);
                 Map<String, Map<String,String>> compostInfoMap = (Map<String, Map<String,String>>) dataSnapshot.getValue();
 
                 for(Map.Entry<String, Map<String,String>> compostAdListMap: compostInfoMap.entrySet()){
@@ -81,9 +89,6 @@ public class NearByComposter extends AppCompatActivity {
                 Log.w("DataBase", "Failed to read value.", databaseError.toException());
             }
         });
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.near_by_composter_activity);
 
         FragmentManager fragmentManager = getFragmentManager();
         NearByComposterFragment nearByComposterFragment = (NearByComposterFragment) fragmentManager.findFragmentById(R.id.ResidentNearByComposterFragment);
