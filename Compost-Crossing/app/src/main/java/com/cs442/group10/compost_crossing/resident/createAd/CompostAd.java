@@ -16,6 +16,15 @@ public class CompostAd {
     String drop;
     String sold;
     String buyerId;
+    String buyerName;
+
+    public String getBuyerName() {
+        return buyerName;
+    }
+
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
 
     public String getBuyerId() {
         return buyerId;

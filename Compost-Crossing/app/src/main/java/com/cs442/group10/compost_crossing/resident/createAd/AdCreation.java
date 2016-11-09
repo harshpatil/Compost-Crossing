@@ -7,16 +7,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.cs442.group10.compost_crossing.R;
-import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
+import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.UUID;
 
 public class AdCreation extends AppCompatActivity {
 
@@ -68,9 +69,7 @@ public class AdCreation extends AppCompatActivity {
 
     protected void writeToDB(){
 
-        String buyerId = "9595995";
-        String idSuffix = "ad2";
-        String adId = buyerId + "_" + idSuffix;
+        String adId = UUID.randomUUID().toString();
 
         CompostAd compostAd = new CompostAd();
         compostAd.setTitle(compostTitle.getText().toString());
@@ -80,8 +79,10 @@ public class AdCreation extends AppCompatActivity {
         compostAd.setZipCode(zipCode.getText().toString());
         compostAd.setWeight(weight.getText().toString());
         compostAd.setCost(price.getText().toString());
+        compostAd.setSold("false");
         compostAd.setDrop("available");
         compostAd.setBuyerId("NULL");
+        compostAd.setBuyerName("NULL");
         compostAd.setId(adId);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -99,8 +100,8 @@ public class AdCreation extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(this, "Compost Ad : " + compostAd.getTitle() + " has been created", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, AdCreation.class);
+        Toast.makeText(this, "Compost Advertise named : \"" + compostAd.getTitle() + "\" has been created", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, ResidentListViewActivity.class);
         startActivity(intent);
     }
 

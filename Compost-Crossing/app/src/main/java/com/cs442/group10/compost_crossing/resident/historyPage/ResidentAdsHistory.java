@@ -10,9 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.cs442.group10.compost_crossing.R;
-import com.cs442.group10.compost_crossing.newsArticle.News;
-import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
-import com.cs442.group10.compost_crossing.resident.ResidentListViewAdapter;
+import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +30,8 @@ public class ResidentAdsHistory extends AppCompatActivity {
     List<Ads> adsList = new ArrayList<Ads>();
     ResidentHistoryAdapter residentHistoryAdapter;
     ListView residentHistoryListView;
-    String buyerName = "";
     Ads ads;
+    int imageId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,32 +53,50 @@ public class ResidentAdsHistory extends AppCompatActivity {
                     if(String.valueOf(compostAdMap.get("sold")).contains("true")){
 
                         ads = new Ads();
-                        String buyerId = String.valueOf(compostAdMap.get("buyerId"));
-
-                        FirebaseDatabase database2 = FirebaseDatabase.getInstance();
-                        DatabaseReference ref2 = database2.getReference("composterRegisteration/"+buyerId + "/name");
-                        ref2.push();
-                        ref2.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                buyerName = dataSnapshot.getValue(String.class);
-                                ads.setBuyerName(buyerName);
-                                Log.i("BUYERNAME:", buyerName);
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
+//                        String buyerId = String.valueOf(compostAdMap.get("buyerId"));
+//                        FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+//                        DatabaseReference ref2 = database2.getReference("composterRegisteration/"+buyerId + "/name");
+//                        ref2.push();
+//                        ref2.addValueEventListener(new ValueEventListener() {
+//
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                                buyerName = dataSnapshot.getValue(String.class);
+//                                ads.setBuyerName(buyerName);
+//                                Log.i("BUYERNAME:", buyerName);
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                            }
+//                        });
 
                         Log.i("ADSLIST",compostAdMap.get("title"));
                         Log.i("ADSLIST",compostAdMap.get("sold"));
+
+                        switch (imageId%10){
+                            case 0 : ads.setImageId(R.drawable.compost_1); break;
+                            case 1 : ads.setImageId(R.drawable.compost_2); break;
+                            case 2 : ads.setImageId(R.drawable.compost_3); break;
+                            case 3 : ads.setImageId(R.drawable.compost_4); break;
+                            case 4 : ads.setImageId(R.drawable.compost_5); break;
+                            case 5 : ads.setImageId(R.drawable.compost_6); break;
+                            case 6 : ads.setImageId(R.drawable.compost_7); break;
+                            case 7 : ads.setImageId(R.drawable.compost_8); break;
+                            case 8 : ads.setImageId(R.drawable.compost_9); break;
+                            case 9 : ads.setImageId(R.drawable.compost_10); break;
+                            default : ads.setImageId(R.drawable.compost_11);
+                        }
+
+                        imageId ++;
 
                         ads.setTitle(String.valueOf(compostAdMap.get("title")));
                         ads.setCost(String.valueOf(compostAdMap.get("cost")));
                         ads.setWeight(String.valueOf(compostAdMap.get("weight")));
                         ads.setSold(String.valueOf(compostAdMap.get("sold")));
+                        ads.setBuyerName(String.valueOf(compostAdMap.get("buyerName")));
 
                         adsList.add(ads);
                     }

@@ -1,4 +1,4 @@
-package com.cs442.group10.compost_crossing.resident;
+package com.cs442.group10.compost_crossing.resident.residentDefault;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
 import com.cs442.group10.compost_crossing.resident.historyPage.ResidentAdsHistory;
@@ -19,6 +20,7 @@ public class ResidentListViewActivity extends AppCompatActivity {
     Button history;
     Button nearByComposter;
     Button postNewAd;
+    Button goToHomePage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class ResidentListViewActivity extends AppCompatActivity {
         history = (Button) findViewById(R.id.btnResidentHistory);
         nearByComposter = (Button) findViewById(R.id.btnComposterNearBy);
         postNewAd = (Button) findViewById(R.id.btnPostAd);
+        goToHomePage = (Button) findViewById(R.id.btnBackResidentListView);
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +52,13 @@ public class ResidentListViewActivity extends AppCompatActivity {
                 onClickingPostNewAd();
             }
         });
+
+        goToHomePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickingGoToHomePage();
+            }
+        });
     }
 
     public void back(View v){
@@ -56,7 +66,6 @@ public class ResidentListViewActivity extends AppCompatActivity {
     }
 
     public void navigateToNewAdForm(View v){
-        //navigating to posting new ad fragment goes here
     }
 
     public void onClickHistoryButton(){
@@ -72,7 +81,14 @@ public class ResidentListViewActivity extends AppCompatActivity {
     }
 
     public void onClickingPostNewAd(){
+
         Intent intent = new Intent(this, AdCreation.class);
+        startActivity(intent);
+    }
+
+    public void onClickingGoToHomePage(){
+
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

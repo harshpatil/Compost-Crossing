@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.cs442.group10.compost_crossing.R;
-import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
+import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,52 +24,63 @@ import java.util.Map;
 public class NearByComposter extends AppCompatActivity {
 
     Button backButton;
+    Composter composter;
     List<Composter> composterList = new ArrayList<Composter>();
     NearByComposterAdapter nearByComposterAdapter;
     ListView nearByComposterListView;
+    String currentUserZipCode = "60616";
+    int imageId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference ref = database.getReference("Composters");
-//        ref.push();
-//
-//        ref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                Map<String, Map<String,String>> compostInfoMap = (Map<String, Map<String,String>>) dataSnapshot.getValue();
-//
-//                for(Map.Entry<String, Map<String,String>> compostAdListMap: compostInfoMap.entrySet()){
-//
-//                    Map<String,String> compostAdMap = compostAdListMap.getValue();
-//
-//                    if(String.valueOf(compostAdMap.get("Zipcode").subString(0, 2) == currentUserZipcode.subString(0.2)){
-//
-//                        Composter composter = new Composter();
-//                        composter.setName(String.valueOf(compostAdMap.get("Name")));
-//                        composter.setAddress(String.valueOf(compostAdMap.get("Address")));
-//                        composter.setZipcode(String.valueOf(compostAdMap.get("ZipCode")));
-//
-//                        composterList.add(composter);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.w("DataBase", "Failed to read value.", databaseError.toException());
-//            }
-//        });
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("composterRegisteration");
+        ref.push();
 
-        // Remove this once data is fetched from firebase
-        Composter composter = new Composter();
-        composter.setName("Chicago Composter");
-        composter.setAddress("2901, S. King Drive");
-        composter.setZipcode("60616");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        composterList.add(composter);
+                Map<String, Map<String,String>> compostInfoMap = (Map<String, Map<String,String>>) dataSnapshot.getValue();
+
+                for(Map.Entry<String, Map<String,String>> compostAdListMap: compostInfoMap.entrySet()){
+
+                    Map<String,String> compostAdMap = compostAdListMap.getValue();
+
+                    String composterZip = String.valueOf(compostAdMap.get("zipcode")).substring(0, 3);
+                    String currentUserPin = currentUserZipCode.substring(0, 3);
+                    Log.i("PINCODE", composterZip);
+                    Log.i("PINCODE", currentUserPin);
+
+                    if(composterZip.equals(currentUserPin)){
+
+                        composter = new Composter();
+                        switch (imageId%10){
+                            case 0 : composter.setImageId(R.drawable.company_1); break;
+                            case 1 : composter.setImageId(R.drawable.company_2); break;
+                            case 2 : composter.setImageId(R.drawable.company_3); break;
+                            case 3 : composter.setImageId(R.drawable.company_4); break;
+                            case 4 : composter.setImageId(R.drawable.company_5); break;
+                            case 5 : composter.setImageId(R.drawable.company_6); break;
+                            case 6 : composter.setImageId(R.drawable.company_7); break;
+                            case 7 : composter.setImageId(R.drawable.company_8); break;
+                            case 8 : composter.setImageId(R.drawable.company_9); break;
+                            default : composter.setImageId(R.drawable.company_10);
+                        }
+                        imageId ++;
+                        composter.setName(String.valueOf(compostAdMap.get("name")));
+                        composter.setAddress(String.valueOf(compostAdMap.get("address")) + " " + String.valueOf(compostAdMap.get("city")) + " " + String.valueOf(compostAdMap.get("zipcode")));
+                        composterList.add(composter);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("DataBase", "Failed to read value.", databaseError.toException());
+            }
+        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.near_by_composter_activity);

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -46,11 +47,13 @@ public class ResidentHistoryAdapter extends ArrayAdapter<Ads> {
         TextView boughtBy = (TextView)adsView.findViewById(R.id.CompostBoughtByHistoryPage);
         TextView compostWeight = (TextView)adsView.findViewById(R.id.CompostWeightResidentHistoryPage);
         TextView compostPrice = (TextView)adsView.findViewById(R.id.AdCostResidentHistoryPage);
+        ImageView imageView = (ImageView) adsView.findViewById(R.id.imageResidentHistoryPage);
 
         adTitle.setText("Title : "+ ads.getTitle());
         boughtBy.setText("Bought By : "+ String.valueOf(ads.getBuyerName()));
         compostWeight.setText("Weight : "+ String.valueOf(ads.getWeight()) + " pounds");
         compostPrice.setText("Cost : $"+ String.valueOf(ads.getCost()));
+        imageView.setImageResource(ads.getImageId());
 
         return adsView;
     }

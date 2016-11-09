@@ -5,13 +5,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cs442.group10.compost_crossing.resident.ResidentListViewActivity">
+    tools:context=".resident.residentDefault.ResidentListViewActivity">
 
     <fragment
         android:id="@+id/residentListViewFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.cs442.group10.compost_crossing.resident.ResidentListViewFragment">
+        class="com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewFragment">
 
     </fragment>
 

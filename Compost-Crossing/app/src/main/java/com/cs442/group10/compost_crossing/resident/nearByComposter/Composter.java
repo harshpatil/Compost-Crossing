@@ -7,7 +7,7 @@ public class Composter {
 
     String name;
     String address;
-    String zipcode;
+    int imageId;
 
     public String getName() {
         return name;
@@ -25,11 +25,11 @@ public class Composter {
         this.address = address;
     }
 
-    public String getZipcode() {
-        return zipcode;
+    public int getImageId() {
+        return imageId;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 }

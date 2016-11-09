@@ -21,7 +21,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" />
-        <activity android:name=".resident.ResidentListViewActivity" />
+        <activity android:name=".resident.residentDefault.ResidentListViewActivity" />
         <activity android:name=".Composter.CompostDetailActivity" />
         <activity android:name=".Composter.ComposterRegistration" />
         <activity

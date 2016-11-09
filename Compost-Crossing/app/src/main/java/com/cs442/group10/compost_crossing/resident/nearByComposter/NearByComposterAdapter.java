@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -43,15 +44,13 @@ public class NearByComposterAdapter extends ArrayAdapter<Composter> {
             composterListView = (RelativeLayout) convertView;
         }
 
-        TextView composterName = (TextView)composterListView.findViewById(R.id.ComposterNameResidentNearbyComposterPage);
-        TextView composterAddress = (TextView)composterListView.findViewById(R.id.ComposterAddressResidentNearByComposterPage);
-        TextView compostWeight = (TextView)composterListView.findViewById(R.id.ComposterZipCodeResidentNearByComposterPage);
-//        TextView compostPrice = (TextView)composterListView.findViewById(R.id.AdCostResidentHistoryPage);
+        TextView composterName = (TextView) composterListView.findViewById(R.id.ComposterNameResidentNearbyComposterPage);
+        TextView composterAddress = (TextView) composterListView.findViewById(R.id.ComposterAddressResidentNearByComposterPage);
+        ImageView imageView = (ImageView) composterListView.findViewById(R.id.imageResidentNearByComposterPage);
 
-        composterName.setText("Name : "+ composter.getName());
+        composterName.setText("Composter Name : "+ composter.getName());
         composterAddress.setText("Address : "+ String.valueOf(composter.getAddress()));
-        compostWeight.setText("Zip Code : "+ String.valueOf(composter.getZipcode()));
-//        compostPrice.setText("Cost : $"+ String.valueOf(ads.getCost()));
+        imageView.setImageResource(composter.getImageId());
 
         return composterListView;
     }

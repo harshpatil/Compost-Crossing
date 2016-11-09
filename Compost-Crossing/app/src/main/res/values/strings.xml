@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Compost-Crossing</string>
+    <string name="app_name">Compost Crossing</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="compost_article">Read Compost Article</string>
     <!--<string name="article_header"><u>Article of the day !!</u></string>-->
@@ -10,7 +10,7 @@
     <string name="activeAds">Active Ads</string>
     <string name="residentHistory">History</string>
     <string name="postANewAd">Post a New Ad</string>
-    <string name="composterNearBy">Nearby Composter</string>
+    <string name="composterNearBy">See Nearby Composter</string>
     <string name="createANewAdToday">Create a new Ad Today</string>
     <string name="residentPastAds">Your Past Ads</string>
     <string name="residentNearByComposter">Nearby Composters</string>

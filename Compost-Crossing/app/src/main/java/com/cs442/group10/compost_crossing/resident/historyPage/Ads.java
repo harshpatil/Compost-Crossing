@@ -11,6 +11,16 @@ public class Ads {
     String weight;
     String sold;
 
+    public int getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
+    }
+
+    int imageId;
+
     public String getTitle() {
         return title;
     }

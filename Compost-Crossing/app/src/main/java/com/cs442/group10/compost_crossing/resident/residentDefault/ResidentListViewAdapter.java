@@ -1,4 +1,4 @@
-package com.cs442.group10.compost_crossing.resident;
+package com.cs442.group10.compost_crossing.resident.residentDefault;
 
 import android.app.Activity;
 import android.content.Context;

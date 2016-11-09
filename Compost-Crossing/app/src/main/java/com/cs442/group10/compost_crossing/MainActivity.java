@@ -14,18 +14,10 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.cs442.group10.compost_crossing.Composter.CompostDetailActivity;
-import com.cs442.group10.compost_crossing.Composter.ComposterRegistration;
 import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
-import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
-import com.cs442.group10.compost_crossing.newsArticle.ArticleNotificationService;
+import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.cs442.group10.compost_crossing.newsArticle.MyAlarm;
-import com.cs442.group10.compost_crossing.newsArticle.News;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -40,8 +32,6 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-//        db = new DbMain(this);
-
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
@@ -55,22 +45,6 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
                 onClickingReadArticleButton();
             }
         });
-
-//        composterButton = (Button)findViewById(R.id.compostButton);
-//        composterButton.setOnClickListener(new Button.OnClickListener() {
-//            public void onClick(View v) {
-//
-//                int count = db.numberOfentries();
-//                if(count >= 1){
-//                    Intent compostDetailIntent = new Intent(getApplicationContext(),CompostDetailActivity.class);
-//                    startActivity(compostDetailIntent);
-//                }
-//                else{
-//                    Intent composterregistration = new Intent(getApplicationContext(),ComposterRegistration.class);
-//                    startActivity(composterregistration);
-//                }
-//            }
-//        });
 
         residentButton = (Button)findViewById(R.id.residentButton);
         residentButton.setOnClickListener(new Button.OnClickListener() {
@@ -100,19 +74,6 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
                 });
             }
         });
-
-//        if (findViewById(R.id.fragment_container) != null) {
-//
-//            if (savedInstanceState != null) {
-//                return;
-//            }
-//            ViewListingFragment firstFragment = new ViewListingFragment();
-//            firstFragment.setArguments(getIntent().getExtras());
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.fragment_container, firstFragment).commit();
-//
-//        }
-
     }
 
     public void onListingSelected(int position) {
