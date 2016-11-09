@@ -2,6 +2,7 @@ package com.cs442.group10.compost_crossing.Composter;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,13 +13,19 @@ import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.cs442.group10.compost_crossing.AdDetail;
 import com.cs442.group10.compost_crossing.R;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,6 +36,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by cheth on 10/29/2016.
@@ -37,12 +46,13 @@ import java.net.URL;
 public class CompostDetailViewFragment extends Fragment {
     TextView composterAddressTextView;
     String composterAddress;
+    String composterAddressForMap;
+    static AdDetail adDetail;
 
-    public CompostDetailViewFragment(){
-    }
-
-    public static CompostDetailViewFragment newInstance(int i){
+    public static CompostDetailViewFragment newInstance(AdDetail compostAdDetail){
         CompostDetailViewFragment compostDetailViewFragment =  new CompostDetailViewFragment();
+
+        adDetail = compostAdDetail;
         return compostDetailViewFragment;
     }
 
@@ -50,26 +60,75 @@ public class CompostDetailViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.compost_detail_view_fragment, container, false);
-        //LatLng latLng = new LatLng();
 
         TextView composterPhNoTextView = (TextView) view.findViewById(R.id.composterPhNo);
         composterAddressTextView = (TextView) view.findViewById(R.id.composterAddr);
         TextView compostDetailsTextView = (TextView) view.findViewById(R.id.compostDetails);
+        Button backButton = (Button) view.findViewById(R.id.btnBackComposterDetailView);
+        Button acceptCompostButton = (Button) view.findViewById(R.id.btnAcceptCompost);
 
-        composterAddress = "3001 S King Drive,Illinois,Chicago-60616";
-
+        composterAddressForMap = adDetail.getAddress()+","+adDetail.getCity()+","+adDetail.getState()+"-"+adDetail.getZipCode();//"3001 S King Drive,Illinois,Chicago-60616";
+        composterAddress = adDetail.getAddress()+",\n"+adDetail.getCity()+", "+adDetail.getState()+" - "+adDetail.getZipCode();
         composterAddressTextView.setText("3001 S King Drive,\n Illinois, Chicago - 60616");
 
-        new GetMapsInfo().execute(composterAddress.replaceAll(" ","%20"));
+        new GetMapsInfo().execute(composterAddressForMap.replaceAll(" ","%20"));
 
         composterPhNoTextView.setText("3152547895");
         Linkify.addLinks(composterPhNoTextView, Linkify.PHONE_NUMBERS);
 
-        compostDetailsTextView.setText("Weight: 20 pounds\nCost:$1/pound\nDrop:Available");
+        compostDetailsTextView.setText(adDetail.getTitle()+"\nWeight: "+adDetail.getWeight()+"\nCost:$"+adDetail.getCost()+"\nDrop:"+adDetail.getDrop());
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), ComposterListViewActivity.class);
+                startActivity(intent);
+                //getActivity().onBackPressed();
+            }
+        });
+
+        acceptCompostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference reference = database.getReference("adDetails");
+                reference.child("ad1").child("buyerId").setValue("John");
+
+                DatabaseReference reference1 = database.getReference("composterRegisteration");
+                Map<String, Map<String, String>> compostAdMap = getCompostAdMap();
+
+                reference1.child("9174032678").child("adList").setValue(compostAdMap);
+
+                Toast.makeText(getActivity().getBaseContext(), "Compost Accepted Successfully",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity().getApplicationContext(), ComposterListViewActivity.class);
+                //intent.putExtra("loadCompostDetailFragment", false);
+                startActivity(intent);
+               // getActivity().onBackPressed();
+            }
+        });
         return view;
     }
 
+    private HashMap<String, Map<String,String>> getCompostAdMap(){
+        HashMap<String, Map<String,String>> compostAdListMap = new HashMap<String, Map<String,String>>();
+        Map<String,String> compostAdMap = new HashMap<String,String>();
+
+        compostAdMap.put("id", adDetail.getId());
+        compostAdMap.put("address", adDetail.getAddress());
+        compostAdMap.put("buyerId", adDetail.getBuyerId());
+        compostAdMap.put("buyerName", "John");
+        compostAdMap.put("city", adDetail.getCity());
+        compostAdMap.put("cost", adDetail.getCost());
+        compostAdMap.put("drop", adDetail.getDrop());
+        compostAdMap.put("state", adDetail.getState());
+        compostAdMap.put("title", adDetail.getTitle());
+        compostAdMap.put("weight", adDetail.getWeight());
+        compostAdMap.put("sold", "true");
+        compostAdMap.put("zipCode", adDetail.getZipCode());
+
+        compostAdListMap.put(compostAdMap.get("id"), compostAdMap);
+        return compostAdListMap;
+    }
 
     class GetMapsInfo extends AsyncTask<String, String, String>{
         ProgressDialog dialog = new ProgressDialog(getActivity());
@@ -84,7 +143,7 @@ public class CompostDetailViewFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            if(android.os.Debug.isDebuggerConnected())//TODO: removed
+            if(android.os.Debug.isDebuggerConnected())//TODO: Remove
                 android.os.Debug.waitForDebugger();
             String response;
             String uri = "http://maps.google.com/maps/api/geocode/json?address=" +

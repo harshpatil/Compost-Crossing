@@ -31,9 +31,10 @@ import static android.R.id.list;
 public class ResidentListViewFragment extends Fragment {
 
     private static final String AD_TABLE = "adDetails";
-    private static final String AD_ID_COL = "Ad_Id";
-    private static final String TITLE_COL = "Title";
-    private static final String WEIGHT_COL = "Weight";
+    private static final String AD_ID_COL = "adId";
+    private static final String TITLE_COL = "title";
+    private static final String WEIGHT_COL = "weight";
+    private static final String BUYER_ID_COL = "buyerId";
 
     Map<String, String> compostAdsMap = new HashMap<String,String>();
 
@@ -64,15 +65,20 @@ public class ResidentListViewFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 compostAdsMap = new HashMap<String, String>();
                 Map<String, Map<String,String>> compostInfoMap = (Map<String, Map<String,String>>) dataSnapshot.getValue();
-                for(Map.Entry<String, Map<String,String>> compostAdListMap: compostInfoMap.entrySet()){
-                    Map<String,String> compostAdMap = compostAdListMap.getValue();
-                    String compostAd = String.valueOf(compostAdMap.get(TITLE_COL)) + "-" + String.valueOf(compostAdMap.get(WEIGHT_COL)) + "lbs";
-                    compostAdsMap.put(compostAdListMap.getKey(), compostAd);
-                    System.out.println(compostAdMap.get("Title"));
+                for(Map.Entry<String, Map<String,String>> compostAdListMap: compostInfoMap.entrySet()) {
+                    Map<String, String> compostAdMap = compostAdListMap.getValue();
 
-                    ResidentListViewAdapter residentListViewAdapter = new ResidentListViewAdapter(getActivity(), compostAdsMap);
-                    listView.setAdapter(residentListViewAdapter);
-                    listView.setEmptyView(emptyTextView);
+                    String buyerId = compostAdMap.get(BUYER_ID_COL);
+                    if (buyerId != null) {
+                        if(buyerId.equals("NULL")) {
+                            String compostAd = String.valueOf(compostAdMap.get(TITLE_COL)) + "-" + String.valueOf(compostAdMap.get(WEIGHT_COL));
+                            compostAdsMap.put(compostAdListMap.getKey(), compostAd);
+
+                            ResidentListViewAdapter residentListViewAdapter = new ResidentListViewAdapter(getActivity(), compostAdsMap);
+                            listView.setAdapter(residentListViewAdapter);
+                            listView.setEmptyView(emptyTextView);
+                        }
+                    }
                 }
             }
 

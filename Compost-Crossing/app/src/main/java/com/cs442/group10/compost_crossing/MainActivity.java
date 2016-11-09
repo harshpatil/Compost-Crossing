@@ -14,17 +14,10 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.cs442.group10.compost_crossing.Composter.CompostDetailActivity;
-
+import com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
-import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
-import com.cs442.group10.compost_crossing.newsArticle.ArticleNotificationService;
 import com.cs442.group10.compost_crossing.newsArticle.MyAlarm;
-import com.cs442.group10.compost_crossing.newsArticle.News;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -68,7 +61,10 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
         composterButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                setContentView(R.layout.screen_2);
+                Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
+                startActivity(composterListViewIntent);
+
+                /*setContentView(R.layout.screen_2);
                 ListView lv = (ListView) findViewById(R.id.expandableListView);
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
                         android.R.layout.simple_list_item_1, android.R.id.text1, Listings.Names);
@@ -79,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
                         Intent compostDetailIntent = new Intent(getApplicationContext(),CompostDetailActivity.class);
                         startActivity(compostDetailIntent);
                     }
-                });
+                });*/
             }
         });
 

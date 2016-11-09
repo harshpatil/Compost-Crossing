@@ -10,4 +10,8 @@
     <string name="myAds">My Ads</string>
     <string name="postANewAd">Post a New Ad</string>
     <string name="createANewAdToday">Create a new Ad Today</string>
+    <string name="acceptCompost">Accept Compost</string>
+    <string name="title_activity_composter_list_view">ComposterListViewActivity</string>
+    <string name="compostAds">Compost Ads</string>
+    <string name="noAds">No Ads Found</string>
 </resources>
