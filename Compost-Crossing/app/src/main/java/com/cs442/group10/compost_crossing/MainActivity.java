@@ -14,12 +14,12 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.cs442.group10.compost_crossing.Composter.CompostDetailActivity;
+import com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity;
 import com.cs442.group10.compost_crossing.Composter.ComposterRegistration;
 import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
-import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
-import com.cs442.group10.compost_crossing.newsArticle.ArticleNotificationService;
 import com.cs442.group10.compost_crossing.newsArticle.MyAlarm;
+import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
 import com.cs442.group10.compost_crossing.newsArticle.News;
 import com.cs442.group10.compost_crossing.resident.ResidentRegisteration;
 import com.google.firebase.database.DataSnapshot;
@@ -64,20 +64,8 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
 
                 int count = db.numberOfDataComposter();
                 if(count >= 1){
-
-                    setContentView(R.layout.screen_2);
-                    ListView lv = (ListView) findViewById(R.id.expandableListView);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_list_item_1, android.R.id.text1, Listings.Names);
-                    lv.setAdapter(adapter);
-                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {//temporary work around to navigate to detail view
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent compostDetailIntent = new Intent(getApplicationContext(),CompostDetailActivity.class);
-                            startActivity(compostDetailIntent);
-                        }
-                    });
-
+                    Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
+                    startActivity(composterListViewIntent);
                 }
                 else{
                     Intent composterregistration = new Intent(getApplicationContext(),ComposterRegistration.class);
@@ -88,9 +76,7 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
 
         residentButton = (Button)findViewById(R.id.residentButton);
         residentButton.setOnClickListener(new Button.OnClickListener() {
-
             public void onClick(View v) {
-
                 int count = db.numberOfDataResident();
                 if(count >= 1){
 
@@ -104,20 +90,6 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
                 }
             }
         });
-
-
-//        if (findViewById(R.id.fragment_container) != null) {
-//
-//            if (savedInstanceState != null) {
-//                return;
-//            }
-//            ViewListingFragment firstFragment = new ViewListingFragment();
-//            firstFragment.setArguments(getIntent().getExtras());
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.fragment_container, firstFragment).commit();
-//
-//        }
-
     }
 
     public void onListingSelected(int position) {

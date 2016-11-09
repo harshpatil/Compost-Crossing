@@ -1,5 +1,6 @@
 package com.cs442.group10.compost_crossing.resident;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -22,6 +23,7 @@ public class ResidentListViewActivity extends AppCompatActivity {
     }
 
     public void navigateToNewAdForm(View v){
-        //navigating to posting new ad fragment goes here
+        Intent adCreationIntent = new Intent(this, AdCreation.class);
+        startActivity(adCreationIntent);
     }
 }

@@ -7,13 +7,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/myAds"
+        android:text="@string/compostAds"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:gravity="center"
         android:textSize="30sp"
         android:layout_marginBottom="20px" />
     <ListView
-        android:id="@+id/residentItemListView"
+        android:id="@+id/composterItemListView"
         android:layout_width="wrap_content"
         android:layout_height="368dp"
         android:textAppearance="?attr/textAppearanceListItem"
@@ -21,15 +21,15 @@
         android:layout_marginRight="20px" />
 
     <TextView
-        android:id="@+id/emptyAdListForResident"
+        android:id="@+id/emptyAdListForComposter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textStyle="bold"
         android:visibility="gone"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
-        android:text="@string/createANewAdToday"/>
-    
+        android:text="@string/noAds"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,18 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Back"
-            android:onClick="back"
+            android:onClick="onBackCompostListView"
             android:textColor="@color/buttonText"
             android:background="@color/buttonBackground"
             android:layout_marginRight="50px" />
-
-        <Button
-            android:id="@+id/btnPostAd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/postANewAd"
-            android:textColor="@color/buttonText"
-            android:background="@color/buttonBackground"
-            android:onClick="navigateToNewAdForm" />
     </LinearLayout>
 </LinearLayout>

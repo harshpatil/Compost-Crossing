@@ -55,6 +55,9 @@ public class ComposterRegistration extends AppCompatActivity {
                     db.insertComposter("", name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
                     writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
 
+                    Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
+                    startActivity(composterListViewIntent);
+                    /*
                     setContentView(R.layout.screen_2);
                     ListView lv = (ListView) findViewById(R.id.expandableListView);
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
@@ -66,7 +69,7 @@ public class ComposterRegistration extends AppCompatActivity {
                             Intent compostDetailIntent = new Intent(getApplicationContext(),CompostDetailActivity.class);
                             startActivity(compostDetailIntent);
                         }
-                    });
+                    });*/
 
                 }
                 else{
