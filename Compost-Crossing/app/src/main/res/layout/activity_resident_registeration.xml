@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Hey Composter! Tell us more about you..."
+        android:text="Hey Resident! Tell us more about you..."
         android:textAlignment="center"
         android:id="@+id/header"
         android:textSize="40px"

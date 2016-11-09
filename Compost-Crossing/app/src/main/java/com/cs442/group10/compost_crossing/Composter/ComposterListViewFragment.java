@@ -80,7 +80,7 @@ public class ComposterListViewFragment extends Fragment {
                     Map<String, String> compostAdMap = compostAdListMap.getValue();
 
                     String buyerId = compostAdMap.get(BUYER_ID_COL);
-                    String weight = compostAdMap.get(WEIGHT_COL);
+                    String weight = compostAdMap.get(WEIGHT_COL);//Long cannot be string
                     String title = compostAdMap.get(TITLE_COL);
 
                     final AdDetail adDetail = new AdDetail(compostAdMap.get(ID_COL),title, compostAdMap.get(ADDRESS_COL),compostAdMap.get(CITY_COL),compostAdMap.get(STATE_COL),

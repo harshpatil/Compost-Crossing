@@ -5,7 +5,7 @@ package com.cs442.group10.compost_crossing;
  */
 public class Listings {
 
-    static String[] Names = {
+    public static String[] Names = {
             "John",
             "Mike",
             "Bill"

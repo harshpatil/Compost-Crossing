@@ -10,22 +10,46 @@
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Compost Type"
         android:textColor="#000000"
         android:textColorHint="#f1434343"/>
 
     <EditText
-        android:id="@+id/pickupLocation"
+        android:id="@+id/pickupAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Pickup Location"
+        android:hint="Address"
+        android:textColorHint="#f1434343"/>
+
+    <EditText
+        android:id="@+id/pickupCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="City"
+        android:textColorHint="#f1434343"/>
+
+    <EditText
+        android:id="@+id/pickupState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="State"
         android:textColorHint="#f1434343"/>
 
     <LinearLayout
@@ -33,7 +57,7 @@
         android:layout_height="71dp"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
         <TextView
@@ -44,7 +68,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <Switch
-            android:id="@+id/paymentAccepted"
+            android:id="@+id/dropAccepted"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
@@ -59,56 +83,45 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/compWeight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Pickup Location"
-        android:textColor="#000000"
-        android:textColorHint="#f1434343"/>
-    <EditText
-        android:id="@+id/contactNo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|start"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:inputType="phone"
         android:ems="10"
-        android:hint="Contact No"
+        android:hint="Compost Weight (lbs)"
         android:textColor="#000000"
         android:textColorHint="#f1434343"/>
-
     <EditText
-        android:id="@+id/compostAddress"
+        android:id="@+id/compPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|start"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:inputType="phone"
         android:ems="10"
-        android:inputType="textMultiLine"
-        android:hint="Address"
+        android:hint="Price ($)"
         android:textColor="#000000"
-        android:textColorHint="#f1434343"
-        android:layout_weight="0.28" />
+        android:textColorHint="#f1434343"/>
 
     <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Submit"
-        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="40dp"
-        android:onClick="invokeSubmitButton"/>
-
+        android:layout_gravity="center"
+        android:textColor="@color/buttonText"
+        android:background="@color/buttonBackground"
+        android:layout_marginBottom="5dp"
+        android:text="Submit"
+        android:textSize="16dp"
+        android:id="@+id/btnSubmit"
+        />
 </LinearLayout>

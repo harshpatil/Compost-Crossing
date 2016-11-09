@@ -1,4 +1,24 @@
-package com.cs442.group10.compost_crossing.Composter;
+package com.cs442.group10.compost_crossing.resident;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.cs442.group10.compost_crossing.Composter.CompostDetailActivity;
+import com.cs442.group10.compost_crossing.DB.DbMain;
+import com.cs442.group10.compost_crossing.Listings;
+import com.cs442.group10.compost_crossing.R;
+import com.cs442.group10.compost_crossing.constants.Constants;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -14,14 +34,13 @@ import android.widget.Toast;
 import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.Listings;
 import com.cs442.group10.compost_crossing.R;
-import com.cs442.group10.compost_crossing.constants.Constants;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 
 import java.util.ArrayList;
 
-public class ComposterRegistration extends AppCompatActivity {
+public class ResidentRegisteration extends AppCompatActivity {
     public EditText name;
     public EditText phone;
     public EditText address;
@@ -33,7 +52,7 @@ public class ComposterRegistration extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_composter_registeration);
+        setContentView(R.layout.activity_resident_registeration);
         db = new DbMain(this);
         final Button createProfileButton= (Button)findViewById(R.id.createProfileButton);
 
@@ -52,24 +71,11 @@ public class ComposterRegistration extends AppCompatActivity {
                         city.getText().length() != 0  &&
                         state.getText().length() != 0  &&
                         zipcode.getText().length() != 0 ) {
-                    db.insertComposter("", name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
+                    db.insertResident("", name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
                     writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
 
-                    Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
-                    startActivity(composterListViewIntent);
-                    /*
-                    setContentView(R.layout.screen_2);
-                    ListView lv = (ListView) findViewById(R.id.expandableListView);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_list_item_1, android.R.id.text1, Listings.Names);
-                    lv.setAdapter(adapter);
-                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {//temporary work around to navigate to detail view
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent compostDetailIntent = new Intent(getApplicationContext(),CompostDetailActivity.class);
-                            startActivity(compostDetailIntent);
-                        }
-                    });*/
+                    Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
+                    startActivity(residentListViewIntent);
 
                 }
                 else{
@@ -84,7 +90,7 @@ public class ComposterRegistration extends AppCompatActivity {
 
     protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode){
 
-        String url ="composterRegisteration/"+ phone;
+        String url ="residentRegisteration/"+ phone;
         final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference(url);
         mDatabase.child("name").setValue(name);
         mDatabase.child("phone").setValue(phone);
@@ -94,6 +100,6 @@ public class ComposterRegistration extends AppCompatActivity {
         mDatabase.child("zipcode").setValue(zipcode);
         mDatabase.child("adlist").setValue(" ");
         mDatabase.push();
-        Constants.composterId =phone.toString();
+        Constants.ResidentId=phone.toString();
     }
 }

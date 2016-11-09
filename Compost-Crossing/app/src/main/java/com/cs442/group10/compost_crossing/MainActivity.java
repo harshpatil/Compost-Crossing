@@ -15,9 +15,18 @@ import android.widget.ListView;
 
 import com.cs442.group10.compost_crossing.Composter.CompostDetailActivity;
 import com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity;
+import com.cs442.group10.compost_crossing.Composter.ComposterRegistration;
+import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.newsArticle.MyAlarm;
 import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
+import com.cs442.group10.compost_crossing.newsArticle.News;
+import com.cs442.group10.compost_crossing.resident.ResidentRegisteration;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -27,10 +36,12 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
     Button readArticle;
     Button residentButton;
     Button composterButton;
+    DbMain db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
+          db = new DbMain(this);
 //        writeArticleToDB();
 
         super.onCreate(savedInstanceState);
@@ -47,52 +58,38 @@ public class MainActivity extends AppCompatActivity implements ViewListingFragme
             }
         });
 
+        composterButton = (Button)findViewById(R.id.compostButton);
+        composterButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+                int count = db.numberOfDataComposter();
+                if(count >= 1){
+                    Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
+                    startActivity(composterListViewIntent);
+                }
+                else{
+                    Intent composterregistration = new Intent(getApplicationContext(),ComposterRegistration.class);
+                    startActivity(composterregistration);
+                }
+            }
+        });
+
         residentButton = (Button)findViewById(R.id.residentButton);
         residentButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                int count = db.numberOfDataResident();
+                if(count >= 1){
 
-                Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
-                startActivity(residentListViewIntent);
+                    Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
+                    startActivity(residentListViewIntent);
 
+                }
+                else{
+                    Intent residentregistration = new Intent(getApplicationContext(),ResidentRegisteration.class);
+                    startActivity(residentregistration);
+                }
             }
         });
-
-        composterButton = (Button) findViewById(R.id.compostButton);
-        composterButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
-                startActivity(composterListViewIntent);
-
-                /*setContentView(R.layout.screen_2);
-                ListView lv = (ListView) findViewById(R.id.expandableListView);
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                        android.R.layout.simple_list_item_1, android.R.id.text1, Listings.Names);
-                lv.setAdapter(adapter);
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {//temporary work around to navigate to detail view
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent compostDetailIntent = new Intent(getApplicationContext(),CompostDetailActivity.class);
-                        startActivity(compostDetailIntent);
-                    }
-                });*/
-            }
-        });
-
-        if (findViewById(R.id.fragment_container) != null) {
-
-            if (savedInstanceState != null) {
-                return;
-            }
-            ViewListingFragment firstFragment = new ViewListingFragment();
-
-            firstFragment.setArguments(getIntent().getExtras());
-
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).commit();
-
-        }
-
     }
 
     public void onListingSelected(int position) {
