@@ -16,7 +16,10 @@ import android.widget.RelativeLayout;
 
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
+import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
+import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
+import com.cs442.group10.compost_crossing.resident.nearByComposter.NearByComposter;
 import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -149,13 +152,15 @@ public class ResidentAdsHistory extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[2];
-        drawerList[0] = " Home";
-        drawerList[1] = " News Article";
+        drawerList = new String[5];
+        drawerList[0] = Constants.HOME;
+        drawerList[1] = Constants.NEWS_ARTICLE;
+        drawerList[2] = Constants.YOUR_ACTIVE_ADS;
+        drawerList[3] = Constants.CREATE_AD;
+        drawerList[4] = Constants.NEARBY_COMPOSTERS;
 
 
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.navigation_list_item, drawerList));
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
@@ -193,12 +198,32 @@ public class ResidentAdsHistory extends AppCompatActivity {
     }
 
     private void selectItem(int position) {
+
         if(position==0){
-            Intent loginscreen=new Intent(this,MainActivity.class);
-            startActivity(loginscreen);
-        }else if(position==1){
-            Intent loginscreen=new Intent(this,Article.class);
-            startActivity(loginscreen);
+
+            Intent intent=new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+        } else if(position==1){
+
+            Intent intent=new Intent(this, Article.class);
+            startActivity(intent);
+
+        } else if(position == 2){
+
+            Intent intent = new Intent(this, ResidentListViewActivity.class);
+            startActivity(intent);
+
+        } else if(position == 3){
+
+            Intent intent = new Intent(this, AdCreation.class);
+            startActivity(intent);
+
+        } else if(position == 4){
+
+            Intent intent = new Intent(this, NearByComposter.class);
+            startActivity(intent);
+
         }
     }
 }
