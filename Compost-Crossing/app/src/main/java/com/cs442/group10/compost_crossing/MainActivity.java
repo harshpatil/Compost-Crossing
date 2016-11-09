@@ -31,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements ViewListingFragment.OnListingSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     Button readArticle;
     Button residentButton;
