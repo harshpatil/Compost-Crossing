@@ -75,26 +75,6 @@ public class ResidentAdsHistory extends AppCompatActivity {
                     if(String.valueOf(compostAdMap.get("sold")).contains("true")){
 
                         ads = new Ads();
-//                        String buyerId = String.valueOf(compostAdMap.get("buyerId"));
-//                        FirebaseDatabase database2 = FirebaseDatabase.getInstance();
-//                        DatabaseReference ref2 = database2.getReference("composterRegisteration/"+buyerId + "/name");
-//                        ref2.push();
-//                        ref2.addValueEventListener(new ValueEventListener() {
-//
-//                            @Override
-//                            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                                buyerName = dataSnapshot.getValue(String.class);
-//                                ads.setBuyerName(buyerName);
-//                                Log.i("BUYERNAME:", buyerName);
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(DatabaseError databaseError) {
-//
-//                            }
-//                        });
-
                         Log.i("ADSLIST",compostAdMap.get("title"));
                         Log.i("ADSLIST",compostAdMap.get("sold"));
 
@@ -161,24 +141,18 @@ public class ResidentAdsHistory extends AppCompatActivity {
 
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
-        // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this, /* host Activity */
-                mDrawerLayout, /* DrawerLayout object */
-                R.drawable.ic_audiotrack, /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open, /* "open drawer" description for accessibility */
-                R.string.drawer_close /* "close drawer" description for accessibility */
-        ) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_audiotrack, R.string.drawer_open, R.string.drawer_close) {
+
             public void onDrawerClosed(View view) {
-            // getActionBar().setTitle("Ta-Helper");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+
+                invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
-            // getActionBar().setTitle("Ta-Helper Shortcuts");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+
+                invalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);

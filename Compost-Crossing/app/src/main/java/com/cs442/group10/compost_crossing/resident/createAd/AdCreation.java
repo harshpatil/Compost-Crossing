@@ -99,30 +99,22 @@ public class AdCreation extends AppCompatActivity {
         drawerList[3] = Constants.YOUR_PAST_ADS;
         drawerList[4] = Constants.NEARBY_COMPOSTERS;
 
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.navigation_list_item, drawerList));
-        // Set the list's click listener
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this, /* host Activity */
-                mDrawerLayout, /* DrawerLayout object */
-                R.drawable.ic_audiotrack, /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open, /* "open drawer" description for accessibility */
-                R.string.drawer_close /* "close drawer" description for accessibility */
-        ) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_audiotrack, R.string.drawer_open, R.string.drawer_close) {
+
             public void onDrawerClosed(View view) {
-                // getActionBar().setTitle("Ta-Helper");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+
+                invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
-                // getActionBar().setTitle("Ta-Helper Shortcuts");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+
+                invalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
     }
 
     protected void writeToDB(){
