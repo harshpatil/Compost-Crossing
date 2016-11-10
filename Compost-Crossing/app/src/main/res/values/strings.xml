@@ -18,5 +18,9 @@
     <string name="residentNearByComposter">Nearby Composters</string>
     <string name="back">Back</string>
     <string name="createAd">Create Ad</string>
-
+    <string name="acceptCompost">Accept Compost</string>
+    <string name="title_activity_composter_list_view">ComposterListViewActivity</string>
+    <string name="compostAds">Compost Ads</string>
+    <string name="noAds">No Ads Found</string>
+    <string name="myAds">My Ads</string>
 </resources>

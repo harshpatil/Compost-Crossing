@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/compostAds"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:layout_marginBottom="20px" />
+    <ListView
+        android:id="@+id/composterItemListView"
+        android:layout_width="wrap_content"
+        android:layout_height="368dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px" />
+
+    <TextView
+        android:id="@+id/emptyAdListForComposter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+        android:text="@string/noAds"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="40px">
+        <Button
+            android:id="@+id/btnBackResidentListView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:onClick="onBackCompostListView"
+            android:textColor="@color/buttonText"
+            android:background="@color/buttonBackground"
+            android:layout_marginRight="50px" />
+    </LinearLayout>
+</LinearLayout>

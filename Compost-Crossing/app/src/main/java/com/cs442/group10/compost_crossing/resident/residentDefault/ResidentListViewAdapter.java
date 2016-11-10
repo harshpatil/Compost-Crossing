@@ -66,7 +66,7 @@ public class ResidentListViewAdapter extends BaseAdapter{
         final String currentItem = getItem(position).toString();
         adTextView.setText(currentItem);
 
-        Button removeAdBtn = (Button) convertView.findViewById(R.id.btnAdRemove);
+        /*Button removeAdBtn = (Button) convertView.findViewById(R.id.btnAdRemove);
         removeAdBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +85,7 @@ public class ResidentListViewAdapter extends BaseAdapter{
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
             }
-        });
+        });*/
 
         return convertView;
     }
