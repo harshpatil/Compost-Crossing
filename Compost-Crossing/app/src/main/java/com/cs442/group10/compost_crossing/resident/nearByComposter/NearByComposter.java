@@ -23,7 +23,6 @@ import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
 import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
 import com.cs442.group10.compost_crossing.resident.historyPage.ResidentAdsHistory;
-import com.cs442.group10.compost_crossing.resident.historyPage.ResidentHistoryFragment;
 import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -126,7 +125,7 @@ public class NearByComposter extends AppCompatActivity {
         });
 
         if(composterList.size() == 0 && loadingLayout.getVisibility() == View.VISIBLE){
-            nearByComposterFragment.getListView().setBackgroundResource(R.drawable.empty_can);
+            nearByComposterFragment.getListView().setBackgroundResource(R.drawable.empty_trash);
         }
 
         backButton = (Button) findViewById(R.id.backButtonResidentNearByComposterPage);

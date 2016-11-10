@@ -137,7 +137,7 @@ public class ResidentAdsHistory extends AppCompatActivity {
         Log.i("ADSLIST", String.valueOf(adsList.size()));
 
         if(adsList.size() == 0 && loadingLayout.getVisibility() == View.VISIBLE){
-            residentHistoryFragment.getListView().setBackgroundResource(R.drawable.empty_can);
+            residentHistoryFragment.getListView().setBackgroundResource(R.drawable.empty_trash);
         }
 
         backButton = (Button) findViewById(R.id.backButtonResidentHistoryPage);

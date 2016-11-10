@@ -134,11 +134,11 @@ public class MainActivity extends AppCompatActivity {
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        SharedPreferences prefs = getSharedPreferences("com.cs442.group10.compost_crossing.MainActivity", MODE_PRIVATE);
-        boolean isFirstRun = prefs.getBoolean("firstrun", true);
+        SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.MainActivity", MODE_PRIVATE);
+        boolean isFirstRun = sharedPreferences.getBoolean("firstrun", true);
         if (isFirstRun) {
 
-            prefs.edit().putBoolean("firstrun", false).commit();
+            sharedPreferences.edit().putBoolean("firstrun", false).commit();
             showFirstShowCase();
         }
 
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
                 .setStyle(R.style.CustomShowcaseTheme2)
                 .setTarget(new ViewTarget(mDrawerLayout))
                 .hideOnTouchOutside()
-                .setContentTitle("Click to see the sub modules of this module.")
+                .setContentTitle("Click to navigate between screens")
                 .setShowcaseEventListener(new SimpleShowcaseEventListener() {
 
                     @Override
@@ -279,6 +279,4 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .build();
     }
-
-
 }
