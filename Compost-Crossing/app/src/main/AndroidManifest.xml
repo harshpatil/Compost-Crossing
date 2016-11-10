@@ -18,10 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" />
+        <activity android:name=".resident.residentDefault.ResidentListViewActivity" />
         <activity android:name=".resident.ResidentListViewActivity" />
         <activity android:name=".Composter.CompostDetailActivity" />
         <activity android:name=".Composter.ComposterRegistration" />
@@ -38,6 +38,9 @@
         <receiver
             android:name=".newsArticle.MyAlarm"
             android:process=":remote" />
+        <activity android:name=".resident.historyPage.ResidentAdsHistory" />
+        <activity android:name=".resident.nearByComposter.NearByComposter" />
+        <activity android:name=".resident.createAd.AdCreation"></activity>
         <activity android:name=".resident.AdCreation"></activity>
         <activity android:name=".Composter.ComposterListViewActivity"></activity>
         <activity android:name=".resident.ResidentRegisteration"></activity>

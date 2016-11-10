@@ -8,34 +8,57 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 /**
  * Created by HarshPatil on 10/31/16.
  */
 public class WriteArticleToDB {
 
-    public static void main(String args[]){
+    public void writeToDb() throws Exception {
 
-        String title = "How to compost your kitchen scraps and other green waste over the winter months.";
-        String body = "Winter traditionally puts a chill on composting. Short, cold days allow conditions inside your compost piles to cool down to almost nothing. The supply of compostable materials from your landscape falls off once the leaves are raked and the freeze is on.\n\nBut composting doesn’t have to come to a full-stop during the cold months. Here’s how to care for your established, outdoor compost pile during winter, plus tips to start new ones, even in January. Like a lot of activities, composting can come indoors during the frozen months with Bokashi buckets and vermicomposting.\n\nFirst, know what you’re doing. A solid background in composting that includes understanding of green and brown material ratios, the best moisture conditions for making compost and other basic knowledge will go a long way in keeping your compost active during the winter. Collect all the leaves you can. Winter heaps need more brown material to stay active. Yet most of what you’ll be bringing out from the kitchen will be green.\nBulk up the inside of the pile when turning the heaps in the fall. Leave as much air space inside as possible. This puff factor, like goose down in a jacket, helps with insulation. It also provides for oxidation — the decaying process — of the kitchen scraps you’re adding.\nInsulate your pile with fall leaves. They’ll help keep in the heat generated at the center of the pile. Straw makes a good cover if leaves are in short supply. To keep leaves in place, use a tarp or, like my grandfather and Stu Campbell, author of Let It Rot: The Gardener’s Guide to Composting did, cover the heaps with a burlap or old duck canvas cover. The fabric holds in heat and moisture and stays breathable, even when soaked.\nAs the University of Wisconsin-Extension suggests in its piece on winter composting, leave a hole in the leaf cover at the top of the heap. That’s where you’ll pour kitchen scraps into the pile. Pull leaves from around the sides of the heap and add to the hole after adding green waste to make for good green-brown layering.\nBuild a wind block of straw bales around your pile.\nCovering growing beds — or places where new beds will be sited — with sheet compost, famously known as the “lasagna” method is a horizontal, on-the-spot method of building better soil right in your garden. After the ground freezes, you can tuck your kitchen scraps under the cover. This makes for good green (scraps) and brown (straw) balance.\nHave more leaves than your piles and tumbler will accept? Bag them along with some green material — kitchen scraps or fresh mown grass — and let them overwinter, preferably in the sun. Black trash bags are best. They develop more heat in the sunlight. In the spring you can add the composting leaves from the bags into your piles or directly in your garden, depending on their condition. Protect your piles with walls or some kind of break on the east, north and west sides. Keep the south side open to the sun for maximum warming. Site compost tumblers to take best advantage of the sun and protect them from the wind.\nScoop out soil where the pile will be located to a depth of one or two feet. Being partly submerged in the earth helps keep the pile insulated and active.\nYou’ll have to shovel a path to your piles in regions that see major snow accumulations. Keep your piles close and convenient to your back door, but not so close that they’ll be an eyesore come summer.\nTrenching — Storing your green waste in shallow trenches dug directly in your garden gets your scraps pile-ready come spring. This method gets the composting process started early especially in areas that experience frequent freeze and thaw cycles and may even yield finished compost if the ingredients are chopped finely enough. In cold regions, six to ten weeks in the ground may not be enough to have finished waste. When the daily temperatures begin to rise in March or so, dig them up and transfer to your piles/heaps or tumbler. You’ll have kept the microbes in your garden soil active and well-fed.Low humidity and winter winds, both problems here in the mountain west, can dry out your pile. Water it sparingly on a day when the moisture won’t immediately freeze as needed.\nAdd only green kitchen scraps to your pile during winter and use large quantities — you can hold your scrapes in pails or buckets — when you do. Adding finished chicken or steer manure, blood meal, alfalfa pellets or other high nitrogen amendments will help keep temperatures and microbe activity up.\nAs winter turns to spring and moisture increases, compost heaps may turn slimy and start to smell. This is a good time to add brown material — leaves if you have them left from fall — or dry sawdust.\nCompost tumblers: Turn your compost as frequently as possible. Add as much green material — kitchen scraps and the like — to keep whatever activity there is existent. In between, drape your compost tumbler with a well-anchored tarp that will insulate and serve as a wind-break. Locate your tumbler near landscape or buildings that block prevailing winds.\nIf what’s inside your tumbler freezes solid, don’t attempt to turn it. There’s no need. It’s axles and pivots are probably too frozen to budge. And if you do succeed, sudden shifting of the heavy, icy block inside can damage the tumbler and, worse, the person doing the tumbling. Wait for the thaw.\nMake sure scraps are finely chopped. Don’t use rinds.\"\n\nBy E. Vinje\n";
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("articlesList");
-        News news = new News();
-        news.setTitle(title);
-        news.setBody(body);
-        myRef.child("news_02112016").setValue(news);
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                Log.i("DataBase", "Value is: " + value);
+//        String csvFile = "/Users/HarshPatil/Desktop/input.csv";
+//        BufferedReader bufferedReader = null;
+//        String line = "";
+//        String cvsSplitBy = ",";
+//        int today = 9;
+//        try {
+//            bufferedReader = new BufferedReader(new FileReader(csvFile));
+//            while ((line = bufferedReader.readLine()) != null) {
+//
+//                // use comma as separator
+//                String[] field = line.split(cvsSplitBy);
+//                String title = field[0];
+//                String body = field[1];
+    String title = "Straw bale gardening and other tips to build the best soil for your raised beds.";
+    String body = "Adding some raised beds to your garden this year? Great idea. I’ve seen it said that raised beds produce about four times the amount of produce as do row crops. Plants seem more vigorous there in early season, probably because the soil in a raised bed warms faster than that in the garden patch. As gardeners, we love early season growth.\nNone of this is true, of course, if the soil in your raised bed isn’t at its best. And that’s the great things about raised beds. You can dig them out and fill them as you like. Think of them as a controlled experiment in which you’re looking for just the right, airy mix of organic materials — including beneficial microbes and other living things — and naturally occurring nutrients like nitrogen and minerals. The easy way is to just buy the best top soil and compost, in bags or not, and fill up the bed’s box. If you have your own compost, or can get reliable, organic compost — we were lucky to get it from a local, organic dairy goat farm — it’s worth making your own soil blend. That way, you’ll be able to fine-tune it for particular crops. Growing tomatoes? Make your soil slightly acidic, just the way they like it. Growing greens? You’ll want to keep the nitrogen low until you have germination.\nIf you’re using compost, make sure that it’s completely finished. If you’re adding manures of any kind, make sure they’re completely composted and are no longer “hot.” Mix in other materials, like peat or perlite if you’re looking for good drainage, or sand, which root vegetables like. The easiest way to make sure compost is garden-ready is to spread it in the fall, leaving it on the surface to finish through the freeze and thaw cycles of winter.\nIf you didn’t spread compost in the fall or just don’t have any to spare, you can make it on the spot and grow in it as you do. We’ve stuck a bale or two of straw in raised beds in the fall and were left with good results when we pulled the remnants off in the spring.\nNot only does the bale smother any weeds that might try to poke up early, it conditions the soil beneath where it sits. We even know someone that placed a bale right on the sod where he put his box in August and finished up with top soil when it came time to plant next spring. Personally, I’d go to the trouble to dig out all the sod ahead of putting down bales. But that’s just me. If you’re putting in new raised beds this spring, why not put your first planting right in the straw bales? The craft of straw bale gardening has grown in popularity and for good reason. Some gardeners skip the box all together and just grow in the bale.\nOnce the hay bale growing is over, your raised box will be left with good-quality left behind from the composted straw. You can hasten the process by adding some compost or top soil which you’ll probably do as part of sticking plants in the bale. Either way, the soil inside your raised bed will benefit.\n\nBy E. Vinje\n";
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("articlesList");
+                News news = new News();
+                news.setTitle(title);
+                news.setBody(body);
+//                today++;
+//                String day = String.valueOf(today);
+//                Log.i("CSV","CSV");
+//                myRef.child("news_"+ day +"112016").setValue(news);
+                myRef.child("news_13112016").setValue(news);
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+
+                        Log.w("DataBase", "Failed to read value.", error.toException());
+                    }
+                });
             }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-                Log.w("DataBase", "Failed to read value.", error.toException());
-            }
-        });
-    }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 }

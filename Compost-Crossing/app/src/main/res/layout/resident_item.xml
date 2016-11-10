@@ -1,24 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="10"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/myAds"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:layout_marginBottom="20px" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="5dp"
+        android:weightSum="10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="match_parent"
+            android:text="@string/activeAds"
+            android:textStyle="bold"
+            android:background="@color/buttonBackground"
+            android:textColor="@color/buttonText"
+            android:gravity="center"
+            android:textSize="18dp"
+            />
+
+        <Button
+            android:id="@+id/btnResidentHistory"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="@string/residentHistory"
+            android:background="@color/buttonBackground"
+            android:textColor="@color/buttonText"
+            android:gravity="center"
+            android:textSize="16dp"
+             />
+    </LinearLayout>
+
     <ListView
         android:id="@+id/residentItemListView"
-        android:layout_width="wrap_content"
-        android:layout_height="368dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:layout_marginLeft="20px"
-        android:layout_marginRight="20px" />
+        />
 
     <TextView
         android:id="@+id/emptyAdListForResident"
@@ -29,30 +57,54 @@
         android:visibility="gone"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
         android:text="@string/createANewAdToday"/>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:weightSum="10"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="40px">
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+
         <Button
             android:id="@+id/btnBackResidentListView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            android:onClick="back"
-            android:textColor="@color/buttonText"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:text="Home"
             android:background="@color/buttonBackground"
-            android:layout_marginRight="50px" />
+            android:textColor="@color/buttonText"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+             />
+
+        <Button
+            android:id="@+id/btnComposterNearBy"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="match_parent"
+            android:background="@color/buttonBackground"
+            android:textColor="@color/buttonText"
+            android:text="@string/composterNearBy"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
 
         <Button
             android:id="@+id/btnPostAd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/postANewAd"
-            android:textColor="@color/buttonText"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="match_parent"
             android:background="@color/buttonBackground"
-            android:onClick="navigateToNewAdForm" />
+            android:textColor="@color/buttonText"
+            android:text="@string/postANewAd"
+            android:onClick="navigateToNewAdForm"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            />
+
     </LinearLayout>
+
 </LinearLayout>

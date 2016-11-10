@@ -14,12 +14,15 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.cs442.group10.compost_crossing.Composter.CompostDetailActivity;
+import com.cs442.group10.compost_crossing.DB.DbMain;
+import com.cs442.group10.compost_crossing.newsArticle.Article;
+import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
+import com.cs442.group10.compost_crossing.newsArticle.MyAlarm;
 import com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity;
 import com.cs442.group10.compost_crossing.Composter.ComposterRegistration;
 import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.newsArticle.MyAlarm;
-import com.cs442.group10.compost_crossing.resident.ResidentListViewActivity;
 import com.cs442.group10.compost_crossing.newsArticle.News;
 import com.cs442.group10.compost_crossing.resident.ResidentRegisteration;
 import com.google.firebase.database.DataSnapshot;
@@ -58,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        composterButton = (Button)findViewById(R.id.compostButton);
+        composterButton = (Button) findViewById(R.id.compostButton);
         composterButton.setOnClickListener(new Button.OnClickListener() {
+
             public void onClick(View v) {
 
                 int count = db.numberOfDataComposter();

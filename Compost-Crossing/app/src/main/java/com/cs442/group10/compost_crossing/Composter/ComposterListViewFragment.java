@@ -17,8 +17,6 @@ import android.widget.TextView;
 
 import com.cs442.group10.compost_crossing.AdDetail;
 import com.cs442.group10.compost_crossing.R;
-import com.cs442.group10.compost_crossing.resident.ResidentListViewAdapter;
-import com.cs442.group10.compost_crossing.resident.ResidentListViewFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
