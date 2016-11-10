@@ -74,6 +74,6 @@ public class ResidentRegisteration extends AppCompatActivity {
         mDatabase.child("zipcode").setValue(zipcode);
         mDatabase.child("adlist").setValue(" ");
         mDatabase.push();
-        Constants.residentId =phone.toString();
+        Constants.residentId = phone.toString();
     }
 }

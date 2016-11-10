@@ -18,5 +18,4 @@ public class Constants {
     public static String composterName = "";
     public static String residentId = "";
     public static String residentName = "";
-
 }

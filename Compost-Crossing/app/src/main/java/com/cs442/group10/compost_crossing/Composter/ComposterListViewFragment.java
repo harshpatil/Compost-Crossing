@@ -1,10 +1,7 @@
 package com.cs442.group10.compost_crossing.Composter;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cs442.group10.compost_crossing.AdDetail;
@@ -23,14 +21,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class ComposterListViewFragment extends Fragment {
     private static final String AD_TABLE = "adDetails";
-    private static final String COMPOSTER_REG_TABLE = "composterRegisteration";
+    private static final String RESIDENT_REG_TABLE = "residentRegisteration";
     private static final String ID_COL = "id";
     private static final String OWNER_NAME_COL = "ownerName";
     private static final String AD_ID_COL = "adId";
@@ -67,49 +64,66 @@ public class ComposterListViewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_composter_list_view, container, false);
         final ListView listView = (ListView) view.findViewById(R.id.composterItemListView);
         final TextView emptyTextView = (TextView) view.findViewById(R.id.emptyAdListForComposter);
+        final RelativeLayout loadingLayout = (RelativeLayout) view.findViewById(R.id.loadingPanel);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference(AD_TABLE);
+        DatabaseReference reference = database.getReference(RESIDENT_REG_TABLE);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                loadingLayout.setVisibility(View.GONE);
                 compostAdsMap = new HashMap<String, String>();
-                Map<String, Map<String,String>> compostInfoMap = (Map<String, Map<String,String>>) dataSnapshot.getValue();
-                for(Map.Entry<String, Map<String,String>> compostAdListMap: compostInfoMap.entrySet()) {
-                    Map<String, String> compostAdMap = compostAdListMap.getValue();
+                Map<String, Map<String,Object>> residentRegMap = (Map<String, Map<String,Object>>) dataSnapshot.getValue();
+                for(Map.Entry<String, Map<String,Object>> residentMap: residentRegMap.entrySet()) {
+                    Map<String, Object> residentRecordMap = residentMap.getValue();
 
-                    String buyerId = compostAdMap.get(BUYER_ID_COL);
-                    String weight = compostAdMap.get(WEIGHT_COL);
-                    String title = compostAdMap.get(TITLE_COL);
+                    if (!residentRecordMap.get("adlist").equals(" ")) {
+                        Map<String, Map<String, String>> compostAdListMap = (Map<String, Map<String, String>>) residentRecordMap.get("adlist");
+                        for (Map.Entry<String, Map<String, String>> compostAdMap : compostAdListMap.entrySet()) {
+                            Map<String, String> adDetailsMap = compostAdMap.getValue();
 
-                    final AdDetail adDetail = new AdDetail(compostAdMap.get(ID_COL),compostAdMap.get(OWNER_NAME_COL),title, compostAdMap.get(ADDRESS_COL),compostAdMap.get(CITY_COL),compostAdMap.get(STATE_COL),
-                            compostAdMap.get(ZIP_CODE_COL),compostAdMap.get(COST_COL),compostAdMap.get(DROP_COL),compostAdMap.get(SOLD_COL),weight,
-                            compostAdMap.get(BUYER_ID_COL),compostAdMap.get(BUYER_NAME_COL));
+                            String buyerId = adDetailsMap.get(BUYER_ID_COL);
+                            String weight = adDetailsMap.get(WEIGHT_COL);
+                            String title = adDetailsMap.get(TITLE_COL);
+                            String id = adDetailsMap.get(ID_COL);
+                            String ownerName = (String) residentRecordMap.get("name");
+                            String ownerPhone = (String) residentRecordMap.get("phone");
+                            String address = adDetailsMap.get(ADDRESS_COL);
+                            String city = adDetailsMap.get(CITY_COL);
+                            String zipCode = adDetailsMap.get(ZIP_CODE_COL);
+                            String cost = adDetailsMap.get(COST_COL);
+                            String drop = adDetailsMap.get(DROP_COL);
+                            String sold = adDetailsMap.get(SOLD_COL);
+                            String buyerName =  adDetailsMap.get(BUYER_NAME_COL);
+                            String state = adDetailsMap.get(STATE_COL);
 
-                    if (buyerId != null) {
-                        if(buyerId.equals("NULL")) {
-                            final String compostAd = String.valueOf(title) + "-" + String.valueOf(weight);
-                            compostAdsMap.put(compostAdListMap.getKey(), compostAd);
-                            adDetailMap.put(compostAdListMap.getKey(), adDetail);
+                            final AdDetail adDetail = new AdDetail(id, ownerName, ownerPhone, title, address, city, state, zipCode, cost, drop, sold, weight, buyerId, buyerName);
 
-                            ComposterListViewAdapter composterListViewAdapter = new ComposterListViewAdapter(getActivity(), compostAdsMap);
-                            listView.setAdapter(composterListViewAdapter);
+                            if (buyerId != null) {
+                                if (buyerId.equals("NULL")) {
+                                    final String compostAd = String.valueOf(title) + "-" + String.valueOf(weight);
+                                    compostAdsMap.put(compostAdMap.getKey(), compostAd);
+                                    adDetailMap.put(compostAdMap.getKey(), adDetail);
 
-                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long itemId) {
-                                    String key = (String) adDetailMap.keySet().toArray()[position];
+                                    ComposterListViewAdapter composterListViewAdapter = new ComposterListViewAdapter(getActivity(), compostAdsMap);
+                                    listView.setAdapter(composterListViewAdapter);
 
-                                    Intent compostDetailIntent = new Intent(getActivity().getApplicationContext(),CompostDetailActivity.class);
-                                    Bundle compostAdBundle = new Bundle();
-                                    compostAdBundle.putSerializable("compostAd", adDetailMap.get(key));
-                                    compostDetailIntent.putExtras(compostAdBundle);
-                                    startActivity(compostDetailIntent);
+                                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long itemId) {
+                                            String key = (String) adDetailMap.keySet().toArray()[position];
+
+                                            Intent compostDetailIntent = new Intent(getActivity().getApplicationContext(), CompostDetailActivity.class);
+                                            Bundle compostAdBundle = new Bundle();
+                                            compostAdBundle.putSerializable("compostAd", adDetailMap.get(key));
+                                            compostDetailIntent.putExtras(compostAdBundle);
+                                            startActivity(compostDetailIntent);
+                                        }
+                                    });
+                                    listView.setEmptyView(emptyTextView);
                                 }
-                            });
-
-                            listView.setEmptyView(emptyTextView);
+                            }
                         }
                     }
                 }
