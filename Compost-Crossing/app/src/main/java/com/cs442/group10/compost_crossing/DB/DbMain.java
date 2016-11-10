@@ -128,4 +128,20 @@ public class DbMain extends SQLiteOpenHelper {
         }
         return array_list;
     }
+
+    public String getResidentPhoneNumber(){
+
+        String phoneNumber = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor resultSet =  db.rawQuery( "select phone from resident_register", null);
+        resultSet.moveToLast();
+
+        while(resultSet.isBeforeFirst() == false){
+
+            phoneNumber = resultSet.getString(resultSet.getColumnIndex("phone"));
+            break;
+        }
+        return phoneNumber;
+    }
+
 }

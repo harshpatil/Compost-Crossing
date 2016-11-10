@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
@@ -40,6 +41,8 @@ public class AdCreation extends AppCompatActivity {
     EditText price;
     Button submitButton;
     Button backButton;
+    DbMain dbMain;
+    String phoneNumber;
 
     private ListView mDrawerList;
     private String[] drawerList;
@@ -51,6 +54,10 @@ public class AdCreation extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resident_ad_creation_activity);
+
+        dbMain = new DbMain(this);
+        phoneNumber = dbMain.getResidentPhoneNumber();
+        Log.i("PHONENUMBER", phoneNumber);
 
         compostTitle = (EditText) findViewById(R.id.compostType);
         address = (EditText) findViewById(R.id.pickupLocation);
@@ -137,7 +144,7 @@ public class AdCreation extends AppCompatActivity {
         compostAd.setId(adId);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("adDetails");
+        DatabaseReference myRef = database.getReference("residentRegisteration/"+ phoneNumber + "/adlist");
         myRef.child(adId).setValue(compostAd);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
