@@ -134,14 +134,14 @@ public class ResidentAdsHistory extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[6];
+        drawerList = new String[7];
         drawerList[0] = Constants.HOME;
         drawerList[1] = Constants.NEWS_ARTICLE;
         drawerList[2] = Constants.YOUR_ACTIVE_ADS;
-        drawerList[3] = Constants.CREATE_AD;
-        drawerList[4] = Constants.NEARBY_COMPOSTERS;
-        drawerList[5] = Constants.SETTINGS;
-
+        drawerList[3] = Constants.YOUR_PAST_ADS;
+        drawerList[4] = Constants.CREATE_AD;
+        drawerList[5] = Constants.NEARBY_COMPOSTERS;
+        drawerList[6] = Constants.SETTINGS;
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -165,6 +165,7 @@ public class ResidentAdsHistory extends AppCompatActivity {
 
         Intent intent = new Intent(this, ResidentListViewActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -193,15 +194,20 @@ public class ResidentAdsHistory extends AppCompatActivity {
 
         } else if(position == 3){
 
-            Intent intent = new Intent(this, AdCreation.class);
+            Intent intent = new Intent(this, ResidentAdsHistory.class);
             startActivity(intent);
 
         } else if(position == 4){
 
-            Intent intent = new Intent(this, NearByComposter.class);
+            Intent intent = new Intent(this, AdCreation.class);
             startActivity(intent);
 
         } else if(position == 5){
+
+            Intent intent = new Intent(this, NearByComposter.class);
+            startActivity(intent);
+
+        } else if(position == 6){
 
             Class<?> c = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ? MyPreferenceActivity.class:MyPreferenceActivity.class;
             Intent i = new Intent(this, c);

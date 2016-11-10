@@ -156,7 +156,6 @@ public class Article extends AppCompatActivity {
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
     }
 
     public void onClickingGoToHomePageButton(){

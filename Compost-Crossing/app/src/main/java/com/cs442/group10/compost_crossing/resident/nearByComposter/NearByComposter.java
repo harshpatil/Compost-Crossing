@@ -2,6 +2,7 @@ package com.cs442.group10.compost_crossing.resident.nearByComposter;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
+import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
 import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
 import com.cs442.group10.compost_crossing.resident.historyPage.ResidentAdsHistory;
 import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
@@ -49,6 +51,7 @@ public class NearByComposter extends AppCompatActivity {
     private String[] drawerList;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private static final int SHOW_PREFERENCES = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,13 +130,14 @@ public class NearByComposter extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[5];
+        drawerList = new String[7];
         drawerList[0] = Constants.HOME;
         drawerList[1] = Constants.NEWS_ARTICLE;
         drawerList[2] = Constants.YOUR_ACTIVE_ADS;
         drawerList[3] = Constants.YOUR_PAST_ADS;
         drawerList[4] = Constants.CREATE_AD;
-
+        drawerList[5] = Constants.NEARBY_COMPOSTERS;
+        drawerList[6] = Constants.SETTINGS;
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -157,6 +161,7 @@ public class NearByComposter extends AppCompatActivity {
 
         Intent intent = new Intent(this, ResidentListViewActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -193,6 +198,16 @@ public class NearByComposter extends AppCompatActivity {
             Intent intent = new Intent(this, AdCreation.class);
             startActivity(intent);
 
+        } else if(position == 5){
+
+            Intent intent = new Intent(this, NearByComposter.class);
+            startActivity(intent);
+
+        } else if(position == 6){
+
+            Class<?> c = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ? MyPreferenceActivity.class:MyPreferenceActivity.class;
+            Intent i = new Intent(this, c);
+            startActivityForResult(i, SHOW_PREFERENCES);
         }
     }
 }
