@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import com.cs442.group10.compost_crossing.AdDetail;
 import com.cs442.group10.compost_crossing.R;
+import com.cs442.group10.compost_crossing.constants.Constants;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -48,6 +49,7 @@ public class CompostDetailViewFragment extends Fragment {
     String composterAddress;
     String composterAddressForMap;
     static AdDetail adDetail;
+    private static final String RESIDENT_REG_TABLE = "residentRegisteration";
 
     public static CompostDetailViewFragment newInstance(AdDetail compostAdDetail){
         CompostDetailViewFragment compostDetailViewFragment =  new CompostDetailViewFragment();
@@ -61,19 +63,24 @@ public class CompostDetailViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.compost_detail_view_fragment, container, false);
 
+        final String composterId = Constants.composterId;
+        final String composterName = Constants.composterName;
+
+        TextView composterNameTextView = (TextView) view.findViewById(R.id.composterName);
         TextView composterPhNoTextView = (TextView) view.findViewById(R.id.composterPhNo);
-        composterAddressTextView = (TextView) view.findViewById(R.id.composterAddr);
         TextView compostDetailsTextView = (TextView) view.findViewById(R.id.compostDetails);
         Button backButton = (Button) view.findViewById(R.id.btnBackComposterDetailView);
         Button acceptCompostButton = (Button) view.findViewById(R.id.btnAcceptCompost);
 
+        composterNameTextView.setText(adDetail.getOwnerName());
+        composterAddressTextView = (TextView) view.findViewById(R.id.composterAddr);
         composterAddressForMap = adDetail.getAddress()+","+adDetail.getCity()+","+adDetail.getState()+"-"+adDetail.getZipCode();//"3001 S King Drive,Illinois,Chicago-60616";
         composterAddress = adDetail.getAddress()+",\n"+adDetail.getCity()+", "+adDetail.getState()+" - "+adDetail.getZipCode();
         composterAddressTextView.setText("3001 S King Drive,\n Illinois, Chicago - 60616");
 
         new GetMapsInfo().execute(composterAddressForMap.replaceAll(" ","%20"));
 
-        composterPhNoTextView.setText("3152547895");
+        composterPhNoTextView.setText(adDetail.getOwnerPhone());
         Linkify.addLinks(composterPhNoTextView, Linkify.PHONE_NUMBERS);
 
         compostDetailsTextView.setText(adDetail.getTitle()+"\nWeight: "+adDetail.getWeight()+"\nCost:$"+adDetail.getCost()+"\nDrop:"+adDetail.getDrop());
@@ -91,17 +98,22 @@ public class CompostDetailViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference reference = database.getReference("adDetails");
-                reference.child("ad1").child("buyerId").setValue("John");
+                //DatabaseReference reference = database.getReference("adDetails");
+                /*reference.child("ad1").child("buyerId").setValue(composterId);
+                reference.child("ad1").child("buyerName").setValue(composterId);*/
+                DatabaseReference residentTableRef = database.getReference(RESIDENT_REG_TABLE);
+                Map<String,String> residentAdMap = (Map<String, String>) residentTableRef.child(adDetail.getOwnerPhone()).child("adlist");
 
-                DatabaseReference reference1 = database.getReference("composterRegisteration");
-                Map<String, Map<String, String>> compostAdMap = getCompostAdMap();
+                DatabaseReference composterTableRef = database.getReference("composterRegisteration");
+                /*residentTableRef.child(adDetail.getOwnerPhone()).child("adlist").child(adDetail.getId()).child("sold").setValue("false");
+                residentTableRef.child(adDetail.getOwnerPhone()).child("adlist").child(adDetail.getId()).child("buyerId").setValue(composterId);
+                residentTableRef.child(adDetail.getOwnerPhone()).child("adlist").child(adDetail.getId()).child("buyerName").setValue(composterName);*/
 
-                reference1.child("9174032678").child("adList").setValue(compostAdMap);
+                Map<String, Map<String, String>> compostAdMap = getCompostAdMap(composterId,composterName);
+                composterTableRef.child(composterId).child("adList").setValue(compostAdMap);
 
                 Toast.makeText(getActivity().getBaseContext(), "Compost Accepted Successfully",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity().getApplicationContext(), ComposterListViewActivity.class);
-                //intent.putExtra("loadCompostDetailFragment", false);
                 startActivity(intent);
                // getActivity().onBackPressed();
             }
@@ -109,14 +121,14 @@ public class CompostDetailViewFragment extends Fragment {
         return view;
     }
 
-    private HashMap<String, Map<String,String>> getCompostAdMap(){
+    private HashMap<String, Map<String,String>> getCompostAdMap(String composterId, String composterName){
         HashMap<String, Map<String,String>> compostAdListMap = new HashMap<String, Map<String,String>>();
         Map<String,String> compostAdMap = new HashMap<String,String>();
 
         compostAdMap.put("id", adDetail.getId());
         compostAdMap.put("address", adDetail.getAddress());
-        compostAdMap.put("buyerId", adDetail.getBuyerId());
-        compostAdMap.put("buyerName", "John");
+        compostAdMap.put("buyerId", composterId);
+        compostAdMap.put("buyerName", composterName);
         compostAdMap.put("city", adDetail.getCity());
         compostAdMap.put("cost", adDetail.getCost());
         compostAdMap.put("drop", adDetail.getDrop());

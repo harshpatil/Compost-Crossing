@@ -144,13 +144,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onListingSelected(int position) {
-
-        Intent compostDetailIntent = new Intent(this,CompostDetailActivity.class);
-        startActivity(compostDetailIntent);
-    }
-
-
     public void onClickingReadArticleButton(){
 
         Intent readArticleIntent = new Intent(this, Article.class);

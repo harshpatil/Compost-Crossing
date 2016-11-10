@@ -17,6 +17,7 @@ public class Constants {
     public static String BACK = "Back";
     public static String CREATE_AD = "Create Ad";
     public static String composterId = "";
-    public static String ResidentId = "";
-
+    public static String composterName = "";
+    public static String residentId = "";
+    public static String residentName = "";
 }
