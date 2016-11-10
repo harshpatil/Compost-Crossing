@@ -38,6 +38,21 @@
             />
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <ProgressBar
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/buttonBackground"/>
+    </RelativeLayout>
+
     <ListView
         android:id="@+id/residentItemListView"
         android:layout_width="match_parent"
