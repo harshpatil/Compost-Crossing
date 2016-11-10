@@ -157,7 +157,8 @@ public class DbMain extends SQLiteOpenHelper {
 
             zipCode = resultSet.getString(resultSet.getColumnIndex("zipcode"));
             Log.i("zipCodeLocal", zipCode);
-            resultSet.moveToPrevious();
+//            resultSet.moveToPrevious();
+            break;
         }
         return zipCode;
     }

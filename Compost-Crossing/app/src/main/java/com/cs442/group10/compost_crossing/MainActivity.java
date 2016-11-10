@@ -3,6 +3,7 @@ package com.cs442.group10.compost_crossing;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -28,6 +29,9 @@ import com.cs442.group10.compost_crossing.newsArticle.MyAlarm;
 import com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity;
 import com.cs442.group10.compost_crossing.Composter.ComposterRegistration;
 import com.cs442.group10.compost_crossing.resident.ResidentRegisteration;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.SimpleShowcaseEventListener;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -129,6 +133,15 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        SharedPreferences prefs = getSharedPreferences("com.cs442.group10.compost_crossing.MainActivity", MODE_PRIVATE);
+        boolean isFirstRun = prefs.getBoolean("firstrun", true);
+        if (isFirstRun) {
+
+            prefs.edit().putBoolean("firstrun", false).commit();
+            showFirstShowCase();
+        }
+
     }
 
     public void onListingSelected(int position) {
@@ -194,4 +207,78 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+    private void showFirstShowCase(){
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(composterButton))
+                .hideOnTouchOutside()
+                .setContentTitle("Click the button if you are a composter.")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showSecondShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+    private void showSecondShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(residentButton))
+                .hideOnTouchOutside()
+                .setContentTitle("Click the button to go back to course list.")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showThirdShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+    private void showThirdShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)//moduleListView.getChildAt(0).findViewById(R.id.editModuleButtonView))
+                .setTarget(new ViewTarget(readArticle))
+                .hideOnTouchOutside()
+                .setContentTitle("Click to edit the module details.")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showFourthShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+    private void showFourthShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(mDrawerLayout))
+                .hideOnTouchOutside()
+                .setContentTitle("Click to see the sub modules of this module.")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        //showFifthShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+
 }

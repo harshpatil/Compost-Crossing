@@ -75,7 +75,7 @@ public class ResidentAdsHistory extends AppCompatActivity {
         residentHistoryListView = residentHistoryFragment.getListView();
         residentHistoryAdapter.notifyDataSetChanged();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("residentRegisteration/" + phoneNumber + "/adlist" );
         ref.push();
 
@@ -84,42 +84,46 @@ public class ResidentAdsHistory extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 loadingLayout.setVisibility(View.GONE);
-                Map<String, Map<String,String>> compostInfoMap = (Map<String, Map<String,String>>) dataSnapshot.getValue();
 
-                for(Map.Entry<String, Map<String,String>> compostAdListMap: compostInfoMap.entrySet()){
+                if(dataSnapshot.getValue() != null && dataSnapshot.getValue() != " " && !dataSnapshot.getValue().getClass().equals(String.class)) {
 
-                    Map<String,String> compostAdMap = compostAdListMap.getValue();
+                    Map<String, Map<String,String>> compostInfoMap = (Map<String, Map<String,String>>) dataSnapshot.getValue();
 
-                    if(String.valueOf(compostAdMap.get("sold")).contains("true")){
+                    for(Map.Entry<String, Map<String,String>> compostAdListMap: compostInfoMap.entrySet()){
 
-                        ads = new Ads();
-                        Log.i("ADSLIST",compostAdMap.get("title"));
-                        Log.i("ADSLIST",compostAdMap.get("sold"));
+                        Map<String,String> compostAdMap = compostAdListMap.getValue();
 
-                        switch (imageId%10){
-                            case 0 : ads.setImageId(R.drawable.compost_1); break;
-                            case 1 : ads.setImageId(R.drawable.compost_2); break;
-                            case 2 : ads.setImageId(R.drawable.compost_3); break;
-                            case 3 : ads.setImageId(R.drawable.compost_4); break;
-                            case 4 : ads.setImageId(R.drawable.compost_5); break;
-                            case 5 : ads.setImageId(R.drawable.compost_6); break;
-                            case 6 : ads.setImageId(R.drawable.compost_7); break;
-                            case 7 : ads.setImageId(R.drawable.compost_8); break;
-                            case 8 : ads.setImageId(R.drawable.compost_9); break;
-                            case 9 : ads.setImageId(R.drawable.compost_10); break;
-                            default : ads.setImageId(R.drawable.compost_11);
+                        if(String.valueOf(compostAdMap.get("sold")).contains("true")){
+
+                            ads = new Ads();
+                            Log.i("ADSLIST",compostAdMap.get("title"));
+                            Log.i("ADSLIST",compostAdMap.get("sold"));
+
+                            switch (imageId%10){
+                                case 0 : ads.setImageId(R.drawable.compost_1); break;
+                                case 1 : ads.setImageId(R.drawable.compost_2); break;
+                                case 2 : ads.setImageId(R.drawable.compost_3); break;
+                                case 3 : ads.setImageId(R.drawable.compost_4); break;
+                                case 4 : ads.setImageId(R.drawable.compost_5); break;
+                                case 5 : ads.setImageId(R.drawable.compost_6); break;
+                                case 6 : ads.setImageId(R.drawable.compost_7); break;
+                                case 7 : ads.setImageId(R.drawable.compost_8); break;
+                                case 8 : ads.setImageId(R.drawable.compost_9); break;
+                                case 9 : ads.setImageId(R.drawable.compost_10); break;
+                                default : ads.setImageId(R.drawable.compost_11);
+                            }
+
+                            imageId ++;
+
+                            ads.setTitle(String.valueOf(compostAdMap.get("title")));
+                            ads.setCost(String.valueOf(compostAdMap.get("cost")));
+                            ads.setWeight(String.valueOf(compostAdMap.get("weight")));
+                            ads.setSold(String.valueOf(compostAdMap.get("sold")));
+                            ads.setBuyerName(String.valueOf(compostAdMap.get("buyerName")));
+
+                            adsList.add(ads);
+                            residentHistoryFragment.getListView().setBackgroundResource(0);
                         }
-
-                        imageId ++;
-
-                        ads.setTitle(String.valueOf(compostAdMap.get("title")));
-                        ads.setCost(String.valueOf(compostAdMap.get("cost")));
-                        ads.setWeight(String.valueOf(compostAdMap.get("weight")));
-                        ads.setSold(String.valueOf(compostAdMap.get("sold")));
-                        ads.setBuyerName(String.valueOf(compostAdMap.get("buyerName")));
-
-                        adsList.add(ads);
-                        residentHistoryFragment.getListView().setBackgroundResource(0);
                     }
                 }
             }
@@ -147,7 +151,7 @@ public class ResidentAdsHistory extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[7];
+        drawerList = new String[8];
         drawerList[0] = Constants.HOME;
         drawerList[1] = Constants.NEWS_ARTICLE;
         drawerList[2] = Constants.YOUR_ACTIVE_ADS;
@@ -155,6 +159,7 @@ public class ResidentAdsHistory extends AppCompatActivity {
         drawerList[4] = Constants.CREATE_AD;
         drawerList[5] = Constants.NEARBY_COMPOSTERS;
         drawerList[6] = Constants.SETTINGS;
+        drawerList[7] = Constants.BACK;
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -225,6 +230,12 @@ public class ResidentAdsHistory extends AppCompatActivity {
             Class<?> c = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ? MyPreferenceActivity.class:MyPreferenceActivity.class;
             Intent i = new Intent(this, c);
             startActivityForResult(i, SHOW_PREFERENCES);
+
+        } else if(position == 7){
+
+            Intent intent = new Intent(this, ResidentListViewActivity.class);
+            startActivity(intent);
+
         }
     }
 }
