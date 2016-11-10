@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 
 public class DbMain extends SQLiteOpenHelper {
 
@@ -67,17 +68,16 @@ public class DbMain extends SQLiteOpenHelper {
         return true;
     }
 
-
-    public boolean insertResident (String tstamp, String name, String phone, String city,String state,String zipcode,String address)
+    public boolean insertResident (String tstamp, String name, String phone, String city,String state, String zipcode, String address)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("tstamp", tstamp);
         contentValues.put("name", name);
+        contentValues.put("zipcode", zipcode);
         contentValues.put("phone", phone);
         contentValues.put("city", city);
         contentValues.put("state", state);
-        contentValues.put("zipcode", zipcode);
         contentValues.put("address", address);
         db.insert("resident_register", null, contentValues);
         db.close();
@@ -96,10 +96,12 @@ public class DbMain extends SQLiteOpenHelper {
         return ordCount;
     }
 
-    public Integer deleteAllOrders ()
+    public Integer deleteAllTables()
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("composter_register",null,null);
+        db.delete("resident_register",null,null);
+//        db.delete("composter_register",null,null);
+        return 0;
     }
 
     public ArrayList<Spanned> getAllOrders()
@@ -144,4 +146,19 @@ public class DbMain extends SQLiteOpenHelper {
         return phoneNumber;
     }
 
+    public String getResidentZipCode(){
+
+        String zipCode = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor resultSet =  db.rawQuery( "select zipcode from resident_register", null);
+        resultSet.moveToLast();
+
+        while(resultSet.isBeforeFirst() == false){
+
+            zipCode = resultSet.getString(resultSet.getColumnIndex("zipcode"));
+            Log.i("zipCodeLocal", zipCode);
+            resultSet.moveToPrevious();
+        }
+        return zipCode;
+    }
 }

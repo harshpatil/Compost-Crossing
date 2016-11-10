@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
@@ -22,6 +23,7 @@ import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
 import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
 import com.cs442.group10.compost_crossing.resident.historyPage.ResidentAdsHistory;
+import com.cs442.group10.compost_crossing.resident.historyPage.ResidentHistoryFragment;
 import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,9 +45,11 @@ public class NearByComposter extends AppCompatActivity {
     List<Composter> composterList = new ArrayList<Composter>();
     NearByComposterAdapter nearByComposterAdapter;
     ListView nearByComposterListView;
-    String currentUserZipCode = "60616";
     int imageId = 0;
     RelativeLayout loadingLayout;
+    NearByComposterFragment nearByComposterFragment;
+    DbMain dbMain;
+    String currentUserZipCode;
 
     private ListView mDrawerList;
     private String[] drawerList;
@@ -59,7 +63,17 @@ public class NearByComposter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.near_by_composter_activity);
 
+        dbMain = new DbMain(this);
+        currentUserZipCode = dbMain.getResidentZipCode();
+        Log.i("ZIPCODE", currentUserZipCode);
+
         loadingLayout = (RelativeLayout) findViewById(R.id.loadingPanelNearByComposterPage);
+        FragmentManager fragmentManager = getFragmentManager();
+        nearByComposterFragment = (NearByComposterFragment) fragmentManager.findFragmentById(R.id.ResidentNearByComposterFragment);
+        nearByComposterAdapter = new NearByComposterAdapter(this, R.layout.resident_nearby_composter_fragment, composterList);
+        nearByComposterFragment.setListAdapter(nearByComposterAdapter);
+        nearByComposterListView = nearByComposterFragment.getListView();
+        nearByComposterAdapter.notifyDataSetChanged();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("composterRegisteration");
@@ -100,6 +114,7 @@ public class NearByComposter extends AppCompatActivity {
                         composter.setName(String.valueOf(compostAdMap.get("name")));
                         composter.setAddress(String.valueOf(compostAdMap.get("address")) + " " + String.valueOf(compostAdMap.get("city")) + " " + String.valueOf(compostAdMap.get("zipcode")));
                         composterList.add(composter);
+                        nearByComposterFragment.getListView().setBackgroundResource(0);
                     }
                 }
             }
@@ -110,13 +125,9 @@ public class NearByComposter extends AppCompatActivity {
             }
         });
 
-        FragmentManager fragmentManager = getFragmentManager();
-        NearByComposterFragment nearByComposterFragment = (NearByComposterFragment) fragmentManager.findFragmentById(R.id.ResidentNearByComposterFragment);
-        nearByComposterAdapter = new NearByComposterAdapter(this, R.layout.resident_nearby_composter_fragment, composterList);
-        nearByComposterFragment.setListAdapter(nearByComposterAdapter);
-        nearByComposterListView = nearByComposterFragment.getListView();
-        nearByComposterAdapter.notifyDataSetChanged();
-
+        if(composterList.size() == 0 && loadingLayout.getVisibility() == View.VISIBLE){
+            nearByComposterFragment.getListView().setBackgroundResource(R.drawable.empty_can);
+        }
 
         backButton = (Button) findViewById(R.id.backButtonResidentNearByComposterPage);
         backButton.setOnClickListener(new View.OnClickListener() {

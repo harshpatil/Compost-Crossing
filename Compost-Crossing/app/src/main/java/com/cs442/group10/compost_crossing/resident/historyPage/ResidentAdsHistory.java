@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
@@ -45,6 +46,9 @@ public class ResidentAdsHistory extends AppCompatActivity {
     Ads ads;
     int imageId = 0;
     RelativeLayout loadingLayout;
+    DbMain dbMain;
+    String phoneNumber;
+    ResidentHistoryFragment residentHistoryFragment;
 
     private ListView mDrawerList;
     private String[] drawerList;
@@ -58,10 +62,21 @@ public class ResidentAdsHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resident_ads_history);
 
+        dbMain = new DbMain(this);
+        phoneNumber = dbMain.getResidentPhoneNumber();
+        Log.i("PHONENUMBER", phoneNumber);
+
         loadingLayout = (RelativeLayout) findViewById(R.id.loadingPanelResidentHistoryPage);
 
+        FragmentManager fragmentManager = getFragmentManager();
+        residentHistoryFragment = (ResidentHistoryFragment) fragmentManager.findFragmentById(R.id.ResidentHistoryFragment);
+        residentHistoryAdapter = new ResidentHistoryAdapter(this, R.layout.resident_history_fragment, adsList);
+        residentHistoryFragment.setListAdapter(residentHistoryAdapter);
+        residentHistoryListView = residentHistoryFragment.getListView();
+        residentHistoryAdapter.notifyDataSetChanged();
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("adDetails");
+        DatabaseReference ref = database.getReference("residentRegisteration/" + phoneNumber + "/adlist" );
         ref.push();
 
         ref.addValueEventListener(new ValueEventListener() {
@@ -104,6 +119,7 @@ public class ResidentAdsHistory extends AppCompatActivity {
                         ads.setBuyerName(String.valueOf(compostAdMap.get("buyerName")));
 
                         adsList.add(ads);
+                        residentHistoryFragment.getListView().setBackgroundResource(0);
                     }
                 }
             }
@@ -116,12 +132,9 @@ public class ResidentAdsHistory extends AppCompatActivity {
 
         Log.i("ADSLIST", String.valueOf(adsList.size()));
 
-        FragmentManager fragmentManager = getFragmentManager();
-        ResidentHistoryFragment residentHistoryFragment = (ResidentHistoryFragment) fragmentManager.findFragmentById(R.id.ResidentHistoryFragment);
-        residentHistoryAdapter = new ResidentHistoryAdapter(this, R.layout.resident_history_fragment, adsList);
-        residentHistoryFragment.setListAdapter(residentHistoryAdapter);
-        residentHistoryListView = residentHistoryFragment.getListView();
-        residentHistoryAdapter.notifyDataSetChanged();
+        if(adsList.size() == 0 && loadingLayout.getVisibility() == View.VISIBLE){
+            residentHistoryFragment.getListView().setBackgroundResource(R.drawable.empty_can);
+        }
 
         backButton = (Button) findViewById(R.id.backButtonResidentHistoryPage);
         backButton.setOnClickListener(new View.OnClickListener() {

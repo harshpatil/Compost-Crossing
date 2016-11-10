@@ -45,12 +45,11 @@ public class ResidentRegisteration extends AppCompatActivity {
                         city.getText().length() != 0  &&
                         state.getText().length() != 0  &&
                         zipcode.getText().length() != 0 ) {
-                    db.insertResident("", name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
+                    db.insertResident("", name.getText().toString(), phone.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), zipcode.getText().toString());
                     writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
 
                     Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
                     startActivity(residentListViewIntent);
-
                 }
                 else{
                     Toast.makeText(getApplication(), "Please fill the form completely", Toast.LENGTH_LONG).show();

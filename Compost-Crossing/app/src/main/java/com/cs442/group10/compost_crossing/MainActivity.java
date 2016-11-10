@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
           db = new DbMain(this);
+//        db.deleteAllTables();
 //        writeArticleToDB();
 
         super.onCreate(savedInstanceState);
