@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Created by HarshPatil on 10/30/16.
+ */
 public class NearByComposter extends AppCompatActivity {
 
     Button backButton;

@@ -30,6 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.UUID;
 
+/**
+ * Created by HarshPatil on 10/30/16.
+ */
 public class AdCreation extends AppCompatActivity {
 
     EditText compostTitle;
