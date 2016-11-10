@@ -30,7 +30,9 @@ import java.util.Map;
 
 public class ComposterListViewFragment extends Fragment {
     private static final String AD_TABLE = "adDetails";
+    private static final String COMPOSTER_REG_TABLE = "composterRegisteration";
     private static final String ID_COL = "id";
+    private static final String OWNER_NAME_COL = "ownerName";
     private static final String AD_ID_COL = "adId";
     private static final String TITLE_COL = "title";
     private static final String WEIGHT_COL = "weight";
@@ -78,10 +80,10 @@ public class ComposterListViewFragment extends Fragment {
                     Map<String, String> compostAdMap = compostAdListMap.getValue();
 
                     String buyerId = compostAdMap.get(BUYER_ID_COL);
-                    String weight = compostAdMap.get(WEIGHT_COL);//Long cannot be string
+                    String weight = compostAdMap.get(WEIGHT_COL);
                     String title = compostAdMap.get(TITLE_COL);
 
-                    final AdDetail adDetail = new AdDetail(compostAdMap.get(ID_COL),title, compostAdMap.get(ADDRESS_COL),compostAdMap.get(CITY_COL),compostAdMap.get(STATE_COL),
+                    final AdDetail adDetail = new AdDetail(compostAdMap.get(ID_COL),compostAdMap.get(OWNER_NAME_COL),title, compostAdMap.get(ADDRESS_COL),compostAdMap.get(CITY_COL),compostAdMap.get(STATE_COL),
                             compostAdMap.get(ZIP_CODE_COL),compostAdMap.get(COST_COL),compostAdMap.get(DROP_COL),compostAdMap.get(SOLD_COL),weight,
                             compostAdMap.get(BUYER_ID_COL),compostAdMap.get(BUYER_NAME_COL));
 

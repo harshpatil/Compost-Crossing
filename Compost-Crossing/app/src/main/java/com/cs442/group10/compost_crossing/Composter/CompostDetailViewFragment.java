@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import com.cs442.group10.compost_crossing.AdDetail;
 import com.cs442.group10.compost_crossing.R;
+import com.cs442.group10.compost_crossing.constants.Constants;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -61,12 +62,15 @@ public class CompostDetailViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.compost_detail_view_fragment, container, false);
 
+        final String composterId = Constants.composterId;
+
+        TextView composterNameTextView = (TextView) view.findViewById(R.id.composterName);
         TextView composterPhNoTextView = (TextView) view.findViewById(R.id.composterPhNo);
-        composterAddressTextView = (TextView) view.findViewById(R.id.composterAddr);
         TextView compostDetailsTextView = (TextView) view.findViewById(R.id.compostDetails);
         Button backButton = (Button) view.findViewById(R.id.btnBackComposterDetailView);
         Button acceptCompostButton = (Button) view.findViewById(R.id.btnAcceptCompost);
 
+        composterAddressTextView = (TextView) view.findViewById(R.id.composterAddr);
         composterAddressForMap = adDetail.getAddress()+","+adDetail.getCity()+","+adDetail.getState()+"-"+adDetail.getZipCode();//"3001 S King Drive,Illinois,Chicago-60616";
         composterAddress = adDetail.getAddress()+",\n"+adDetail.getCity()+", "+adDetail.getState()+" - "+adDetail.getZipCode();
         composterAddressTextView.setText("3001 S King Drive,\n Illinois, Chicago - 60616");
@@ -92,16 +96,16 @@ public class CompostDetailViewFragment extends Fragment {
             public void onClick(View v) {
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference reference = database.getReference("adDetails");
-                reference.child("ad1").child("buyerId").setValue("John");
+                reference.child("ad1").child("buyerId").setValue(composterId);
+                reference.child("ad1").child("buyerName").setValue(composterId);
 
                 DatabaseReference reference1 = database.getReference("composterRegisteration");
                 Map<String, Map<String, String>> compostAdMap = getCompostAdMap();
 
-                reference1.child("9174032678").child("adList").setValue(compostAdMap);
+                reference1.child(composterId).child("adList").setValue(compostAdMap);
 
                 Toast.makeText(getActivity().getBaseContext(), "Compost Accepted Successfully",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity().getApplicationContext(), ComposterListViewActivity.class);
-                //intent.putExtra("loadCompostDetailFragment", false);
                 startActivity(intent);
                // getActivity().onBackPressed();
             }
