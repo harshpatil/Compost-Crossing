@@ -28,22 +28,16 @@
         <activity
             android:name=".newsArticle.Article"
             android:theme="@style/NoTitleTheme">
-
-            <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar"> -->
-            <!-- android:theme="@style/Theme.AppCompat.NoActionBar"> -->
         </activity>
-
         <service android:name=".newsArticle.ArticleNotificationService" />
-
-        <receiver
-            android:name=".newsArticle.MyAlarm"
-            android:process=":remote" />
+        <receiver android:name=".newsArticle.MyAlarm" android:process=":remote" />
         <activity android:name=".resident.historyPage.ResidentAdsHistory" />
         <activity android:name=".resident.nearByComposter.NearByComposter" />
         <activity android:name=".resident.createAd.AdCreation"></activity>
         <activity android:name=".resident.AdCreation"></activity>
         <activity android:name=".Composter.ComposterListViewActivity"></activity>
         <activity android:name=".resident.ResidentRegisteration"></activity>
+        <activity android:name=".preferences.MyPreferenceActivity" android:theme="@style/PreferencesTheme"></activity>
     </application>
 
 </manifest>

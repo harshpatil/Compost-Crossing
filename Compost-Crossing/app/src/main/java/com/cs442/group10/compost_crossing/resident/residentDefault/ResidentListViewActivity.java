@@ -20,7 +20,6 @@ public class ResidentListViewActivity extends AppCompatActivity {
     Button history;
     Button nearByComposter;
     Button postNewAd;
-    Button goToHomePage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,6 @@ public class ResidentListViewActivity extends AppCompatActivity {
         history = (Button) findViewById(R.id.btnResidentHistory);
         nearByComposter = (Button) findViewById(R.id.btnComposterNearBy);
         postNewAd = (Button) findViewById(R.id.btnPostAd);
-        goToHomePage = (Button) findViewById(R.id.btnBackResidentListView);
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,12 +51,6 @@ public class ResidentListViewActivity extends AppCompatActivity {
             }
         });
 
-        goToHomePage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickingGoToHomePage();
-            }
-        });
     }
 
     public void back(View v){
@@ -72,23 +64,20 @@ public class ResidentListViewActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, ResidentAdsHistory.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
     }
 
     public void onClickNearByComposterButton(){
 
         Intent intent = new Intent(this, NearByComposter.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
     }
 
     public void onClickingPostNewAd(){
 
         Intent intent = new Intent(this, AdCreation.class);
         startActivity(intent);
-    }
-
-    public void onClickingGoToHomePage(){
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
     }
 }

@@ -13,6 +13,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="PreferencesTheme">
+        <item name="android:background">@color/buttonBackground</item>
+
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
