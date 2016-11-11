@@ -252,7 +252,7 @@ public class ResidentListViewActivity extends AppCompatActivity {
                 .setStyle(R.style.CustomShowcaseTheme2)
                 .setTarget(new ViewTarget(mDrawerLayout))
                 .hideOnTouchOutside()
-                .setContentTitle("Click to navigate between screens")
+                .setContentTitle("Slide from left to navigate between screens")
                 .setShowcaseEventListener(new SimpleShowcaseEventListener() {
 
                     @Override

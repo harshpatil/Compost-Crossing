@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
                 .setStyle(R.style.CustomShowcaseTheme2)
                 .setTarget(new ViewTarget(mDrawerLayout))
                 .hideOnTouchOutside()
-                .setContentTitle("Slide from left to navigation between screens")
+                .setContentTitle("Slide from left to navigate between screens")
                 .setShowcaseEventListener(new SimpleShowcaseEventListener() {
 
                     @Override

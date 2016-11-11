@@ -1,5 +1,6 @@
 package com.cs442.group10.compost_crossing.Composter;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -17,6 +18,8 @@ import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
+import com.cs442.group10.compost_crossing.resident.historyPage.ResidentHistoryAdapter;
+import com.cs442.group10.compost_crossing.resident.historyPage.ResidentHistoryFragment;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.SimpleShowcaseEventListener;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
@@ -28,11 +31,16 @@ public class ComposterListViewActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private static final int SHOW_PREFERENCES = 0;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_composter_list_view);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        ComposterListViewFragment fragment = (ComposterListViewFragment) fragmentManager.findFragmentById(R.id.composterListViewFragment);
+        listView = fragment.listView;
 
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
@@ -44,8 +52,6 @@ public class ComposterListViewActivity extends AppCompatActivity {
         drawerList[3] = Constants.COMPOSTER_VIEW_NEARBY_ADS;
         drawerList[4] = Constants.SETTINGS;
         drawerList[5] = Constants.BACK;
-
-
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -64,7 +70,8 @@ public class ComposterListViewActivity extends AppCompatActivity {
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.MainActivity", MODE_PRIVATE);
+        showFirstShowCase();
+        SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity", MODE_PRIVATE);
         boolean isFirstRun = sharedPreferences.getBoolean("firstrun", true);
         if (isFirstRun) {
 
@@ -129,12 +136,30 @@ public class ComposterListViewActivity extends AppCompatActivity {
                 .setStyle(R.style.CustomShowcaseTheme2)
                 .setTarget(new ViewTarget(mDrawerLayout))
                 .hideOnTouchOutside()
-                .setContentTitle("Slide from left to navigation between screens")
+                .setContentTitle("Slide from left to navigate between screens")
                 .setShowcaseEventListener(new SimpleShowcaseEventListener() {
 
                     @Override
                     public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
-//                        showSecondShowCase();
+                        showSecondShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+    private void showSecondShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)//
+                .setTarget(new ViewTarget(listView))
+                .hideOnTouchOutside()
+                .setContentTitle("Click on any list to view details")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+//                        showFourthShowCase();
                     }
 
                 })

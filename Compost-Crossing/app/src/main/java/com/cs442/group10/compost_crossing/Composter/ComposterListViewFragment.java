@@ -3,7 +3,7 @@ package com.cs442.group10.compost_crossing.Composter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +26,7 @@ import java.util.Map;
 
 
 public class ComposterListViewFragment extends Fragment {
+
     private static final String AD_TABLE = "adDetails";
     private static final String RESIDENT_REG_TABLE = "residentRegisteration";
     private static final String ID_COL = "id";
@@ -42,6 +43,7 @@ public class ComposterListViewFragment extends Fragment {
     private static final String STATE_COL = "state";
     private static final String DROP_COL = "drop";
     private static final String SOLD_COL = "sold";
+    public ListView listView;
 
     Map<String, String> compostAdsMap = new HashMap<String,String>();
     Map<String, AdDetail> adDetailMap = new HashMap<String, AdDetail>();
@@ -62,7 +64,7 @@ public class ComposterListViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_composter_list_view, container, false);
-        final ListView listView = (ListView) view.findViewById(R.id.composterItemListView);
+        listView = (ListView) view.findViewById(R.id.composterItemListView);
         final TextView emptyTextView = (TextView) view.findViewById(R.id.emptyAdListForComposter);
         final RelativeLayout loadingLayout = (RelativeLayout) view.findViewById(R.id.loadingPanel);
 

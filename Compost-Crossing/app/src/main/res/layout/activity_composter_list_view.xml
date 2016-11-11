@@ -16,10 +16,10 @@
 
         <fragment
             android:id="@+id/composterListViewFragment"
+            android:name="com.cs442.group10.compost_crossing.Composter.ComposterListViewFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="com.cs442.group10.compost_crossing.Composter.ComposterListViewFragment">
-
+          >
         </fragment>
     </LinearLayout>
 
