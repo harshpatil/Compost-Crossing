@@ -141,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
             sharedPreferences.edit().putBoolean("firstrun", false).commit();
             showFirstShowCase();
         }
-
     }
 
     public void onClickingReadArticleButton(){
