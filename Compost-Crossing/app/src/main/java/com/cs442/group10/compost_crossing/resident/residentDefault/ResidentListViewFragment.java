@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.cs442.group10.compost_crossing.AdDetail;
 import com.cs442.group10.compost_crossing.R;
+import com.cs442.group10.compost_crossing.constants.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -79,7 +80,7 @@ public class ResidentListViewFragment extends Fragment {
                 for(Map.Entry<String, Map<String,Object>> residentMap: residentRegMap.entrySet()) {
                     Map<String, Object> residentRecordMap = residentMap.getValue();
                     String residentId = residentMap.getKey();
-                    if (!residentRecordMap.get("adlist").equals(" ")) {
+                    if (!residentRecordMap.get("adlist").equals(" ") && (residentId.equals(Constants.residentId))) {
                         Map<String, Map<String, String>> compostAdListMap = (Map<String, Map<String, String>>) residentRecordMap.get("adlist");
                         for (Map.Entry<String, Map<String, String>> compostAdMap : compostAdListMap.entrySet()) {
                             Map<String, String> adDetailsMap = compostAdMap.getValue();

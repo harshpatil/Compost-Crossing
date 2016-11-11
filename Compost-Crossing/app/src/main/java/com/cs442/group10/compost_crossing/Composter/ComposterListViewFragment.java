@@ -113,8 +113,8 @@ public class ComposterListViewFragment extends Fragment {
 
                             compostAdDetailList.add(adDetail);
 
-                            if (buyerId != null) {
-                                if (buyerId.equals("NULL")) {
+                           // if (buyerId != null) {
+                                if (sold.equals("false")) {
                                     final String compostAd = String.valueOf(title) + "-" + String.valueOf(weight);
                                     compostAdsMap.put(compostAdMap.getKey(), compostAd);
                                     adDetailMap.put(compostAdMap.getKey(), adDetail);
@@ -132,7 +132,7 @@ public class ComposterListViewFragment extends Fragment {
                                         }
                                     });
                                 }
-                            }
+                            //}
                         }
                     }
                 }
