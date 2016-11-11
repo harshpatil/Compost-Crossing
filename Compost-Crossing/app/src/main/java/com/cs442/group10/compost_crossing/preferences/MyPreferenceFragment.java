@@ -1,0 +1,16 @@
+package com.cs442.group10.compost_crossing.preferences;
+
+import android.os.Bundle;
+import android.preference.PreferenceFragment;
+
+import com.cs442.group10.compost_crossing.R;
+
+public class MyPreferenceFragment extends PreferenceFragment {
+
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+    addPreferencesFromResource(R.xml.userpreferences);
+  }
+}

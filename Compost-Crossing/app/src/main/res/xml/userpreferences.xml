@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory android:title="Compost Crossing Preference Settings">
+
+    <CheckBoxPreference
+        android:key="PREF_CHECK_BOX"
+        android:title="Enable/Disable Notification"
+        android:summary="Unselect checkbox to disable notification"
+        android:defaultValue="true"
+        />
+
+  </PreferenceCategory>
+
+</PreferenceScreen>

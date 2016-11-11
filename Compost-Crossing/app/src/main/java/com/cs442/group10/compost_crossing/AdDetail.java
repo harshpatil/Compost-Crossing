@@ -9,6 +9,8 @@ import java.io.Serializable;
 public class AdDetail implements Serializable{
 
     private String id;
+    private String ownerName;
+    private String ownerPhone;
     private String title;
     private String address;
     private String city;
@@ -24,8 +26,10 @@ public class AdDetail implements Serializable{
     public AdDetail(){
     }
 
-    public AdDetail(String id, String title, String address, String city, String state, String zipCode, String cost, String drop, String sold, String weight, String buyerId, String buyerName) {
+    public AdDetail(String id, String ownerName, String ownerPhone, String title, String address, String city, String state, String zipCode, String cost, String drop, String sold, String weight, String buyerId, String buyerName) {
         this.id = id;
+        this.ownerName = ownerName;
+        this.ownerPhone = ownerPhone;
         this.title = title;
         this.address = address;
         this.city = city;
@@ -61,6 +65,22 @@ public class AdDetail implements Serializable{
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getOwnerPhone() {
+        return ownerPhone;
+    }
+
+    public void setOwnerPhone(String ownerPhone) {
+        this.ownerPhone = ownerPhone;
     }
 
     public String getCity() {

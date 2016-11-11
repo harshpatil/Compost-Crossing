@@ -1,24 +1,17 @@
 package com.cs442.group10.compost_crossing.resident;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 /**
  * Created by Josh on 10/31/2016.
  */
@@ -46,13 +39,13 @@ public class AdCreation extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.screen_7);
+        setContentView(R.layout.ad_creation);
 
         compostType = (EditText) findViewById(R.id.compostType);
         pickAddress = (EditText) findViewById(R.id.pickupAddress);
         pickCity = (EditText) findViewById(R.id.pickupCity);
         pickState = (EditText) findViewById(R.id.pickupState);
-        paymentAccepted = (Switch) findViewById(R.id.paymentAccepted);
+        paymentAccepted = (Switch) findViewById(R.id.dropAccepted);
         compWeight = (EditText) findViewById(R.id.compWeight);
         compPrice = (EditText) findViewById(R.id.compPrice);
 

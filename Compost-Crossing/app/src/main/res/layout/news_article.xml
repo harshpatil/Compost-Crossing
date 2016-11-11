@@ -1,80 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout_module_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="10" >
+    >
 
-    <TextView
-        android:id="@+id/articleHeader"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:text="@string/article_header"
-        android:textColor="@color/articleHeaderNewsPage"
-        android:background="@color/colorPrimary"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_height="match_parent"
+        android:weightSum="10" >
+
+        <TextView
+            android:id="@+id/articleHeader"
+            android:layout_width="match_parent"
+            android:text="@string/article_header"
+            android:textColor="@color/articleHeaderNewsPage"
+            android:background="@color/colorPrimary"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.3">
+        <TextView
+            android:id="@+id/articleTitle"
+            android:layout_width="match_parent"
+            android:textColor="@color/articleText"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:ellipsize="marquee"
+            android:layout_height="0dp"
+            android:layout_weight="1.3"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        </ScrollView>
+
+        <ImageView
+            android:id="@+id/imageArticlePage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.6"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:adjustViewBounds="false"
+            android:scaleType="centerInside" />
+
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="100dp">
+
+            <ProgressBar
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/buttonBackground"/>
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4.7">
+        <TextView
+            android:id="@+id/articleBody"
+            android:layout_width="match_parent"
+            android:textColor="@color/articleText"
+            android:textSize="15dp"
+            android:layout_height="0dp"
+            android:layout_weight="4.7"
+            android:ellipsize="marquee"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/backButtonArticlePage"
+            android:layout_width="match_parent"
+            android:textColor="@color/buttonText"
+            android:text="@string/article_page_button_text"
+            android:background="@color/buttonBackground"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"/>
+    </LinearLayout>
+
+    <ListView android:id="@+id/left_drawer_module_list"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:background="@color/buttonBackground"
         />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.3">
-    <TextView
-        android:id="@+id/articleTitle"
-        android:layout_width="match_parent"
-        android:textColor="@color/articleText"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:ellipsize="marquee"
-        android:layout_height="0dp"
-        android:layout_weight="1.3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
-    </ScrollView>
-
-    <ImageView
-        android:id="@+id/imageArticlePage"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2.6"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp"
-        android:adjustViewBounds="false"
-        android:scaleType="centerInside" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4.7">
-    <TextView
-        android:id="@+id/articleBody"
-        android:layout_width="match_parent"
-        android:textColor="@color/articleText"
-        android:textSize="15dp"
-        android:layout_height="0dp"
-        android:layout_weight="4.7"
-        android:ellipsize="marquee"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
-    </ScrollView>
-
-    <Button
-        android:id="@+id/backButtonArticlePage"
-        android:layout_width="match_parent"
-        android:textColor="@color/buttonText"
-        android:text="@string/article_page_button_text"
-        android:background="@color/buttonBackground"
-        android:textSize="16dp"
-        android:gravity="center"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp"/>
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>

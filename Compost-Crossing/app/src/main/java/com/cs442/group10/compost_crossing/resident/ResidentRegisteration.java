@@ -4,43 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.cs442.group10.compost_crossing.Composter.CompostDetailActivity;
 import com.cs442.group10.compost_crossing.DB.DbMain;
-import com.cs442.group10.compost_crossing.Listings;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
+import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import com.cs442.group10.compost_crossing.DB.DbMain;
-import com.cs442.group10.compost_crossing.Listings;
-import com.cs442.group10.compost_crossing.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import java.util.Calendar;
-
-import java.util.ArrayList;
 
 public class ResidentRegisteration extends AppCompatActivity {
+
     public EditText name;
     public EditText phone;
     public EditText address;
@@ -71,12 +47,11 @@ public class ResidentRegisteration extends AppCompatActivity {
                         city.getText().length() != 0  &&
                         state.getText().length() != 0  &&
                         zipcode.getText().length() != 0 ) {
-                    db.insertResident("", name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
+                    db.insertResident("", name.getText().toString(), phone.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), zipcode.getText().toString());
                     writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
 
                     Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
                     startActivity(residentListViewIntent);
-
                 }
                 else{
                     Toast.makeText(getApplication(), "Please fill the form completely", Toast.LENGTH_LONG).show();
@@ -100,6 +75,6 @@ public class ResidentRegisteration extends AppCompatActivity {
         mDatabase.child("zipcode").setValue(zipcode);
         mDatabase.child("adlist").setValue(" ");
         mDatabase.push();
-        Constants.ResidentId=phone.toString();
+        Constants.residentId = phone.toString();
     }
 }

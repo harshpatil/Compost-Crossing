@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_compost_detail"
-    android:orientation="vertical"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout_module_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cs442.group10.compost_crossing.Composter.CompostDetailActivity">
+    >
 
-    <FrameLayout
-        android:id="@+id/compostDetailViewContainer"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_compost_detail"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/compost_detail_view_fragment" />
+        tools:context="com.cs442.group10.compost_crossing.Composter.CompostDetailActivity">
 
-</LinearLayout>
+        <FrameLayout
+            android:id="@+id/compostDetailViewContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/compost_detail_view_fragment" />
+
+    </LinearLayout>
+
+    <ListView android:id="@+id/left_drawer_module_list"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:background="@color/buttonBackground"
+        />
+
+</android.support.v4.widget.DrawerLayout>

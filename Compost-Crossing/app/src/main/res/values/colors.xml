@@ -8,4 +8,5 @@
     <color name="articleText">#050505</color>
     <color name="buttonText">#ffffff</color>
     <color name="buttonBackground">#5db45d</color>
+    <color name="background">#a5eda5</color>
 </resources>

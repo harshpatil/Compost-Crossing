@@ -1,25 +1,18 @@
 package com.cs442.group10.compost_crossing.Composter;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.cs442.group10.compost_crossing.DB.DbMain;
-import com.cs442.group10.compost_crossing.Listings;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import java.util.Calendar;
-
-import java.util.ArrayList;
 
 public class ComposterRegistration extends AppCompatActivity {
     public EditText name;
@@ -57,20 +50,6 @@ public class ComposterRegistration extends AppCompatActivity {
 
                     Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
                     startActivity(composterListViewIntent);
-                    /*
-                    setContentView(R.layout.screen_2);
-                    ListView lv = (ListView) findViewById(R.id.expandableListView);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_list_item_1, android.R.id.text1, Listings.Names);
-                    lv.setAdapter(adapter);
-                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {//temporary work around to navigate to detail view
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent compostDetailIntent = new Intent(getApplicationContext(),CompostDetailActivity.class);
-                            startActivity(compostDetailIntent);
-                        }
-                    });*/
-
                 }
                 else{
                     Toast.makeText(getApplication(), "Please fill the form completely", Toast.LENGTH_LONG).show();
@@ -78,7 +57,6 @@ public class ComposterRegistration extends AppCompatActivity {
                 //sint count = db.numberOfentries();
             }
         });
-
 
     }
 
@@ -94,6 +72,7 @@ public class ComposterRegistration extends AppCompatActivity {
         mDatabase.child("zipcode").setValue(zipcode);
         mDatabase.child("adlist").setValue(" ");
         mDatabase.push();
-        Constants.composterId =phone.toString();
+        Constants.composterId = phone.toString();
+
     }
 }
