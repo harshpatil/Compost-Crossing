@@ -11,10 +11,12 @@ import android.widget.Toast;
 import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
+import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ResidentRegisteration extends AppCompatActivity {
+
     public EditText name;
     public EditText phone;
     public EditText address;

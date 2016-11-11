@@ -14,6 +14,8 @@ public class Constants {
     public static String YOUR_PAST_ADS = "Your Past Ads";
     public static String NEARBY_COMPOSTERS = "Nearby Composters";
     public static String SETTINGS = "Settings";
+    public static String COMPOSTER_VIEW_ADS = "View Ads";
+    public static String COMPOSTER_VIEW_NEARBY_ADS = "View Nearby Ads";
     public static String BACK = "Back";
     public static String CREATE_AD = "Create Ad";
     public static String composterId = "";
