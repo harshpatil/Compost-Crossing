@@ -156,6 +156,18 @@ public class ComposterListViewActivity extends AppCompatActivity {
         }
     }
 
+    public void onClickHistoryButton(){
+
+        Intent intent = new Intent(this, ComposterAdsHistory.class);
+        startActivity(intent);
+    }
+
+    public void onClickNearByResidentButton(){
+
+        Intent intent = new Intent(this, NearByResident.class);
+        startActivity(intent);
+    }
+
     private void showFirstShowCase(){
         new ShowcaseView.Builder(this)
                 .withMaterialShowcase()
@@ -178,6 +190,43 @@ public class ComposterListViewActivity extends AppCompatActivity {
         new ShowcaseView.Builder(this)
                 .withMaterialShowcase()
                 .setStyle(R.style.CustomShowcaseTheme2)//
+                .setTarget(new ViewTarget(history))
+                .hideOnTouchOutside()
+                .setContentTitle("Click here to view your purchase history")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showThirdShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+
+    private void showThirdShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)//
+                .setTarget(new ViewTarget(nearByResident))
+                .hideOnTouchOutside()
+                .setContentTitle("Click here to view nearby Ads")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showFourthShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+    private void showFourthShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)//
                 .setTarget(new ViewTarget(listView))
                 .hideOnTouchOutside()
                 .setContentTitle("Click on any list to view details")
@@ -192,16 +241,7 @@ public class ComposterListViewActivity extends AppCompatActivity {
                 .build();
     }
 
-    public void onClickHistoryButton(){
 
-        Intent intent = new Intent(this, ComposterAdsHistory.class);
-        startActivity(intent);
-    }
 
-    public void onClickNearByResidentButton(){
-
-        Intent intent = new Intent(this, NearByResident.class);
-        startActivity(intent);
-    }
 
 }
