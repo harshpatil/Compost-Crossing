@@ -133,8 +133,8 @@ public class ComposterListViewActivity extends AppCompatActivity {
 
         } else if(position == 3){
 
-//            Intent intent=new Intent(this, ComposterListViewActivity.class);
-//            startActivity(intent);
+            Intent intent=new Intent(this, NearByResident.class);
+            startActivity(intent);
 
         } else if(position == 4){
 
