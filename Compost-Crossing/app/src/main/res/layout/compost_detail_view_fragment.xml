@@ -1,137 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    tools:context=".Composter.CompostDetailActivity"
-    android:scrollbars="vertical">
+    android:fillViewport="true"
+    >
 
-    <ImageView
-        android:id="@+id/composterImg"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_gravity="center"
-        android:src="@mipmap/default_person_image"
-        android:layout_marginTop="20dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
-        android:weightSum="1"
-        android:layout_weight="0.88"
-        android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/composterName"
-        android:layout_width="160dp"
-        android:layout_height="51dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="22sp" />
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/composterAddrLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Address"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:gravity="center|start"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:textColor="@color/colorPrimary" />
-        <TextView
-            android:id="@+id/composterAddr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="1"
-        android:layout_marginTop="20px">
-        <TextView
-            android:id="@+id/composterPhNoLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Phone"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:gravity="center|start"
-            android:textAlignment="textStart"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:textColor="@color/colorPrimary" />
-        <TextView
-            android:id="@+id/composterPhNo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|center_horizontal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="20px"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.68">
-        <TextView
-            android:id="@+id/compostDetailsLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Compost Details"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:gravity="center|start"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:textColor="@color/colorPrimary" />
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        tools:context=".Composter.CompostDetailActivity"
+        android:scrollbars="vertical">
 
         <TextView
-            android:id="@+id/compostDetails"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Weight: 20 pounds\nCost:$1/pound\nDrop:Available"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:textColor="@color/buttonText"
+            android:background="@color/buttonBackground"
+            android:textSize="18dp"
+            android:textAlignment="center"
             android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:text="@string/adDetails"
+            android:layout_marginBottom="3dp"
+            />
+
+        <ImageView
+            android:id="@+id/composterImg"
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:src="@drawable/compost_person"
+            android:layout_marginTop="5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="5.5"
+            android:layout_height="0dp"
+            >
+
+            <TextView
+                android:id="@+id/composterName"
+                android:layout_width="160dp"
+                android:layout_height="51dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="22sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/composterAddrLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address : "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:gravity="center|start"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/colorPrimary" />
+                <TextView
+                    android:id="@+id/composterAddr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:weightSum="1"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/composterPhNoLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone : "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:gravity="center|start"
+                    android:textAlignment="textStart"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/colorPrimary" />
+                <TextView
+                    android:id="@+id/composterPhNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                >
+                <TextView
+                    android:id="@+id/compostDetailsLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Compost Details : "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:gravity="center|start"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/compostDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Weight : 20 pounds\nCost:$1/pound\nDrop:Available"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                </LinearLayout>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.7"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnAcceptCompost"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/buttonText"
+                android:background="@color/buttonBackground"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/acceptCompost"
+                android:layout_marginBottom="5dp" />
+
+            <Button
+                android:id="@+id/btnBackComposterDetailView"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom"
+                android:text="Back"
+                android:textColor="@color/buttonText"
+                android:background="@color/buttonBackground"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:onClick="navigateBackToComposterAdsListView" />
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <Button
-            android:id="@+id/btnAcceptCompost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/buttonText"
-            android:background="@color/buttonBackground"
-            android:layout_centerHorizontal="true"
-            android:text="@string/acceptCompost"
-            android:layout_marginBottom="5dp" />
-
-        <Button
-            android:id="@+id/btnBackComposterDetailView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="Back"
-            android:textColor="@color/buttonText"
-            android:background="@color/buttonBackground"
-            android:layout_centerHorizontal="true"
-            android:onClick="navigateBackToComposterAdsListView" />
-    </LinearLayout>
-</LinearLayout>
+</ScrollView>

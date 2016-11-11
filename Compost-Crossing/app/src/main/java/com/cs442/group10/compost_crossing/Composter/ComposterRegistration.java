@@ -73,6 +73,7 @@ public class ComposterRegistration extends AppCompatActivity {
         mDatabase.child("adlist").setValue(" ");
         mDatabase.push();
         Constants.composterId = phone.toString();
+        Constants.composterZip=zipcode.toString();
 
     }
 }

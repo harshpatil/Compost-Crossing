@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:layout_marginTop="5dp"
+    >
+
+    <ImageView
+        android:id="@+id/imageComposterHistoryPage"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="110dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:adjustViewBounds="false"
+        android:scaleType="centerInside"
+        />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="7"
+        android:layout_height="120dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:layout_marginRight="10dp"
+        >
+
+        <TextView
+            android:id="@+id/AdTitleComposterHistoryPage"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textColor="#F000"
+            android:paddingTop="4dp"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:fontFamily="sans-serif-light"
+            android:scaleType="center"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/CompostBoughtByHistoryPage"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textColor="#F000"
+            android:textSize="16dp"
+            android:scrollbars="vertical"
+            android:paddingTop="4dp"
+            android:fadingEdge="vertical"
+            android:textAlignment="center"
+            android:scaleType="fitCenter"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
+            android:layout_below="@+id/AdTitleComposterHistoryPage" />
+
+        <TextView
+            android:id="@+id/CompostWeightComposterHistoryPage"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:scrollbars="vertical"
+            android:fadingEdge="vertical"
+            android:paddingTop="4dp"
+            android:textColor="#F000"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
+            android:layout_below="@+id/CompostBoughtByHistoryPage"
+            />
+
+        <TextView
+            android:id="@+id/AdCostComposterHistoryPage"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textColor="#F000"
+            android:textSize="16dp"
+            android:scrollbars="vertical"
+            android:paddingTop="4dp"
+            android:fadingEdge="vertical"
+            android:textAlignment="center"
+            android:scaleType="fitCenter"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
+            android:layout_below="@+id/CompostWeightComposterHistoryPage" />
+
+    </RelativeLayout>
+
+</LinearLayout>

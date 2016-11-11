@@ -11,8 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
+import com.cs442.group10.compost_crossing.Composter.historyPage.ComposterAdsHistory;
+import com.cs442.group10.compost_crossing.Composter.nearbyResident.NearByResident;
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
@@ -30,6 +33,8 @@ public class ComposterListViewActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private static final int SHOW_PREFERENCES = 0;
     ListView listView;
+    Button history;
+    Button nearByResident;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +45,34 @@ public class ComposterListViewActivity extends AppCompatActivity {
         ComposterListViewFragment fragment = (ComposterListViewFragment) fragmentManager.findFragmentById(R.id.composterListViewFragment);
         listView = fragment.listView;
 
+        history = (Button) findViewById(R.id.btnComposterHistory);
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickHistoryButton();
+            }
+        });
+
+        nearByResident = (Button) findViewById(R.id.btnResidentNearBy);
+
+        nearByResident.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickNearByResidentButton();
+            }
+        });
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[6];
+        drawerList = new String[7];
         drawerList[0] = Constants.HOME;
         drawerList[1] = Constants.NEWS_ARTICLE;
         drawerList[2] = Constants.COMPOSTER_VIEW_ADS;
         drawerList[3] = Constants.COMPOSTER_VIEW_NEARBY_ADS;
-        drawerList[4] = Constants.SETTINGS;
-        drawerList[5] = Constants.BACK;
+        drawerList[4] = Constants.YOUR_PURCHASE_HISTORY;
+        drawerList[5] = Constants.SETTINGS;
+        drawerList[6] = Constants.BACK;
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -109,21 +132,38 @@ public class ComposterListViewActivity extends AppCompatActivity {
 
         } else if(position == 3){
 
-//            Intent intent=new Intent(this, ComposterListViewActivity.class);
-//            startActivity(intent);
+            Intent intent=new Intent(this, NearByResident.class);
+            startActivity(intent);
 
         } else if(position == 4){
+
+            Intent intent=new Intent(this, ComposterAdsHistory.class);
+            startActivity(intent);
+
+        } else if(position == 5){
 
             Class<?> c = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ? MyPreferenceActivity.class:MyPreferenceActivity.class;
             Intent i = new Intent(this, c);
             startActivityForResult(i, SHOW_PREFERENCES);
 
-        } else if(position == 5){
+        } else if(position == 6){
 
             Intent intent = new Intent(this, ComposterListViewActivity.class);
             startActivity(intent);
 
         }
+    }
+
+    public void onClickHistoryButton(){
+
+        Intent intent = new Intent(this, ComposterAdsHistory.class);
+        startActivity(intent);
+    }
+
+    public void onClickNearByResidentButton(){
+
+        Intent intent = new Intent(this, NearByResident.class);
+        startActivity(intent);
     }
 
     private void showFirstShowCase(){
@@ -148,6 +188,43 @@ public class ComposterListViewActivity extends AppCompatActivity {
         new ShowcaseView.Builder(this)
                 .withMaterialShowcase()
                 .setStyle(R.style.CustomShowcaseTheme2)//
+                .setTarget(new ViewTarget(history))
+                .hideOnTouchOutside()
+                .setContentTitle("Click here to view your purchase history")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showThirdShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+
+    private void showThirdShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)//
+                .setTarget(new ViewTarget(nearByResident))
+                .hideOnTouchOutside()
+                .setContentTitle("Click here to view nearby Ads")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showFourthShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+    private void showFourthShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)//
                 .setTarget(new ViewTarget(listView))
                 .hideOnTouchOutside()
                 .setContentTitle("Click on any list to view details")
@@ -161,5 +238,8 @@ public class ComposterListViewActivity extends AppCompatActivity {
                 })
                 .build();
     }
+
+
+
 
 }

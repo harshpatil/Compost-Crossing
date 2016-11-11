@@ -10,7 +10,8 @@
     <string name="text_home_screen">Welcome! Are you a </string>
     <string name="remove">Remove</string>
     <string name="activeAds">Active Ads</string>
-    <string name="residentHistory">History</string>
+    <string name="residentHistory">Sales History</string>
+    <string name="composterHistory">Purchase History</string>
     <string name="postANewAd">Post a New Ad</string>
     <string name="composterNearBy">See Nearby Composter</string>
     <string name="createANewAdToday">Create a new Ad Today</string>
@@ -18,6 +19,7 @@
     <string name="residentNearByComposter">Nearby Composters</string>
     <string name="back">Back</string>
     <string name="createAd">Create Ad</string>
+    <string name="adDetails">Ad Details</string>
     <string name="acceptCompost">Accept Compost</string>
     <string name="title_activity_composter_list_view">ComposterListViewActivity</string>
     <string name="compostAds">Compost Ads</string>
