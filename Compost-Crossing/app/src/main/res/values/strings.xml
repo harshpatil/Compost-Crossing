@@ -11,6 +11,7 @@
     <string name="remove">Remove</string>
     <string name="activeAds">Active Ads</string>
     <string name="residentHistory">History</string>
+    <string name="composterHistory">Purchase History</string>
     <string name="postANewAd">Post a New Ad</string>
     <string name="composterNearBy">See Nearby Composter</string>
     <string name="createANewAdToday">Create a new Ad Today</string>

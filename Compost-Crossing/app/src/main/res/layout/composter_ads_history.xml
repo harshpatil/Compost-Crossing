@@ -21,7 +21,7 @@
             android:textSize="18dp"
             android:textAlignment="center"
             android:gravity="center"
-            android:text="Your Past Records"
+            android:text="Your Purchase History"
             android:layout_marginBottom="3dp"
             />
 
