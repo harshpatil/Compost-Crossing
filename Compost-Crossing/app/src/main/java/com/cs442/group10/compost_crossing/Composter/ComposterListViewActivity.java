@@ -11,8 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
+import com.cs442.group10.compost_crossing.Composter.historyPage.ComposterAdsHistory;
+import com.cs442.group10.compost_crossing.Composter.nearbyResident.NearByResident;
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
@@ -32,6 +35,8 @@ public class ComposterListViewActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private static final int SHOW_PREFERENCES = 0;
     ListView listView;
+    Button history;
+    Button nearByResident;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,23 @@ public class ComposterListViewActivity extends AppCompatActivity {
         ComposterListViewFragment fragment = (ComposterListViewFragment) fragmentManager.findFragmentById(R.id.composterListViewFragment);
         listView = fragment.listView;
 
+        history = (Button) findViewById(R.id.btnComposterHistory);
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickHistoryButton();
+            }
+        });
+
+        nearByResident = (Button) findViewById(R.id.btnResidentNearBy);
+
+        nearByResident.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickNearByResidentButton();
+            }
+        });
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
@@ -162,6 +184,18 @@ public class ComposterListViewActivity extends AppCompatActivity {
 
                 })
                 .build();
+    }
+
+    public void onClickHistoryButton(){
+
+        Intent intent = new Intent(this, ComposterAdsHistory.class);
+        startActivity(intent);
+    }
+
+    public void onClickNearByResidentButton(){
+
+        Intent intent = new Intent(this, NearByResident.class);
+        startActivity(intent);
     }
 
 }
