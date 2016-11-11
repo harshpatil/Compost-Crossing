@@ -2,6 +2,7 @@ package com.cs442.group10.compost_crossing.Composter.nearbyResident;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +16,12 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity;
+import com.cs442.group10.compost_crossing.Composter.historyPage.ComposterAdsHistory;
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
+import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
 import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
 import com.cs442.group10.compost_crossing.resident.historyPage.ResidentAdsHistory;
 import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
@@ -43,6 +46,7 @@ public class NearByResident extends AppCompatActivity {
     NearByResidentAdapter nearByComposterAdapter;
     ListView nearByComposterListView;
     String currentUserZipCode = Constants.composterZip;
+    private static final int SHOW_PREFERENCES = 0;
     int imageId = 0;
     RelativeLayout loadingLayout;
 
@@ -133,13 +137,14 @@ public class NearByResident extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[5];
+        drawerList = new String[7];
         drawerList[0] = Constants.HOME;
         drawerList[1] = Constants.NEWS_ARTICLE;
-        drawerList[2] = Constants.YOUR_ACTIVE_ADS;
-        drawerList[3] = Constants.YOUR_PAST_ADS;
-        drawerList[4] = Constants.CREATE_AD;
-
+        drawerList[2] = Constants.COMPOSTER_VIEW_ADS;
+        drawerList[3] = Constants.COMPOSTER_VIEW_NEARBY_ADS;
+        drawerList[4] = Constants.YOUR_PURCHASE_HISTORY;
+        drawerList[5] = Constants.SETTINGS;
+        drawerList[6] = Constants.BACK;
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -184,19 +189,30 @@ public class NearByResident extends AppCompatActivity {
             Intent intent=new Intent(this, Article.class);
             startActivity(intent);
 
-        } else if(position == 2){
+        } else if(position==2){
 
-            Intent intent = new Intent(this, ResidentListViewActivity.class);
+            Intent intent=new Intent(this, ComposterListViewActivity.class);
             startActivity(intent);
 
         } else if(position == 3){
 
-            Intent intent = new Intent(this, ResidentAdsHistory.class);
+            Intent intent=new Intent(this, NearByResident.class);
             startActivity(intent);
 
         } else if(position == 4){
 
-            Intent intent = new Intent(this, AdCreation.class);
+            Intent intent=new Intent(this, ComposterAdsHistory.class);
+            startActivity(intent);
+
+        } else if(position == 5){
+
+            Class<?> c = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ? MyPreferenceActivity.class:MyPreferenceActivity.class;
+            Intent i = new Intent(this, c);
+            startActivityForResult(i, SHOW_PREFERENCES);
+
+        } else if(position == 6){
+
+            Intent intent = new Intent(this, ComposterListViewActivity.class);
             startActivity(intent);
 
         }

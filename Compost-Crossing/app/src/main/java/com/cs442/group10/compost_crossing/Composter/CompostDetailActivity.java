@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cs442.group10.compost_crossing.AdDetail;
+import com.cs442.group10.compost_crossing.Composter.historyPage.ComposterAdsHistory;
+import com.cs442.group10.compost_crossing.Composter.nearbyResident.NearByResident;
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
@@ -57,13 +59,14 @@ public class CompostDetailActivity extends FragmentActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[6];
+        drawerList = new String[7];
         drawerList[0] = Constants.HOME;
         drawerList[1] = Constants.NEWS_ARTICLE;
         drawerList[2] = Constants.COMPOSTER_VIEW_ADS;
         drawerList[3] = Constants.COMPOSTER_VIEW_NEARBY_ADS;
-        drawerList[4] = Constants.SETTINGS;
-        drawerList[5] = Constants.BACK;
+        drawerList[4] = Constants.YOUR_PURCHASE_HISTORY;
+        drawerList[5] = Constants.SETTINGS;
+        drawerList[6] = Constants.BACK;
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -118,16 +121,21 @@ public class CompostDetailActivity extends FragmentActivity {
 
         } else if(position == 3){
 
-//            Intent intent=new Intent(this, ComposterListViewActivity.class);
-//            startActivity(intent);
+            Intent intent=new Intent(this, NearByResident.class);
+            startActivity(intent);
 
         } else if(position == 4){
+
+            Intent intent=new Intent(this, ComposterAdsHistory.class);
+            startActivity(intent);
+
+        } else if(position == 5){
 
             Class<?> c = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ? MyPreferenceActivity.class:MyPreferenceActivity.class;
             Intent i = new Intent(this, c);
             startActivityForResult(i, SHOW_PREFERENCES);
 
-        } else if(position == 5){
+        } else if(position == 6){
 
             Intent intent = new Intent(this, ComposterListViewActivity.class);
             startActivity(intent);
