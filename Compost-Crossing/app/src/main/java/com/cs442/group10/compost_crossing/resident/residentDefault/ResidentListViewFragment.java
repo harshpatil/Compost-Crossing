@@ -1,6 +1,5 @@
 package com.cs442.group10.compost_crossing.resident.residentDefault;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,23 +7,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cs442.group10.compost_crossing.AdDetail;
-import com.cs442.group10.compost_crossing.Composter.CompostDetailActivity;
-import com.cs442.group10.compost_crossing.Composter.ComposterListViewAdapter;
 import com.cs442.group10.compost_crossing.R;
-import com.cs442.group10.compost_crossing.constants.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ResidentListViewFragment extends Fragment {
@@ -44,8 +40,8 @@ public class ResidentListViewFragment extends Fragment {
     private static final String DROP_COL = "drop";
     private static final String SOLD_COL = "sold";
 
-    Map<String, String> compostAdsMap = new HashMap<String,String>();
-    Map<String, AdDetail> adDetailMap = new HashMap<String, AdDetail>();
+    int imageId = 0;
+    List<AdDetail> adDetailList = new ArrayList<>();
 
     public ResidentListViewFragment() {
     }
@@ -67,6 +63,11 @@ public class ResidentListViewFragment extends Fragment {
         final TextView emptyTextView = (TextView) view.findViewById(R.id.emptyAdListForResident);
         final RelativeLayout loadingLayout = (RelativeLayout) view.findViewById(R.id.loadingPanel);
 
+        ResidentListViewAdapter residentListViewAdapter = new ResidentListViewAdapter(getContext(), R.layout.resident_item_list, getActivity(), adDetailList);
+        listView.setAdapter(residentListViewAdapter);
+        //listView.setEmptyView(emptyTextView);
+        residentListViewAdapter.notifyDataSetChanged();
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(RESIDENT_REG_TABLE);
 
@@ -74,7 +75,6 @@ public class ResidentListViewFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 loadingLayout.setVisibility(View.GONE);
-                compostAdsMap = new HashMap<String, String>();
                 Map<String, Map<String,Object>> residentRegMap = (Map<String, Map<String,Object>>) dataSnapshot.getValue();
                 for(Map.Entry<String, Map<String,Object>> residentMap: residentRegMap.entrySet()) {
                     Map<String, Object> residentRecordMap = residentMap.getValue();
@@ -99,17 +99,13 @@ public class ResidentListViewFragment extends Fragment {
                             String buyerName =  adDetailsMap.get(BUYER_NAME_COL);
                             String state = adDetailsMap.get(STATE_COL);
 
-                            final AdDetail adDetail = new AdDetail(id, ownerName, ownerPhone, title, address, city, state, zipCode, cost, drop, sold, weight, buyerId, buyerName);
+                            final AdDetail adDetail = new AdDetail(id, ownerName, ownerPhone, title, address, city, state, zipCode, cost, drop, sold, weight, buyerId, buyerName, imageId);
+
+                            imageId = setRandomImageId(adDetail, imageId);
 
                            // if (buyerId != null) {
                                 if (sold.equals("false")) {
-                                    final String compostAd = String.valueOf(title) + "-" + String.valueOf(weight);
-                                    compostAdsMap.put(compostAdMap.getKey(), compostAd);
-                                    adDetailMap.put(compostAdMap.getKey(), adDetail);
-
-                                    ResidentListViewAdapter residentListViewAdapter = new ResidentListViewAdapter(getActivity(), compostAdsMap);
-                                    listView.setAdapter(residentListViewAdapter);
-                                    listView.setEmptyView(emptyTextView);
+                                    adDetailList.add(adDetail);
                                 }
                            // }
                         }
@@ -124,6 +120,24 @@ public class ResidentListViewFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private int setRandomImageId(AdDetail adDetail, int imageId) {
+        switch (imageId%10){
+            case 0 : adDetail.setImageId(R.drawable.compost_1); break;
+            case 1 : adDetail.setImageId(R.drawable.compost_2); break;
+            case 2 : adDetail.setImageId(R.drawable.compost_3); break;
+            case 3 : adDetail.setImageId(R.drawable.compost_4); break;
+            case 4 : adDetail.setImageId(R.drawable.compost_5); break;
+            case 5 : adDetail.setImageId(R.drawable.compost_6); break;
+            case 6 : adDetail.setImageId(R.drawable.compost_7); break;
+            case 7 : adDetail.setImageId(R.drawable.compost_8); break;
+            case 8 : adDetail.setImageId(R.drawable.compost_9); break;
+            case 9 : adDetail.setImageId(R.drawable.compost_10); break;
+            default : adDetail.setImageId(R.drawable.compost_11);
+        }
+        imageId ++;
+        return imageId;
     }
 
     @Override

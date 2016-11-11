@@ -83,7 +83,7 @@ public class CompostDetailViewFragment extends Fragment {
         composterPhNoTextView.setText(adDetail.getOwnerPhone());
         Linkify.addLinks(composterPhNoTextView, Linkify.PHONE_NUMBERS);
 
-        compostDetailsTextView.setText(adDetail.getTitle()+"\nWeight: "+adDetail.getWeight()+"\nCost:$"+adDetail.getCost()+"\nDrop:"+adDetail.getDrop());
+        compostDetailsTextView.setText(adDetail.getTitle()+"\nWeight: "+adDetail.getWeight()+"\nCost:$"+adDetail.getCost());
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +131,6 @@ public class CompostDetailViewFragment extends Fragment {
         compostAdMap.put("buyerName", composterName);
         compostAdMap.put("city", adDetail.getCity());
         compostAdMap.put("cost", adDetail.getCost());
-        compostAdMap.put("drop", adDetail.getDrop());
         compostAdMap.put("state", adDetail.getState());
         compostAdMap.put("title", adDetail.getTitle());
         compostAdMap.put("weight", adDetail.getWeight());
@@ -155,8 +154,8 @@ public class CompostDetailViewFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            if(android.os.Debug.isDebuggerConnected())//TODO: Remove
-                android.os.Debug.waitForDebugger();
+           /* if(android.os.Debug.isDebuggerConnected())//TODO: Remove
+                android.os.Debug.waitForDebugger();*/
             String response;
             String uri = "http://maps.google.com/maps/api/geocode/json?address=" +
                     params[0] + "&sensor=false";
@@ -166,8 +165,8 @@ public class CompostDetailViewFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String s) {
-            if(android.os.Debug.isDebuggerConnected())//TODO: Remove
-                android.os.Debug.waitForDebugger();
+            /*if(android.os.Debug.isDebuggerConnected())//TODO: Remove
+                android.os.Debug.waitForDebugger();*/
             dialog.dismiss();
             super.onPostExecute(s);
             JSONObject jsonObject;

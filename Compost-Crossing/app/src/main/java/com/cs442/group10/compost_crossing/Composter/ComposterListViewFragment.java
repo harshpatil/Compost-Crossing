@@ -1,9 +1,9 @@
 package com.cs442.group10.compost_crossing.Composter;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -45,8 +47,10 @@ public class ComposterListViewFragment extends Fragment {
     private static final String SOLD_COL = "sold";
     public ListView listView;
 
+    List<AdDetail> compostAdDetailList = new ArrayList<>();
     Map<String, String> compostAdsMap = new HashMap<String,String>();
     Map<String, AdDetail> adDetailMap = new HashMap<String, AdDetail>();
+    int imageId=0;
 
     public ComposterListViewFragment() {
     }
@@ -67,6 +71,10 @@ public class ComposterListViewFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.composterItemListView);
         final TextView emptyTextView = (TextView) view.findViewById(R.id.emptyAdListForComposter);
         final RelativeLayout loadingLayout = (RelativeLayout) view.findViewById(R.id.loadingPanel);
+
+        ComposterListViewAdapter composterListViewAdapter = new ComposterListViewAdapter(getActivity().getApplicationContext(), R.layout.composter_item_list, getActivity(), compostAdDetailList);
+        listView.setAdapter(composterListViewAdapter);
+        composterListViewAdapter.notifyDataSetChanged();
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(RESIDENT_REG_TABLE);
@@ -100,16 +108,16 @@ public class ComposterListViewFragment extends Fragment {
                             String buyerName =  adDetailsMap.get(BUYER_NAME_COL);
                             String state = adDetailsMap.get(STATE_COL);
 
-                            final AdDetail adDetail = new AdDetail(id, ownerName, ownerPhone, title, address, city, state, zipCode, cost, drop, sold, weight, buyerId, buyerName);
+                            final AdDetail adDetail = new AdDetail(id, ownerName, ownerPhone, title, address, city, state, zipCode, cost, drop, sold, weight, buyerId, buyerName, imageId);
+                            imageId = setRandomImageId(adDetail, imageId);
+
+                            compostAdDetailList.add(adDetail);
 
                             if (buyerId != null) {
                                 if (buyerId.equals("NULL")) {
                                     final String compostAd = String.valueOf(title) + "-" + String.valueOf(weight);
                                     compostAdsMap.put(compostAdMap.getKey(), compostAd);
                                     adDetailMap.put(compostAdMap.getKey(), adDetail);
-
-                                    ComposterListViewAdapter composterListViewAdapter = new ComposterListViewAdapter(getActivity(), compostAdsMap);
-                                    listView.setAdapter(composterListViewAdapter);
 
                                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                         @Override
@@ -123,7 +131,6 @@ public class ComposterListViewFragment extends Fragment {
                                             startActivity(compostDetailIntent);
                                         }
                                     });
-                                    listView.setEmptyView(emptyTextView);
                                 }
                             }
                         }
@@ -137,6 +144,24 @@ public class ComposterListViewFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private int setRandomImageId(AdDetail adDetail, int imageId) {
+        switch (imageId%10){
+            case 0 : adDetail.setImageId(R.drawable.compost_1); break;
+            case 1 : adDetail.setImageId(R.drawable.compost_2); break;
+            case 2 : adDetail.setImageId(R.drawable.compost_3); break;
+            case 3 : adDetail.setImageId(R.drawable.compost_4); break;
+            case 4 : adDetail.setImageId(R.drawable.compost_5); break;
+            case 5 : adDetail.setImageId(R.drawable.compost_6); break;
+            case 6 : adDetail.setImageId(R.drawable.compost_7); break;
+            case 7 : adDetail.setImageId(R.drawable.compost_8); break;
+            case 8 : adDetail.setImageId(R.drawable.compost_9); break;
+            case 9 : adDetail.setImageId(R.drawable.compost_10); break;
+            default : adDetail.setImageId(R.drawable.compost_11);
+        }
+        imageId ++;
+        return imageId;
     }
 
     @Override

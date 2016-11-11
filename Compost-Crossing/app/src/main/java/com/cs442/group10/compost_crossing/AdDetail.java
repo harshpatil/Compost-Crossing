@@ -22,11 +22,12 @@ public class AdDetail implements Serializable{
     private String weight;
     private String buyerId;
     private String buyerName;
+    private int imageId;
 
     public AdDetail(){
     }
 
-    public AdDetail(String id, String ownerName, String ownerPhone, String title, String address, String city, String state, String zipCode, String cost, String drop, String sold, String weight, String buyerId, String buyerName) {
+    public AdDetail(String id, String ownerName, String ownerPhone, String title, String address, String city, String state, String zipCode, String cost, String drop, String sold, String weight, String buyerId, String buyerName, int imageId) {
         this.id = id;
         this.ownerName = ownerName;
         this.ownerPhone = ownerPhone;
@@ -41,6 +42,7 @@ public class AdDetail implements Serializable{
         this.weight = weight;
         this.buyerId = buyerId;
         this.buyerName = buyerName;
+        this.imageId = imageId;
     }
 
     public String getId() {
@@ -153,5 +155,13 @@ public class AdDetail implements Serializable{
 
     public void setBuyerName(String buyerName) {
         this.buyerName = buyerName;
+    }
+
+    public int getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 }
