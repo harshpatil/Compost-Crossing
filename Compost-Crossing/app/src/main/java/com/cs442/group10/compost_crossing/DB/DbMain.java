@@ -162,4 +162,54 @@ public class DbMain extends SQLiteOpenHelper {
         }
         return zipCode;
     }
+
+    public String getComposterID()
+    {
+        ArrayList<Spanned> array_list = new ArrayList<Spanned>();
+        String retString = "";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from composter_register", null );
+        res.moveToFirst();
+        String phone ="";
+        while(res.isAfterLast() == false){
+
+            phone  = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_PHONE));
+            break;
+        }
+        return phone;
+    }
+
+    public String getComposterzip()
+    {
+        ArrayList<Spanned> array_list = new ArrayList<Spanned>();
+        String retString = "";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from composter_register", null );
+        res.moveToFirst();
+        String zip ="";
+        while(res.isAfterLast() == false){
+
+            zip  = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_ZIPCODE));
+            break;
+        }
+        return zip;
+    }
+    public String getResidentID()
+    {
+        ArrayList<Spanned> array_list = new ArrayList<Spanned>();
+        String retString = "";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from resident_register", null );
+        res.moveToFirst();
+        String phone ="";
+        while(res.isAfterLast() == false){
+
+            phone  = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_PHONE));
+            break;
+        }
+        return phone;
+    }
 }

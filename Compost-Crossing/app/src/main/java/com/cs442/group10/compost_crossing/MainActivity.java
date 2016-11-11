@@ -76,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 int count = db.numberOfDataComposter();
+                String id = db.getComposterID();
+                String zip = db.getComposterzip();
+                Constants.composterId =id;
+                Constants.composterZip=zip;
+
                 if(count >= 1){
                     Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
                     startActivity(composterListViewIntent);
@@ -93,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
         residentButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 int count = db.numberOfDataResident();
+                String id =db.getResidentID();
+                Constants.residentId=id;
                 if(count >= 1){
 
                     Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
