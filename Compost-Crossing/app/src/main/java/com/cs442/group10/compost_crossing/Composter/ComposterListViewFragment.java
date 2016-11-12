@@ -74,9 +74,7 @@ public class ComposterListViewFragment extends Fragment {
         final TextView emptyTextView = (TextView) view.findViewById(R.id.emptyAdListForComposter);
         final RelativeLayout loadingLayout = (RelativeLayout) view.findViewById(R.id.loadingPanel);
 
-        ComposterListViewAdapter composterListViewAdapter = new ComposterListViewAdapter(getActivity().getApplicationContext(), R.layout.composter_item_list, getActivity(), compostAdDetailList);
-        listView.setAdapter(composterListViewAdapter);
-        composterListViewAdapter.notifyDataSetChanged();
+
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(RESIDENT_REG_TABLE);
@@ -95,30 +93,25 @@ public class ComposterListViewFragment extends Fragment {
                         for (Map.Entry<String, Map<String, String>> compostAdMap : compostAdListMap.entrySet()) {
                             Map<String, String> adDetailsMap = compostAdMap.getValue();
 
-                            String buyerId = adDetailsMap.get(BUYER_ID_COL);
                             String weight = adDetailsMap.get(WEIGHT_COL);
                             String title = adDetailsMap.get(TITLE_COL);
                             String id = adDetailsMap.get(ID_COL);
                             String ownerName = (String) residentRecordMap.get("name");
                             String ownerPhone = (String) residentRecordMap.get("phone");
-                            String address = adDetailsMap.get(ADDRESS_COL);
-                            String city = adDetailsMap.get(CITY_COL);
-                            String zipCode = adDetailsMap.get(ZIP_CODE_COL);
                             String cost = adDetailsMap.get(COST_COL);
-                            String drop = adDetailsMap.get(DROP_COL);
                             String sold = adDetailsMap.get(SOLD_COL);
                             String buyerName =  adDetailsMap.get(BUYER_NAME_COL);
-                            String state = adDetailsMap.get(STATE_COL);
 
-                            final AdDetail adDetail = new AdDetail(id, ownerName, ownerPhone, title, address, city, state, zipCode, cost, drop, sold, weight, buyerId, buyerName, imageId);
+                            final AdDetail adDetail = new AdDetail(id, ownerName, ownerPhone, title, cost, weight, buyerName, imageId);
                             imageId = setRandomImageId(adDetail, imageId);
 
                             compostAdDetailList.add(adDetail);
 
                                 if (sold.equals("false")) {
-                                    final String compostAd = String.valueOf(title) + "-" + String.valueOf(weight);
-                                    compostAdsMap.put(compostAdMap.getKey(), compostAd);
-                                    adDetailMap.put(compostAdMap.getKey(), adDetail);
+                                    //Below three lines moved from top
+                                    ComposterListViewAdapter composterListViewAdapter = new ComposterListViewAdapter(getActivity().getApplicationContext(), R.layout.composter_item_list, getActivity(), compostAdDetailList);
+                                    listView.setAdapter(composterListViewAdapter);
+                                    composterListViewAdapter.notifyDataSetChanged();
 
                                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                         @Override

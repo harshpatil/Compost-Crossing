@@ -13,6 +13,8 @@ import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
 
+import com.cs442.group10.compost_crossing.constants.Constants;
+
 public class DbMain extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "CompostCrossing.db";
@@ -178,39 +180,19 @@ public class DbMain extends SQLiteOpenHelper {
         return zipCode;
     }
 
-    public String getComposterID()
+    public void setComposterUserDetails()
     {
-        ArrayList<Spanned> array_list = new ArrayList<Spanned>();
-        String retString = "";
-
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from composter_register", null );
+        Cursor res =  db.rawQuery("select * from composter_register", null);
         res.moveToFirst();
-        String phone ="";
         while(res.isAfterLast() == false){
-
-            phone  = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_PHONE));
+            Constants.composterId = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_PHONE));
+            Constants.composterName = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_NAME));
+            Constants.composterZip = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_ZIPCODE));;
             break;
         }
-        return phone;
     }
 
-    public String getComposterzip()
-    {
-        ArrayList<Spanned> array_list = new ArrayList<Spanned>();
-        String retString = "";
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from composter_register", null );
-        res.moveToFirst();
-        String zip ="";
-        while(res.isAfterLast() == false){
-
-            zip  = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_ZIPCODE));
-            break;
-        }
-        return zip;
-    }
     public String getResidentID()
     {
         ArrayList<Spanned> array_list = new ArrayList<Spanned>();

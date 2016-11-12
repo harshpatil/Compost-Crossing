@@ -17,7 +17,6 @@ public class AdDetail implements Serializable{
     private String state;
     private String zipCode;
     private String cost;
-    private String drop;
     private String sold;
     private String weight;
     private String buyerId;
@@ -27,7 +26,7 @@ public class AdDetail implements Serializable{
     public AdDetail(){
     }
 
-    public AdDetail(String id, String ownerName, String ownerPhone, String title, String address, String city, String state, String zipCode, String cost, String drop, String sold, String weight, String buyerId, String buyerName, int imageId) {
+    public AdDetail(String id, String ownerName, String ownerPhone, String title, String address, String city, String state, String zipCode, String cost, String sold, String weight, String buyerId, String buyerName, int imageId) {
         this.id = id;
         this.ownerName = ownerName;
         this.ownerPhone = ownerPhone;
@@ -37,10 +36,20 @@ public class AdDetail implements Serializable{
         this.state = state;
         this.zipCode = zipCode;
         this.cost = cost;
-        this.drop = drop;
         this.sold = sold;
         this.weight = weight;
         this.buyerId = buyerId;
+        this.buyerName = buyerName;
+        this.imageId = imageId;
+    }
+
+    public AdDetail(String id, String ownerName, String ownerPhone, String title, String cost, String weight, String buyerName, int imageId) {
+        this.id = id;
+        this.ownerName = ownerName;
+        this.ownerPhone = ownerPhone;
+        this.title = title;
+        this.cost = cost;
+        this.weight = weight;
         this.buyerName = buyerName;
         this.imageId = imageId;
     }
@@ -115,14 +124,6 @@ public class AdDetail implements Serializable{
 
     public void setCost(String cost) {
         this.cost = cost;
-    }
-
-    public String getDrop() {
-        return drop;
-    }
-
-    public void setDrop(String drop) {
-        this.drop = drop;
     }
 
     public String getSold() {
