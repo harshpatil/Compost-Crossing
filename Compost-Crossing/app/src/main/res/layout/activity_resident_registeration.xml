@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:textColor="@color/buttonText"
             android:background="@color/buttonBackground"
             android:textSize="20dp"
@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:text="Hey Resident! Tell us more about you ..."
             android:textAlignment="center"
             android:id="@+id/header"
@@ -57,7 +57,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Given Name"
-            android:layout_below="@+id/textScreen6"/>
+            />
 
         <EditText
             android:inputType="phone"
@@ -69,7 +69,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Contact Number"
-            android:layout_below="@+id/lastName"/>
+            />
 
         <EditText
             android:inputType="text"
@@ -81,7 +81,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Address"
-            android:layout_below="@+id/phoneNumber"/>
+            />
 
         <EditText
             android:inputType="text"
@@ -93,7 +93,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="City"
-            android:layout_below="@+id/phoneNumber"/>
+            />
 
         <EditText
             android:inputType="text"
@@ -105,7 +105,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="State"
-            android:layout_below="@+id/phoneNumber"/>
+            />
 
 
         <EditText
@@ -118,7 +118,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Zipcode"
-            android:layout_below="@+id/address"/>
+            />
 
         <Button
             android:layout_width="match_parent"
