@@ -30,7 +30,7 @@
         <TextView
             android:id="@+id/compostTitleTextViewCompostPage"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:textColor="#F000"
             android:paddingTop="4dp"
             android:textSize="16dp"
@@ -44,7 +44,7 @@
         <TextView
             android:id="@+id/compostWeightTextViewCompostPage"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="35dp"
             android:scrollbars="vertical"
             android:fadingEdge="vertical"
             android:paddingTop="4dp"
