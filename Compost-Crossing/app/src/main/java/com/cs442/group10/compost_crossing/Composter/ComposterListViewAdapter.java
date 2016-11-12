@@ -36,6 +36,7 @@ public class ComposterListViewAdapter extends ArrayAdapter<AdDetail>{
         if(convertView == null){
             convertView = layoutInflater.inflate(R.layout.composter_item_list, null);
         }
+
         AdDetail adDetail = getItem(position);
 
         TextView adTitle = (TextView) convertView.findViewById(R.id.compostTitleTextViewCompostPage);
@@ -43,6 +44,7 @@ public class ComposterListViewAdapter extends ArrayAdapter<AdDetail>{
         TextView adCost = (TextView) convertView.findViewById(R.id.compostCostTextViewCompostPage);
         ImageView adImage = (ImageView) convertView.findViewById(R.id.compostImageCompostItemPage);
 
+        //convertView.setId(Integer.parseInt(adDetail.getId()));
         adTitle.setText("Title : "+ adDetail.getTitle());
         adCost.setText("Cost : "+ adDetail.getCost());
         adWeight.setText("Weight : "+ adDetail.getWeight() +" lbs");

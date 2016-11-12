@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +55,7 @@ public class ComposterListViewFragment extends Fragment {
 
     public ComposterListViewFragment() {
     }
+
 
     public static ComposterListViewFragment newInstance(int columnCount) {
         ComposterListViewFragment fragment = new ComposterListViewFragment();
@@ -113,7 +115,6 @@ public class ComposterListViewFragment extends Fragment {
 
                             compostAdDetailList.add(adDetail);
 
-                           // if (buyerId != null) {
                                 if (sold.equals("false")) {
                                     final String compostAd = String.valueOf(title) + "-" + String.valueOf(weight);
                                     compostAdsMap.put(compostAdMap.getKey(), compostAd);
@@ -122,17 +123,14 @@ public class ComposterListViewFragment extends Fragment {
                                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                         @Override
                                         public void onItemClick(AdapterView<?> parent, View view, int position, long itemId) {
-                                            String key = (String) adDetailMap.keySet().toArray()[position];
-
                                             Intent compostDetailIntent = new Intent(getActivity().getApplicationContext(), CompostDetailActivity.class);
                                             Bundle compostAdBundle = new Bundle();
-                                            compostAdBundle.putSerializable("compostAd", adDetailMap.get(key));
+                                            compostAdBundle.putSerializable("compostAd", compostAdDetailList.get(position));
                                             compostDetailIntent.putExtras(compostAdBundle);
                                             startActivity(compostDetailIntent);
                                         }
                                     });
                                 }
-                            //}
                         }
                     }
                 }
