@@ -82,39 +82,35 @@ public class ComposterListViewFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 loadingLayout.setVisibility(View.GONE);
-
                 compostAdsMap = new HashMap<String, String>();
 
                 Map<String, Map<String,Object>> residentRegMap = (Map<String, Map<String,Object>>) dataSnapshot.getValue();
-
                 for(Map.Entry<String, Map<String,Object>> residentMap: residentRegMap.entrySet()) {
 
                     Map<String, Object> residentRecordMap = residentMap.getValue();
-
                     if (!residentRecordMap.get("adlist").equals(" ")) {
-
                         Map<String, Map<String, String>> compostAdListMap = (Map<String, Map<String, String>>) residentRecordMap.get("adlist");
 
                         for (Map.Entry<String, Map<String, String>> compostAdMap : compostAdListMap.entrySet()) {
-
                             Map<String, String> adDetailsMap = compostAdMap.getValue();
-
                             Log.i("SOLDVALUE",adDetailsMap.get(SOLD_COL));
 
                             if (adDetailsMap.get(SOLD_COL).contains("false")) {
-
                                 String weight = adDetailsMap.get(WEIGHT_COL);
                                 String title = adDetailsMap.get(TITLE_COL);
                                 String id = adDetailsMap.get(ID_COL);
+                                String address = adDetailsMap.get(ADDRESS_COL);
+                                String city = adDetailsMap.get(CITY_COL);
+                                String zipCode = adDetailsMap.get(ZIP_CODE_COL);
+                                String state = adDetailsMap.get(STATE_COL);
                                 String ownerName = (String) residentRecordMap.get("name");
                                 String ownerPhone = (String) residentRecordMap.get("phone");
                                 String cost = adDetailsMap.get(COST_COL);
                                 String sold = adDetailsMap.get(SOLD_COL);
                                 String buyerName = adDetailsMap.get(BUYER_NAME_COL);
 
-                                final AdDetail adDetail = new AdDetail(id, ownerName, ownerPhone, title, cost, weight, buyerName, imageId);
+                                final AdDetail adDetail = new AdDetail(id, ownerName, ownerPhone, title, address, city, state, zipCode, cost, weight, buyerName, imageId);
                                 imageId = setRandomImageId(adDetail, imageId);
 
                                 compostAdDetailList.add(adDetail);

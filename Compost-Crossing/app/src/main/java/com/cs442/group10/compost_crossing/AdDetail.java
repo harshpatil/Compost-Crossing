@@ -43,11 +43,15 @@ public class AdDetail implements Serializable{
         this.imageId = imageId;
     }
 
-    public AdDetail(String id, String ownerName, String ownerPhone, String title, String cost, String weight, String buyerName, int imageId) {
+    public AdDetail(String id, String ownerName, String ownerPhone, String title, String address, String city, String state, String zipCode, String cost, String weight, String buyerName, int imageId) {
         this.id = id;
         this.ownerName = ownerName;
         this.ownerPhone = ownerPhone;
         this.title = title;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
         this.cost = cost;
         this.weight = weight;
         this.buyerName = buyerName;

@@ -118,13 +118,12 @@ public class CompostDetailViewFragment extends Fragment {
     }
 
     private void updateComposterTable(FirebaseDatabase database, String composterId, String composterName) {
-        Map<String, Map<String, String>> compostAdMap = getCompostAdMap(composterId,composterName);
+        Map<String, String> compostAdMap = getCompostAdMap(composterId,composterName);
         DatabaseReference composterTableRef = database.getReference(COMPOSTER_REG_TABLE);
         composterTableRef.child(composterId).child("adList").child(adDetail.getId()).setValue(compostAdMap);
     }
 
-    private HashMap<String, Map<String,String>> getCompostAdMap(String composterId, String composterName){
-        HashMap<String, Map<String,String>> compostAdListMap = new HashMap<String, Map<String,String>>();
+    private Map<String,String> getCompostAdMap(String composterId, String composterName){
         Map<String,String> compostAdMap = new HashMap<String,String>();
 
         compostAdMap.put("id", adDetail.getId());
@@ -139,8 +138,7 @@ public class CompostDetailViewFragment extends Fragment {
         compostAdMap.put("sold", "true");
         compostAdMap.put("zipCode", adDetail.getZipCode());
 
-        compostAdListMap.put(compostAdMap.get("id"), compostAdMap);
-        return compostAdListMap;
+        return compostAdMap;
     }
 
     class GetMapsInfo extends AsyncTask<String, String, String>{
