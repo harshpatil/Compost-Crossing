@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,36 +21,51 @@ import java.util.Map;
  * Created by cheth on 11/8/2016.
  */
 
-public class ComposterListViewAdapter extends ArrayAdapter<AdDetail>{
+public class ComposterListViewAdapter extends BaseAdapter{
     Activity activity;
-    List<AdDetail> compostAdDetailList;
+    final List<AdDetail> compostAdDetailList;
     Map<String,String> compostAdsMap = new HashMap<String,String>();
 
     public ComposterListViewAdapter(Context context, int resource, Activity activity, List<AdDetail> compostAdDetailList) {
-        super(context,resource,compostAdDetailList);
+        super();
+        this.compostAdDetailList = compostAdDetailList;
+        //super(context,resource,compostAdDetailList);
         this.activity = activity;
+    }
+
+    @Override
+    public int getCount() {
+        return compostAdDetailList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return compostAdDetailList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater = activity.getLayoutInflater();
+        AdDetail adDetail = (AdDetail) getItem(position);
+
         if(convertView == null){
             convertView = layoutInflater.inflate(R.layout.composter_item_list, null);
         }
-
-        AdDetail adDetail = getItem(position);
 
         TextView adTitle = (TextView) convertView.findViewById(R.id.compostTitleTextViewCompostPage);
         TextView adWeight = (TextView) convertView.findViewById(R.id.compostWeightTextViewCompostPage);
         TextView adCost = (TextView) convertView.findViewById(R.id.compostCostTextViewCompostPage);
         ImageView adImage = (ImageView) convertView.findViewById(R.id.compostImageCompostItemPage);
 
-        //convertView.setId(Integer.parseInt(adDetail.getId()));
-        adTitle.setText("Title : "+ adDetail.getTitle());
-        adCost.setText("Cost : "+ adDetail.getCost());
-        adWeight.setText("Weight : "+ adDetail.getWeight() +" lbs");
+        adTitle.setText("Title : " + adDetail.getTitle());
+        adCost.setText("Cost : " + adDetail.getCost());
+        adWeight.setText("Weight : " + adDetail.getWeight() + " lbs");
         adImage.setImageResource(adDetail.getImageId());
-
         return convertView;
     }
 }

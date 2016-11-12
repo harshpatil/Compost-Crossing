@@ -38,7 +38,6 @@ public class ResidentListViewFragment extends Fragment {
     private static final String CITY_COL = "city";
     private static final String ZIP_CODE_COL = "zipCode";
     private static final String STATE_COL = "state";
-    private static final String DROP_COL = "drop";
     private static final String SOLD_COL = "sold";
 
     int imageId = 0;
@@ -96,21 +95,18 @@ public class ResidentListViewFragment extends Fragment {
                             String city = adDetailsMap.get(CITY_COL);
                             String zipCode = adDetailsMap.get(ZIP_CODE_COL);
                             String cost = adDetailsMap.get(COST_COL);
-                            String drop = adDetailsMap.get(DROP_COL);
                             String sold = adDetailsMap.get(SOLD_COL);
                             String buyerName =  adDetailsMap.get(BUYER_NAME_COL);
                             String state = adDetailsMap.get(STATE_COL);
 
-                            final AdDetail adDetail = new AdDetail(id, ownerName, ownerPhone, title, address, city, state, zipCode, cost, drop, sold, weight, buyerId, buyerName, imageId);
+                            final AdDetail adDetail = new AdDetail(id, ownerName, ownerPhone, title, address, city, state, zipCode, cost, sold, weight, buyerId, buyerName, imageId);
 
                             imageId = setRandomImageId(adDetail, imageId);
 
-                           // if (buyerId != null) {
                                 if (sold.equals("false")) {
                                     adDetailList.add(adDetail);
                                     listView.setBackgroundResource(0);
                                 }
-                           // }
                         }
                     }
                 }

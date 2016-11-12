@@ -17,13 +17,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.cs442.group10.compost_crossing.Composter.CompostDetailActivity;
 import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
-import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
-import com.cs442.group10.compost_crossing.resident.nearByComposter.NearByComposter;
 import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.cs442.group10.compost_crossing.newsArticle.MyAlarm;
 import com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity;
@@ -76,12 +73,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 int count = db.numberOfDataComposter();
-                String id = db.getComposterID();
-                String zip = db.getComposterzip();
-                Constants.composterId =id;
-                Constants.composterZip=zip;
 
                 if(count >= 1){
+                    db.setComposterUserDetails();//Sets the composter name,id and zip - Chethan
                     Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
                     startActivity(composterListViewIntent);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
