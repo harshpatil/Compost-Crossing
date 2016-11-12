@@ -44,13 +44,11 @@ public class ComposterHistoryAdaptor extends ArrayAdapter<Ads> {
         }
 
         TextView adTitle = (TextView)adsView.findViewById(R.id.AdTitleComposterHistoryPage);
-        TextView boughtBy = (TextView)adsView.findViewById(R.id.CompostBoughtByHistoryPage);
         TextView compostWeight = (TextView)adsView.findViewById(R.id.CompostWeightComposterHistoryPage);
         TextView compostPrice = (TextView)adsView.findViewById(R.id.AdCostComposterHistoryPage);
         ImageView imageView = (ImageView) adsView.findViewById(R.id.imageComposterHistoryPage);
 
         adTitle.setText("Title : "+ ads.getTitle());
-        boughtBy.setText("Bought By : "+ String.valueOf(ads.getBuyerName()));
         compostWeight.setText("Weight : "+ String.valueOf(ads.getWeight()) + " pounds");
         compostPrice.setText("Cost : $"+ String.valueOf(ads.getCost()));
         imageView.setImageResource(ads.getImageId());

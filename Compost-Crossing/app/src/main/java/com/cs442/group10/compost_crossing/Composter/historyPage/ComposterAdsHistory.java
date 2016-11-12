@@ -94,37 +94,37 @@ public class ComposterAdsHistory extends AppCompatActivity {
 
                             switch (imageId % 10) {
                                 case 0:
-                                    ads.setImageId(R.drawable.compost_1);
+                                    ads.setImageId(R.drawable.compost_11);
                                     break;
                                 case 1:
-                                    ads.setImageId(R.drawable.compost_2);
+                                    ads.setImageId(R.drawable.compost_10);
                                     break;
                                 case 2:
-                                    ads.setImageId(R.drawable.compost_3);
+                                    ads.setImageId(R.drawable.compost_9);
                                     break;
                                 case 3:
-                                    ads.setImageId(R.drawable.compost_4);
+                                    ads.setImageId(R.drawable.compost_8);
                                     break;
                                 case 4:
-                                    ads.setImageId(R.drawable.compost_5);
+                                    ads.setImageId(R.drawable.compost_7);
                                     break;
                                 case 5:
                                     ads.setImageId(R.drawable.compost_6);
                                     break;
                                 case 6:
-                                    ads.setImageId(R.drawable.compost_7);
+                                    ads.setImageId(R.drawable.compost_5);
                                     break;
                                 case 7:
-                                    ads.setImageId(R.drawable.compost_8);
+                                    ads.setImageId(R.drawable.compost_4);
                                     break;
                                 case 8:
-                                    ads.setImageId(R.drawable.compost_9);
+                                    ads.setImageId(R.drawable.compost_3);
                                     break;
                                 case 9:
-                                    ads.setImageId(R.drawable.compost_10);
+                                    ads.setImageId(R.drawable.compost_2);
                                     break;
                                 default:
-                                    ads.setImageId(R.drawable.compost_11);
+                                    ads.setImageId(R.drawable.compost_1);
                             }
 
                             imageId++;
