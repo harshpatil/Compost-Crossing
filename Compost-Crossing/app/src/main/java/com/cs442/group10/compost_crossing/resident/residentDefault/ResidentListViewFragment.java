@@ -58,6 +58,7 @@ public class ResidentListViewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.resident_item, container, false);
         final ListView listView = (ListView) view.findViewById(R.id.residentItemListView);
         final TextView emptyTextView = (TextView) view.findViewById(R.id.emptyAdListForResident);
@@ -104,6 +105,7 @@ public class ResidentListViewFragment extends Fragment {
 
                                 if (sold.equals("false")) {
                                     adDetailList.add(adDetail);
+                                    listView.setBackgroundResource(0);
                                 }
                         }
                     }
@@ -115,6 +117,10 @@ public class ResidentListViewFragment extends Fragment {
                 Log.d("Firebase", "Error retrieving data in ResidentListView");
             }
         });
+
+        if(adDetailList.size() == 0 && loadingLayout.getVisibility() == View.VISIBLE){
+            listView.setBackgroundResource(R.drawable.empty_trash);
+        }
 
         return view;
     }
