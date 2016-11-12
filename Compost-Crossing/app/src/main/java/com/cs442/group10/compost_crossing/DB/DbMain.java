@@ -52,7 +52,7 @@ public class DbMain extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertComposter (String tstamp, String name, String phone, String city,String state,String zipcode,String address)
+    public boolean insertComposter (String tstamp, String name, String phone, String city,String state, String zipcode,String address)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -68,7 +68,7 @@ public class DbMain extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertResident (String tstamp, String name, String phone, String city,String state, String zipcode, String address)
+    public boolean insertResident (String tstamp, String name, String phone, String city, String state, String zipcode, String address)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -157,7 +157,22 @@ public class DbMain extends SQLiteOpenHelper {
 
             zipCode = resultSet.getString(resultSet.getColumnIndex("zipcode"));
             Log.i("zipCodeLocal", zipCode);
-//            resultSet.moveToPrevious();
+            break;
+        }
+        return zipCode;
+    }
+
+    public String getComposterZipCode(){
+
+        String zipCode = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor resultSet =  db.rawQuery( "select zipcode from composter_register", null);
+        resultSet.moveToLast();
+
+        while(resultSet.isBeforeFirst() == false){
+
+            zipCode = resultSet.getString(resultSet.getColumnIndex("zipcode"));
+            Log.i("zipCodeLocal", zipCode);
             break;
         }
         return zipCode;

@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity;
 import com.cs442.group10.compost_crossing.Composter.historyPage.ComposterAdsHistory;
+import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
@@ -45,9 +46,11 @@ public class NearByResident extends AppCompatActivity {
     List<Resident> composterList = new ArrayList<Resident>();
     NearByResidentAdapter nearByComposterAdapter;
     ListView nearByComposterListView;
-    String currentUserZipCode = Constants.composterZip;
+//    String currentUserZipCode = Constants.composterZip;
+    String currentUserZipCode;
     private static final int SHOW_PREFERENCES = 0;
     int imageId = 0;
+    DbMain dbMain;
     RelativeLayout loadingLayout;
 
     private ListView mDrawerList;
@@ -62,6 +65,10 @@ public class NearByResident extends AppCompatActivity {
         setContentView(R.layout.near_by_resident);
 
         loadingLayout = (RelativeLayout) findViewById(R.id.loadingPanelNearByComposterPage);
+
+        dbMain = new DbMain(this);
+        currentUserZipCode = dbMain.getComposterZipCode();
+        Log.i("ComposterZIPCODE", currentUserZipCode);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("residentRegisteration");
@@ -87,8 +94,8 @@ public class NearByResident extends AppCompatActivity {
 
                     String composterZip = String.valueOf(compostAdMap.get("zipcode")).substring(0, 3);
                     String currentUserPin = currentUserZipCode.substring(0, 3);
-                    Log.i("PINCODE", composterZip);
-                    Log.i("PINCODE", currentUserPin);
+                    Log.i("ComposterZIPCODE", composterZip);
+                    Log.i("ComposterZIPCODE", currentUserPin);
 
                     if(composterZip.equals(currentUserPin)){
 

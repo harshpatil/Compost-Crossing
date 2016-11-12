@@ -64,7 +64,7 @@ public class NearByComposter extends AppCompatActivity {
 
         dbMain = new DbMain(this);
         currentUserZipCode = dbMain.getResidentZipCode();
-        Log.i("ZIPCODE", currentUserZipCode);
+        Log.i("ResidentZIPCODE", currentUserZipCode);
 
         loadingLayout = (RelativeLayout) findViewById(R.id.loadingPanelNearByComposterPage);
         FragmentManager fragmentManager = getFragmentManager();
@@ -91,8 +91,8 @@ public class NearByComposter extends AppCompatActivity {
 
                     String composterZip = String.valueOf(compostAdMap.get("zipcode")).substring(0, 3);
                     String currentUserPin = currentUserZipCode.substring(0, 3);
-                    Log.i("PINCODE", composterZip);
-                    Log.i("PINCODE", currentUserPin);
+                    Log.i("ResidentZIPCODE", composterZip);
+                    Log.i("ResidentZIPCODE", currentUserPin);
 
                     if(composterZip.equals(currentUserPin)){
 

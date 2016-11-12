@@ -45,7 +45,7 @@ public class ComposterRegistration extends AppCompatActivity {
                         city.getText().length() != 0  &&
                         state.getText().length() != 0  &&
                         zipcode.getText().length() != 0 ) {
-                    db.insertComposter("", name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
+                    db.insertComposter("", name.getText().toString(), phone.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), address.getText().toString());
                     writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
 
                     Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);

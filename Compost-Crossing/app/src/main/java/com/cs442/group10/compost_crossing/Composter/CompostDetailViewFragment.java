@@ -45,6 +45,7 @@ import java.util.Map;
  */
 
 public class CompostDetailViewFragment extends Fragment {
+
     TextView composterAddressTextView;
     String composterAddress;
     String composterAddressForMap;
@@ -102,7 +103,7 @@ public class CompostDetailViewFragment extends Fragment {
                 /*reference.child("ad1").child("buyerId").setValue(composterId);
                 reference.child("ad1").child("buyerName").setValue(composterId);*/
                 DatabaseReference residentTableRef = database.getReference(RESIDENT_REG_TABLE);
-                Map<String,String> residentAdMap = (Map<String, String>) residentTableRef.child(adDetail.getOwnerPhone()).child("adlist");
+//                Map<String,String> residentAdMap = (Map<String, String>) residentTableRef.child(adDetail.getOwnerPhone()).child("adlist");
 
                 DatabaseReference composterTableRef = database.getReference("composterRegisteration");
                 /*residentTableRef.child(adDetail.getOwnerPhone()).child("adlist").child(adDetail.getId()).child("sold").setValue("false");
