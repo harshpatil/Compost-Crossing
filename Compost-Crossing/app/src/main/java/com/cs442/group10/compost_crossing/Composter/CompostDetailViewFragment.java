@@ -84,7 +84,7 @@ public class CompostDetailViewFragment extends Fragment {
         composterPhNoTextView.setText(adDetail.getOwnerPhone());
         Linkify.addLinks(composterPhNoTextView, Linkify.PHONE_NUMBERS);
 
-        compostDetailsTextView.setText(adDetail.getTitle()+"\nWeight: "+adDetail.getWeight()+"\nCost:$"+adDetail.getCost());
+        compostDetailsTextView.setText(adDetail.getTitle()+"\nWeight: "+adDetail.getWeight()+" lbs\nCost: $"+adDetail.getCost());
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

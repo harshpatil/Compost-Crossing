@@ -10,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cs442.group10.compost_crossing.AdDetail;
+import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -69,12 +71,10 @@ public class ComposterListViewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_composter_list_view, container, false);
+        final View view = inflater.inflate(R.layout.fragment_composter_list_view, container, false);
         listView = (ListView) view.findViewById(R.id.composterItemListView);
         final TextView emptyTextView = (TextView) view.findViewById(R.id.emptyAdListForComposter);
         final RelativeLayout loadingLayout = (RelativeLayout) view.findViewById(R.id.loadingPanel);
-
-
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(RESIDENT_REG_TABLE);
@@ -89,14 +89,40 @@ public class ComposterListViewFragment extends Fragment {
                 for(Map.Entry<String, Map<String,Object>> residentMap: residentRegMap.entrySet()) {
 
                     Map<String, Object> residentRecordMap = residentMap.getValue();
+
                     if (!residentRecordMap.get("adlist").equals(" ")) {
                         Map<String, Map<String, String>> compostAdListMap = (Map<String, Map<String, String>>) residentRecordMap.get("adlist");
 
                         for (Map.Entry<String, Map<String, String>> compostAdMap : compostAdListMap.entrySet()) {
+
                             Map<String, String> adDetailsMap = compostAdMap.getValue();
                             Log.i("SOLDVALUE",adDetailsMap.get(SOLD_COL));
 
-                            if (adDetailsMap.get(SOLD_COL).contains("false")) {
+                            Boolean condition = adDetailsMap.get(SOLD_COL).contains("false");
+                            Bundle bundle = getActivity().getIntent().getExtras();
+                            if(bundle != null){
+                                Button residentNearByButton = (Button) view.findViewById(R.id.btnResidentNearBy);
+                                Button residentAllButton = (Button) view.findViewById(R.id.btnAllResident);
+
+                                if(bundle.getBoolean("showNearby")){
+                                    String composterZip = String.valueOf(adDetailsMap.get("zipCode")).substring(0, 3);
+                                    DbMain dbMain = new DbMain(getActivity().getApplicationContext());
+                                    String currentUserZipCode = dbMain.getComposterZipCode();
+                                    if(residentAllButton.getVisibility() == View.GONE){
+                                        residentAllButton.setVisibility(View.VISIBLE);
+                                        residentNearByButton.setVisibility(View.GONE);
+                                    }
+                                    condition = condition && (currentUserZipCode.startsWith(composterZip));
+                                } else {
+                                    if(residentNearByButton.getVisibility() == View.GONE){
+                                        residentNearByButton.setVisibility(View.VISIBLE);
+                                        residentAllButton.setVisibility(View.GONE);
+                                    }
+                                }
+                            }
+
+
+                            if (condition) {
                                 String weight = adDetailsMap.get(WEIGHT_COL);
                                 String title = adDetailsMap.get(TITLE_COL);
                                 String id = adDetailsMap.get(ID_COL);

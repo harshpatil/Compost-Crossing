@@ -89,7 +89,20 @@
             android:layout_height="match_parent"
             android:background="@color/buttonBackground"
             android:textColor="@color/buttonText"
-            android:text="SEE NEAR BY Ads"
+            android:text="@string/seeNearByAds"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+
+        <Button
+            android:id="@+id/btnAllResident"
+            android:layout_width="0dp"
+            android:layout_weight="10"
+            android:layout_height="match_parent"
+            android:background="@color/buttonBackground"
+            android:textColor="@color/buttonText"
+            android:text="@string/seeAllAds"
+            android:visibility="gone"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             />

@@ -35,6 +35,7 @@ public class ComposterListViewActivity extends AppCompatActivity {
     ListView listView;
     Button history;
     Button nearByResident;
+    Button allResidentBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,15 @@ public class ComposterListViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onClickNearByResidentButton();
+            }
+        });
+
+        allResidentBtn = (Button) findViewById(R.id.btnAllResident);
+
+        allResidentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickAllResidentButton();
             }
         });
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
@@ -162,7 +172,13 @@ public class ComposterListViewActivity extends AppCompatActivity {
 
     public void onClickNearByResidentButton(){
 
-        Intent intent = new Intent(this, NearByResident.class);
+        Intent intent = new Intent(this, ComposterListViewActivity.class);
+        intent.putExtra("showNearby", true);
+        startActivity(intent);
+    }
+
+    public void onClickAllResidentButton(){
+        Intent intent = new Intent(this, ComposterListViewActivity.class);
         startActivity(intent);
     }
 

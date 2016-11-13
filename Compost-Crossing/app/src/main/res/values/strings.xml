@@ -26,4 +26,6 @@
     <string name="compostAds">Compost Ads</string>
     <string name="noAds">No Ads Found</string>
     <string name="myAds">My Ads</string>
+    <string name="seeNearByAds">SEE NEAR BY ADS</string>
+    <string name="seeAllAds">SEE ALL ADS</string>
 </resources>
