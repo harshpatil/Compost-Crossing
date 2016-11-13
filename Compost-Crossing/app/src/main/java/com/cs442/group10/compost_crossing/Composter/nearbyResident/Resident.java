@@ -8,6 +8,9 @@ public class Resident {
     String name;
     String address;
     int imageId;
+    String title;
+    String cost;
+    String weight;
 
     public String getName() {
         return name;
@@ -31,5 +34,31 @@ public class Resident {
 
     public void setImageId(int imageId) {
         this.imageId = imageId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getCost() {
+        return cost;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setTitle(String title) {
+
+
+        this.title = title;
+    }
+
+    public void setCost(String cost) {
+        this.cost=cost;
+    }
+
+    public void setWeight(String weight) {
+        this.weight= weight;
     }
 }
