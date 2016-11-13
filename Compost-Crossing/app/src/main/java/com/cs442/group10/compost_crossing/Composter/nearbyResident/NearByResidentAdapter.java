@@ -46,10 +46,12 @@ public class NearByResidentAdapter extends ArrayAdapter<Resident> {
 
         TextView composterName = (TextView) composterListView.findViewById(R.id.ComposterNameResidentNearbyComposterPage);
         TextView composterAddress = (TextView) composterListView.findViewById(R.id.ComposterAddressResidentNearByComposterPage);
+        TextView composterCost = (TextView) composterListView.findViewById(R.id.ComposterCostResidentNearByComposterPage);
         ImageView imageView = (ImageView) composterListView.findViewById(R.id.imageResidentNearByComposterPage);
 
-        composterName.setText("Composter : "+ composter.getName());
-        composterAddress.setText("Address : "+ String.valueOf(composter.getAddress()));
+        composterName.setText("Title : "+ composter.getTitle());
+        composterAddress.setText("Weight : "+ String.valueOf(composter.getWeight()));
+        composterCost.setText("Cost : "+ String.valueOf(composter.getCost()));
         imageView.setImageResource(composter.getImageId());
 
         return composterListView;
