@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-          db = new DbMain(this);
+        db = new DbMain(this);
 //        db.deleteAllTables();
 //        writeArticleToDB();
 
@@ -74,35 +74,32 @@ public class MainActivity extends AppCompatActivity {
 
                 int count = db.numberOfDataComposter();
 
-                if(count >= 1){
+                if (count >= 1) {
                     db.setComposterUserDetails();//Sets the composter name,id and zip - Chethan
                     Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
                     startActivity(composterListViewIntent);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
-                }
-                else{
-                    Intent composterregistration = new Intent(getApplicationContext(),ComposterRegistration.class);
+                } else {
+                    Intent composterregistration = new Intent(getApplicationContext(), ComposterRegistration.class);
                     startActivity(composterregistration);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
                 }
             }
         });
 
-        residentButton = (Button)findViewById(R.id.residentButton);
+        residentButton = (Button) findViewById(R.id.residentButton);
         residentButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 int count = db.numberOfDataResident();
-                String id =db.getResidentID();
-                Constants.residentId=id;
-                if(count >= 1){
+                String id = db.getResidentID();
+                Constants.residentId = id;
 
+                if (count >= 1) {
                     Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
                     startActivity(residentListViewIntent);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
-
-                }
-                else{
-                    Intent residentregistration = new Intent(getApplicationContext(),ResidentRegisteration.class);
+                } else {
+                    Intent residentregistration = new Intent(getApplicationContext(), ResidentRegisteration.class);
                     startActivity(residentregistration);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
                 }
@@ -144,25 +141,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickingReadArticleButton(){
+    public void onClickingReadArticleButton() {
 
         Intent readArticleIntent = new Intent(this, Article.class);
         startActivity(readArticleIntent);
         overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
     }
 
-    public void startAlarmService(){
+    public void startAlarmService() {
 
-        Date date  = new Date();
+        Date date = new Date();
         Calendar calendarAlarm = Calendar.getInstance();
         Calendar calendarNow = Calendar.getInstance();
         calendarNow.setTime(date);
         calendarAlarm.setTime(date);
-        calendarAlarm.set(Calendar.HOUR_OF_DAY,8);
+        calendarAlarm.set(Calendar.HOUR_OF_DAY, 8);
         calendarAlarm.set(Calendar.MINUTE, 0);
-        calendarAlarm.set(Calendar.SECOND,0);
-        if(calendarAlarm.before(calendarNow)){
-            calendarAlarm.add(Calendar.DATE,1);
+        calendarAlarm.set(Calendar.SECOND, 0);
+        if (calendarAlarm.before(calendarNow)) {
+            calendarAlarm.add(Calendar.DATE, 1);
         }
 
         Log.i("MainActivity", "Starting Alarm");
@@ -182,19 +179,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void selectItem(int position) {
 
-        if(position==0){
+        if (position == 0) {
 
-            Intent intent=new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
 
-        } else if(position==1){
+        } else if (position == 1) {
 
-            Intent intent=new Intent(this, Article.class);
+            Intent intent = new Intent(this, Article.class);
             startActivity(intent);
 
-        } else if(position == 2){
+        } else if (position == 2) {
 
-            Class<?> c = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ? MyPreferenceActivity.class:MyPreferenceActivity.class;
+            Class<?> c = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ? MyPreferenceActivity.class : MyPreferenceActivity.class;
             Intent i = new Intent(this, c);
             startActivityForResult(i, SHOW_PREFERENCES);
 

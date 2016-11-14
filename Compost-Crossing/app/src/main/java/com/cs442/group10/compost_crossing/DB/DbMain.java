@@ -188,7 +188,7 @@ public class DbMain extends SQLiteOpenHelper {
         while(res.isAfterLast() == false){
             Constants.composterId = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_PHONE));
             Constants.composterName = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_NAME));
-            Constants.composterZip = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_ZIPCODE));;
+            Constants.composterZip = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_ZIPCODE));
             break;
         }
     }

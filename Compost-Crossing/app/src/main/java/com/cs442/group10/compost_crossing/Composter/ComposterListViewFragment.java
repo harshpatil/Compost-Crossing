@@ -53,11 +53,10 @@ public class ComposterListViewFragment extends Fragment {
     List<AdDetail> compostAdDetailList = new ArrayList<>();
     Map<String, String> compostAdsMap = new HashMap<String,String>();
     Map<String, AdDetail> adDetailMap = new HashMap<String, AdDetail>();
-    int imageId=0;
+    int imageId = 0;
 
     public ComposterListViewFragment() {
     }
-
 
     public static ComposterListViewFragment newInstance(int columnCount) {
         ComposterListViewFragment fragment = new ComposterListViewFragment();
@@ -105,14 +104,14 @@ public class ComposterListViewFragment extends Fragment {
                                 Button residentAllButton = (Button) view.findViewById(R.id.btnAllResident);
 
                                 if(bundle.getBoolean("showNearby")){
-                                    String composterZip = String.valueOf(adDetailsMap.get("zipCode")).substring(0, 3);
+                                    String adDetailsZipCode = String.valueOf(adDetailsMap.get("zipCode")).substring(0, 3);
                                     DbMain dbMain = new DbMain(getActivity().getApplicationContext());
-                                    String currentUserZipCode = dbMain.getComposterZipCode();
+                                    String composterZipCode = dbMain.getComposterZipCode();
                                     if(residentAllButton.getVisibility() == View.GONE){
                                         residentAllButton.setVisibility(View.VISIBLE);
                                         residentNearByButton.setVisibility(View.GONE);
                                     }
-                                    condition = condition && (currentUserZipCode.startsWith(composterZip));
+                                    condition = condition && (composterZipCode.startsWith(adDetailsZipCode));
                                 } else {
                                     if(residentNearByButton.getVisibility() == View.GONE){
                                         residentNearByButton.setVisibility(View.VISIBLE);
@@ -120,7 +119,6 @@ public class ComposterListViewFragment extends Fragment {
                                     }
                                 }
                             }
-
 
                             if (condition) {
                                 String weight = adDetailsMap.get(WEIGHT_COL);
@@ -141,8 +139,6 @@ public class ComposterListViewFragment extends Fragment {
 
                                 compostAdDetailList.add(adDetail);
 
-    //                                if (sold.equals("false")) {
-                                //Below three lines moved from top
                                 ComposterListViewAdapter composterListViewAdapter = new ComposterListViewAdapter(getActivity().getApplicationContext(), R.layout.composter_item_list, getActivity(), compostAdDetailList);
                                 listView.setAdapter(composterListViewAdapter);
                                 composterListViewAdapter.notifyDataSetChanged();
@@ -157,7 +153,6 @@ public class ComposterListViewFragment extends Fragment {
                                         startActivity(compostDetailIntent);
                                     }
                                 });
-//                                }
                             }
                         }
                     }
