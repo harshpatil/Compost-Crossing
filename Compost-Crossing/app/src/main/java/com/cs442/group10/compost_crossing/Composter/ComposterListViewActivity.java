@@ -1,11 +1,13 @@
 package com.cs442.group10.compost_crossing.Composter;
 
+import android.Manifest;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -33,6 +35,7 @@ public class ComposterListViewActivity extends AppCompatActivity {
 
     private ListView mDrawerList;
     private String[] drawerList;
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private static final int SHOW_PREFERENCES = 0;
@@ -45,6 +48,8 @@ public class ComposterListViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_composter_list_view);
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_SEND_SMS);
 
         FragmentManager fragmentManager = getFragmentManager();
         ComposterListViewFragment fragment = (ComposterListViewFragment) fragmentManager.findFragmentById(R.id.composterListViewFragment);

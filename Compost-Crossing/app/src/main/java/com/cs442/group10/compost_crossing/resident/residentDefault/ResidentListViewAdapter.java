@@ -45,7 +45,7 @@ public class ResidentListViewAdapter extends ArrayAdapter<AdDetail>{
         ImageView adImage = (ImageView) convertView.findViewById(R.id.compostImageResidentItemPage);
 
         adTitle.setText("Title : "+ adDetail.getTitle());
-        adCost.setText("Cost : "+ adDetail.getCost());
+        adCost.setText("Cost : $"+ adDetail.getCost());
         adWeight.setText("Weight : "+ adDetail.getWeight()+" lbs");
         adImage.setImageResource(adDetail.getImageId());
 
