@@ -25,6 +25,10 @@ import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.SimpleShowcaseEventListener;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
+/**
+ * {@link ComposterListViewActivity} - List view activity for Composter Ad lookup.
+ * @author Chethan
+ */
 public class ComposterListViewActivity extends AppCompatActivity {
 
     private ListView mDrawerList;
@@ -112,7 +116,17 @@ public class ComposterListViewActivity extends AppCompatActivity {
     }
 
     public void onBackCompostListView(View view){
+        navigateToMainActivity();
+    }
+
+    @Override
+    public void onBackPressed() {
+        navigateToMainActivity();
+    }
+
+    private void navigateToMainActivity() {
         Intent intent = new Intent(this.getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -254,8 +268,5 @@ public class ComposterListViewActivity extends AppCompatActivity {
                 })
                 .build();
     }
-
-
-
 
 }

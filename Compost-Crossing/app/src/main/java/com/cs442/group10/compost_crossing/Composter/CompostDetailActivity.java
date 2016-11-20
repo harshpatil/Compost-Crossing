@@ -25,6 +25,10 @@ import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
 
+/**
+ * {@link CompostDetailActivity} - Activity to display compost ad details
+ * @author Chethan
+ */
 public class CompostDetailActivity extends FragmentActivity {
 
     private ListView mDrawerList;
@@ -45,14 +49,11 @@ public class CompostDetailActivity extends FragmentActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-
         int orientation = getResources().getConfiguration().orientation;
             if (orientation == Configuration.ORIENTATION_LANDSCAPE) {//For Landscape mode
-                //fragmentTransaction.replace(R.id.compostDetailViewFragment, new CompostDetailViewFragment()); // list view fragment
                 fragmentTransaction.replace(R.id.compostDetailViewContainer, CompostDetailViewFragment.newInstance(adDetail));
             } else {//for Portrait mode
                 fragmentTransaction.replace(R.id.compostDetailViewContainer, CompostDetailViewFragment.newInstance(adDetail));
-                //fragmentTransaction.addToBackStack(null);
             }
             fragmentTransaction.commit();
 
@@ -74,25 +75,39 @@ public class CompostDetailActivity extends FragmentActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_audiotrack, R.string.drawer_open, R.string.drawer_close) {
 
             public void onDrawerClosed(View view) {
-
                 invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
-
                 invalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
+    /**
+     * Method to navigate back to Composter Ad List screen.
+     * @param view
+     */
     public void navigateBackToComposterAdsListView(View view){
         onBackPressed();
     }
 
     public void backToAdPage(View view) {
-        Intent mainActivityIntent = new Intent(this, MainActivity.class);
-        startActivity(mainActivityIntent);
+        navigateToComposterListViewActivity();
+    }
+
+    @Override
+    public void onBackPressed() {
+        navigateToComposterListViewActivity();
+    }
+
+    /**
+     * Method to start Composter List View Activity.
+     */
+    private void navigateToComposterListViewActivity() {
+        Intent composterListViewIntent = new Intent(this, ComposterListViewActivity.class);
+        startActivity(composterListViewIntent);
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

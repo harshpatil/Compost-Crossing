@@ -28,4 +28,5 @@
     <string name="myAds">My Ads</string>
     <string name="seeNearByAds">SEE NEAR BY ADS</string>
     <string name="seeAllAds">SEE ALL ADS</string>
+    <string name="exitMessage">Please click BACK again to exit</string>
 </resources>

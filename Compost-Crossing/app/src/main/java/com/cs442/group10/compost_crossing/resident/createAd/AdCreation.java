@@ -116,6 +116,12 @@ public class AdCreation extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this.getApplicationContext(), ResidentListViewActivity.class);
+        startActivity(intent);
+    }
+
     protected void writeToDB(){
 
         String adId = UUID.randomUUID().toString();
