@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by cheth on 10/29/2016.
+ * {@link CompostDetailViewFragment} - Fragment to display particular Ad details.
+ * Created by Chethan on 10/29/2016.
  */
 
 public class CompostDetailViewFragment extends Fragment {
@@ -53,9 +55,13 @@ public class CompostDetailViewFragment extends Fragment {
     String composterAddressForMap;
     static AdDetail adDetail;
 
+    /**
+     * Method to return a new instance of {@link CompostDetailViewFragment}
+     * @param compostAdDetail
+     * @return Fragment
+     */
     public static CompostDetailViewFragment newInstance(AdDetail compostAdDetail){
         CompostDetailViewFragment compostDetailViewFragment =  new CompostDetailViewFragment();
-
         adDetail = compostAdDetail;
         return compostDetailViewFragment;
     }
@@ -110,6 +116,13 @@ public class CompostDetailViewFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Method to update database for resident table marking the sold Ads.
+     *
+     * @param database
+     * @param composterId
+     * @param composterName
+     */
     private void updateResidentTable(FirebaseDatabase database, String composterId, String composterName) {
         DatabaseReference residentAdIdRef = database.getReference(RESIDENT_REG_TABLE).child(adDetail.getOwnerPhone()).child("adlist").child(adDetail.getId());
         residentAdIdRef.child("sold").setValue("true");
@@ -117,12 +130,26 @@ public class CompostDetailViewFragment extends Fragment {
         residentAdIdRef.child("buyerName").setValue(composterName);
     }
 
+    /**
+     * Method to update database for composter table in order to display purchase history.
+     *
+     * @param database
+     * @param composterId
+     * @param composterName
+     */
     private void updateComposterTable(FirebaseDatabase database, String composterId, String composterName) {
         Map<String, String> compostAdMap = getCompostAdMap(composterId,composterName);
         DatabaseReference composterTableRef = database.getReference(COMPOSTER_REG_TABLE);
         composterTableRef.child(composterId).child("adList").child(adDetail.getId()).setValue(compostAdMap);
     }
 
+    /**
+     * Method to prepare Compost Ad Details data for a particular Ad.
+     *
+     * @param composterId
+     * @param composterName
+     * @return Map<String,String>
+     */
     private Map<String,String> getCompostAdMap(String composterId, String composterName){
         Map<String,String> compostAdMap = new HashMap<String,String>();
 
@@ -141,6 +168,9 @@ public class CompostDetailViewFragment extends Fragment {
         return compostAdMap;
     }
 
+    /**
+     * Asynchronous task for navigation to Maps and adding Linkify features to Contact.
+     */
     class GetMapsInfo extends AsyncTask<String, String, String>{
         ProgressDialog dialog = new ProgressDialog(getActivity());
 
@@ -180,10 +210,17 @@ public class CompostDetailViewFragment extends Fragment {
                 composterAddressTextView.setMovementMethod(LinkMovementMethod.getInstance());
             } catch (JSONException e) {
                 e.printStackTrace();
+                Log.i("Compost Crossing", "Error in Compost Detail View Fragment-->onPostExecute method");
             }
         }
     }
 
+    /**
+     * Method to get latitude and longitude of a particular address.
+     *
+     * @param address
+     * @return String - Latitude and Longitude
+     */
     private String getLatLng(String address){
         StringBuilder responseStringBuilder = new StringBuilder();
         String uri = "http://maps.google.com/maps/api/geocode/json?address=" +
@@ -209,9 +246,13 @@ public class CompostDetailViewFragment extends Fragment {
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
+            Log.i("Compost Crossing", "Error in Compost Detail View Fragment-->getLatLng method");
         } catch (IOException e) {
             e.printStackTrace();
+            Log.i("Compost Crossing", "Error in Compost Detail View Fragment-->getLatLng method");
         }
         return responseStringBuilder.toString();
     }
+
+
 }

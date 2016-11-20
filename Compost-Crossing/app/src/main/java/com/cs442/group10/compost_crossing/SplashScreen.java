@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 /**
- * Created by cheth on 11/6/2016.
+ * Created by Chethan on 11/6/2016.
  */
 public class SplashScreen extends Activity {
 

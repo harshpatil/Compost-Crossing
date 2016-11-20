@@ -28,6 +28,10 @@ import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.SimpleShowcaseEventListener;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
+/**
+ * {@link ResidentListViewActivity} - List View Activity for Resident Ad lookup.
+ * @author Chethan
+ */
 public class ResidentListViewActivity extends AppCompatActivity {
 
     Button history;
@@ -112,6 +116,20 @@ public class ResidentListViewActivity extends AppCompatActivity {
 
     public void back(View v){
         onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        navigateToMainActivity();
+    }
+
+    /**
+     * Method to navigate back to the Main Activity on back button click.
+     */
+    private void navigateToMainActivity() {
+        Intent intent = new Intent(this.getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     public void navigateToNewAdForm(View v){

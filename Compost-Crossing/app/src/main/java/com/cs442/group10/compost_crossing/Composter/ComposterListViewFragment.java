@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cs442.group10.compost_crossing.AdDetail;
+import com.cs442.group10.compost_crossing.Composter.historyPage.CompostorHistoryFragment;
 import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.R;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +30,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * {@link ComposterListViewFragment} - Fragment to show composter ad list.
+ * @author Chethan
+ */
 public class ComposterListViewFragment extends Fragment {
 
     private static final String AD_TABLE = "adDetails";
@@ -71,6 +75,7 @@ public class ComposterListViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_composter_list_view, container, false);
+        final ComposterListViewFragment composterListViewFragment = (ComposterListViewFragment) getFragmentManager().findFragmentById(R.id.composterListViewFragment);
         listView = (ListView) view.findViewById(R.id.composterItemListView);
         final TextView emptyTextView = (TextView) view.findViewById(R.id.emptyAdListForComposter);
         final RelativeLayout loadingLayout = (RelativeLayout) view.findViewById(R.id.loadingPanel);
@@ -82,6 +87,11 @@ public class ComposterListViewFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 loadingLayout.setVisibility(View.GONE);
+
+                if(compostAdDetailList.size() == 0){
+                    composterListViewFragment.listView.setBackgroundResource(R.drawable.empty_trash);
+                }
+
                 compostAdsMap = new HashMap<String, String>();
 
                 Map<String, Map<String,Object>> residentRegMap = (Map<String, Map<String,Object>>) dataSnapshot.getValue();
@@ -155,18 +165,27 @@ public class ComposterListViewFragment extends Fragment {
                                 });
                             }
                         }
+                        if(compostAdDetailList.size() > 0){
+                            composterListViewFragment.listView.setBackgroundResource(0);
+                        }
                     }
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.d("Firebase", "Error retrieving data in ComposterListView");
+                Log.i("Compost Crossing", "Firebase --> Error retrieving data in ComposterListView");
             }
         });
         return view;
     }
 
+    /**
+     * Method to set random image for compost ads.
+     * @param adDetail
+     * @param imageId
+     * @return int - Random image id.
+     */
     private int setRandomImageId(AdDetail adDetail, int imageId) {
         switch (imageId%10){
             case 0 : adDetail.setImageId(R.drawable.compost_1); break;
