@@ -187,6 +187,7 @@ public class ComposterListViewActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, ComposterAdsHistory.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
     }
 
     public void onClickNearByResidentButton(){

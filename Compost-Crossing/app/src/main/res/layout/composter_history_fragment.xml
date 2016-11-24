@@ -32,9 +32,9 @@
         <TextView
             android:id="@+id/AdTitleComposterHistoryPage"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:textColor="#F000"
-            android:paddingTop="4dp"
+            android:paddingTop="10dp"
             android:textSize="16dp"
             android:textAlignment="center"
             android:fontFamily="sans-serif-light"
@@ -46,7 +46,7 @@
         <TextView
             android:id="@+id/CompostWeightComposterHistoryPage"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:scrollbars="vertical"
             android:fadingEdge="vertical"
             android:paddingTop="4dp"
@@ -61,7 +61,7 @@
         <TextView
             android:id="@+id/AdCostComposterHistoryPage"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:textColor="#F000"
             android:textSize="16dp"
             android:scrollbars="vertical"

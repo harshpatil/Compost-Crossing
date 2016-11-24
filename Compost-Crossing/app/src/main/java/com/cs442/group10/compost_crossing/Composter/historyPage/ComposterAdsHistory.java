@@ -199,6 +199,7 @@ public class ComposterAdsHistory extends AppCompatActivity {
 
         Intent intent = new Intent(this, ComposterListViewActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

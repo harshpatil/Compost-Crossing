@@ -94,6 +94,7 @@ public class CompostDetailViewFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), ComposterListViewActivity.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
             }
         });
 
@@ -115,6 +116,7 @@ public class CompostDetailViewFragment extends Fragment {
                 Toast.makeText(getActivity().getBaseContext(), "Compost Accepted Successfully", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity().getApplicationContext(), ComposterListViewActivity.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
             }
         });
         return view;
