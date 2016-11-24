@@ -101,11 +101,11 @@ public class CompostDetailViewFragment extends Fragment {
                         Log.i("Compost Crossing", "Sms sent to " + adDetail.getOwnerPhone() + " Successfully!");
                     }
 
-                    Toast.makeText(getActivity().getBaseContext(), "Compost Accepted Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getBaseContext(), R.string.CompostAcceptedSuccessMsg, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity().getApplicationContext(), ComposterListViewActivity.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getContext(),"Select a Compost from the list",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.selectCompostMessage,Toast.LENGTH_SHORT).show();
                 }
             }
         });
