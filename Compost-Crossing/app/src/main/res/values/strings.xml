@@ -29,4 +29,6 @@
     <string name="seeNearByAds">SEE NEAR BY ADS</string>
     <string name="seeAllAds">SEE ALL ADS</string>
     <string name="exitMessage">Please click BACK again to exit</string>
+    <string name="selectCompostMessage">Select a Compost from the list</string>
+    <string name="CompostAcceptedSuccessMsg">Compost Accepted Successfully</string>
 </resources>

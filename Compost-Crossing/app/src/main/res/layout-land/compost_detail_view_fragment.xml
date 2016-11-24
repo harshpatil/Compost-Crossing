@@ -32,7 +32,7 @@
             android:id="@+id/composterImg"
             android:layout_width="400dp"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="2.2"
             android:layout_gravity="center"
             android:src="@drawable/compost_person"
             android:layout_marginTop="5dp" />
@@ -126,7 +126,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Weight : 20 pounds\nCost:$1/pound\nDrop:Available"
                     android:gravity="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </LinearLayout>
@@ -135,7 +134,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.7"
+            android:layout_weight="1.5"
             android:orientation="vertical">
 
             <Button
@@ -160,6 +159,7 @@
                 android:textColor="@color/buttonText"
                 android:background="@color/buttonBackground"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"

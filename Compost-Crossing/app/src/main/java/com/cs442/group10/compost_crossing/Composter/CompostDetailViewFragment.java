@@ -52,7 +52,8 @@ public class CompostDetailViewFragment extends Fragment {
     TextView composterAddressTextView;
     String composterAddress;
     String composterAddressForMap;
-    static AdDetail adDetail;
+    public static AdDetail adDetail;
+    View mainView;
 
     /**
      * Method to return a new instance of {@link CompostDetailViewFragment}
@@ -69,26 +70,13 @@ public class CompostDetailViewFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.compost_detail_view_fragment, container, false);
+        mainView = inflater.inflate(R.layout.compost_detail_view_fragment, container, false);
+        Button backButton = (Button) mainView.findViewById(R.id.btnBackComposterDetailView);
+        Button acceptCompostButton = (Button) mainView.findViewById(R.id.btnAcceptCompost);
 
-        TextView composterNameTextView = (TextView) view.findViewById(R.id.composterName);
-        TextView composterPhNoTextView = (TextView) view.findViewById(R.id.composterPhNo);
-        TextView compostDetailsTextView = (TextView) view.findViewById(R.id.compostDetails);
-        Button backButton = (Button) view.findViewById(R.id.btnBackComposterDetailView);
-        Button acceptCompostButton = (Button) view.findViewById(R.id.btnAcceptCompost);
-
-        composterNameTextView.setText(adDetail.getOwnerName());
-        composterAddressTextView = (TextView) view.findViewById(R.id.composterAddr);
-        composterAddressForMap = adDetail.getAddress() + "," + adDetail.getCity() + "," + adDetail.getState() + "-" + adDetail.getZipCode();//"3001 S King Drive,Illinois,Chicago-60616";
-        composterAddress = adDetail.getAddress() + ",\n" + adDetail.getCity() + ", " + adDetail.getState() + " - " + adDetail.getZipCode();
-
-        new GetMapsInfo().execute(composterAddressForMap.replaceAll(" ", "%20"));
-
-        composterPhNoTextView.setText(adDetail.getOwnerPhone());
-        Linkify.addLinks(composterPhNoTextView, Linkify.PHONE_NUMBERS);
-
-        compostDetailsTextView.setText(adDetail.getTitle() + "\nWeight: " + adDetail.getWeight() + " lbs\nCost: $" + adDetail.getCost());
-
+        if(adDetail != null) {
+            setCompostDetailViewValues();
+        }
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,25 +89,50 @@ public class CompostDetailViewFragment extends Fragment {
         acceptCompostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                if(adDetail != null) {
+                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                updateResidentTable(database, composterId, composterName);
-                updateComposterTable(database, composterId, composterName);
+                    updateResidentTable(database, composterId, composterName);
+                    updateComposterTable(database, composterId, composterName);
 
-                int res = getContext().checkCallingOrSelfPermission("android.permission.SEND_SMS");
-                if (res == PackageManager.PERMISSION_GRANTED) {
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(adDetail.getOwnerPhone(), null, "Yay!\n" + adDetail.getTitle() + " accepted by " + composterName, null, null);
-                    Log.i("Compost Crossing", "Sms sent to " + adDetail.getOwnerPhone() + " Successfully!");
+                    int res = getContext().checkCallingOrSelfPermission("android.permission.SEND_SMS");
+                    if (res == PackageManager.PERMISSION_GRANTED) {
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage(adDetail.getOwnerPhone(), null, "Yay!\n" + adDetail.getTitle() + " accepted by " + composterName, null, null);
+                        Log.i("Compost Crossing", "Sms sent to " + adDetail.getOwnerPhone() + " Successfully!");
+                    }
+
+                    Toast.makeText(getActivity().getBaseContext(), "Compost Accepted Successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity().getApplicationContext(), ComposterListViewActivity.class);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
+                } else {
+                    Toast.makeText(getContext(), R.string.selectCompostMessage,Toast.LENGTH_SHORT).show();
                 }
-
-                Toast.makeText(getActivity().getBaseContext(), "Compost Accepted Successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity().getApplicationContext(), ComposterListViewActivity.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
             }
         });
-        return view;
+        return mainView;
+    }
+
+    /**
+     * Method to set compost item clicked in compost detail screen.
+     */
+    public void setCompostDetailViewValues() {
+        TextView composterNameTextView = (TextView) mainView.findViewById(R.id.composterName);
+        TextView composterPhNoTextView = (TextView) mainView.findViewById(R.id.composterPhNo);
+        TextView compostDetailsTextView = (TextView) mainView.findViewById(R.id.compostDetails);
+
+        composterNameTextView.setText(adDetail.getOwnerName());
+        composterAddressTextView = (TextView) mainView.findViewById(R.id.composterAddr);
+        composterAddressForMap = adDetail.getAddress() + "," + adDetail.getCity() + "," + adDetail.getState() + "-" + adDetail.getZipCode();//"3001 S King Drive,Illinois,Chicago-60616";
+        composterAddress = adDetail.getAddress() + ",\n" + adDetail.getCity() + ", " + adDetail.getState() + " - " + adDetail.getZipCode();
+
+        new GetMapsInfo().execute(composterAddressForMap.replaceAll(" ", "%20"));
+
+        composterPhNoTextView.setText(adDetail.getOwnerPhone());
+        Linkify.addLinks(composterPhNoTextView, Linkify.PHONE_NUMBERS);
+
+        compostDetailsTextView.setText(adDetail.getTitle() + "\nWeight: " + adDetail.getWeight() + " lbs\nCost: $" + adDetail.getCost());
     }
 
     /**

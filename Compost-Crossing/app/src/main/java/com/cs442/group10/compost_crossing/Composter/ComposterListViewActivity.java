@@ -1,13 +1,14 @@
 package com.cs442.group10.compost_crossing.Composter;
 
 import android.Manifest;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -31,7 +32,7 @@ import com.github.amlcurran.showcaseview.targets.ViewTarget;
  * {@link ComposterListViewActivity} - List view activity for Composter Ad lookup.
  * @author Chethan
  */
-public class ComposterListViewActivity extends AppCompatActivity {
+public class ComposterListViewActivity extends FragmentActivity {
 
     private ListView mDrawerList;
     private String[] drawerList;
@@ -51,7 +52,7 @@ public class ComposterListViewActivity extends AppCompatActivity {
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_SEND_SMS);
 
-        FragmentManager fragmentManager = getFragmentManager();
+       FragmentManager fragmentManager = getSupportFragmentManager();
         ComposterListViewFragment fragment = (ComposterListViewFragment) fragmentManager.findFragmentById(R.id.composterListViewFragment);
         listView = fragment.listView;
 
