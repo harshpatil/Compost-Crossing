@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:layout_marginBottom="5dp"
+        android:weightSum="10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="match_parent"
+            android:text="@string/activeAds"
+            android:textStyle="bold"
+            android:background="@color/buttonBackground"
+            android:textColor="@color/buttonText"
+            android:gravity="center"
+            android:textSize="18dp"
+            />
+
+        <Button
+            android:id="@+id/btnComposterHistory"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="match_parent"
+            android:text="@string/composterHistory"
+            android:background="@color/buttonBackground"
+            android:textColor="@color/buttonText"
+            android:gravity="center"
+            android:textSize="14dp"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="100dp">
+
+        <ProgressBar
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/buttonBackground"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/composterItemListView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="8.5"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:id="@+id/emptyAdListForComposter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+        android:text="@string/noAds"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+
+        <Button
+            android:id="@+id/btnResidentNearBy"
+            android:layout_width="0dp"
+            android:layout_weight="10"
+            android:layout_height="match_parent"
+            android:background="@color/buttonBackground"
+            android:textColor="@color/buttonText"
+            android:text="@string/seeNearByAds"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <Button
+            android:id="@+id/btnAllResident"
+            android:layout_width="0dp"
+            android:layout_weight="10"
+            android:layout_height="match_parent"
+            android:background="@color/buttonBackground"
+            android:textColor="@color/buttonText"
+            android:text="@string/seeAllAds"
+            android:visibility="gone"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+    </LinearLayout>
+</LinearLayout>
