@@ -19,10 +19,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.cs442.group10.compost_crossing.Composter.composter_login;
 import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
+import com.cs442.group10.compost_crossing.resident.ResidentLogin;
 import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.cs442.group10.compost_crossing.newsArticle.MyAlarm;
 import com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity;
@@ -75,12 +77,18 @@ public class MainActivity extends AppCompatActivity {
 
                 int count = db.numberOfDataComposter();
 
-                if (count >= 1) {
+                if (count >= 1 && Constants.loginflag == 0) {
+                    db.setComposterUserDetails();//Sets the composter name,id and zip - Chethan
+                    Intent composterListViewIntent = new Intent(getBaseContext(), composter_login.class);
+                    startActivity(composterListViewIntent);
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
+                } else if (count >= 1 && Constants.loginflag == 1) {
                     db.setComposterUserDetails();//Sets the composter name,id and zip - Chethan
                     Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
                     startActivity(composterListViewIntent);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
-                } else {
+                }
+                else{
                     Intent composterregistration = new Intent(getApplicationContext(), ComposterRegistration.class);
                     startActivity(composterregistration);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
@@ -95,11 +103,17 @@ public class MainActivity extends AppCompatActivity {
                 String id = db.getResidentID();
                 Constants.residentId = id;
 
-                if (count >= 1) {
+                if (count >= 1&& Constants.loginflag == 0) {
+                    db.setComposterUserDetails();//Sets the composter name,id and zip - Chethan
+                    Intent composterListViewIntent = new Intent(getBaseContext(), ResidentLogin.class);
+                    startActivity(composterListViewIntent);
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
+                }else if(count >= 1&& Constants.loginflag == 1){
                     Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
                     startActivity(residentListViewIntent);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
-                } else {
+                }
+                else {
                     Intent residentregistration = new Intent(getApplicationContext(), ResidentRegisteration.class);
                     startActivity(residentregistration);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);

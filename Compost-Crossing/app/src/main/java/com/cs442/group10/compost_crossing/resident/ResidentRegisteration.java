@@ -24,6 +24,8 @@ public class ResidentRegisteration extends AppCompatActivity {
     public EditText state;
     public EditText zipcode;
     DbMain db;
+    public EditText username;
+    public EditText passcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +43,20 @@ public class ResidentRegisteration extends AppCompatActivity {
                 city = (EditText)findViewById(R.id.city);
                 state = (EditText)findViewById(R.id.state);
                 zipcode = (EditText)findViewById(R.id.zipcode);
+                username = (EditText)findViewById(R.id.username);
+                passcode = (EditText)findViewById(R.id.password);
                 if(name.getText().length() != 0 &&
                         phone.getText().length() != 0  &&
                         address.getText().length() != 0  &&
                         city.getText().length() != 0  &&
                         state.getText().length() != 0  &&
-                        zipcode.getText().length() != 0 ) {
-                    db.insertResident("", name.getText().toString(), phone.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), zipcode.getText().toString());
-                    writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
-
+                        zipcode.getText().length() != 0 &&
+                        username.getText().length() != 0  &&
+                        passcode.getText().length() != 0
+                )  {
+                    db.insertResident("", name.getText().toString(), phone.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), zipcode.getText().toString(),username.getText().toString(),passcode.getText().toString());
+                    writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(),username.getText().toString(),passcode.getText().toString());
+                    Constants.loginflag=1;
                     Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
                     startActivity(residentListViewIntent);
                 }
@@ -63,7 +70,7 @@ public class ResidentRegisteration extends AppCompatActivity {
 
     }
 
-    protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode){
+    protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode,String username, String passcode){
 
         String url ="residentRegisteration/"+ phone;
         final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference(url);
@@ -74,6 +81,8 @@ public class ResidentRegisteration extends AppCompatActivity {
         mDatabase.child("state").setValue(state);
         mDatabase.child("zipcode").setValue(zipcode);
         mDatabase.child("adlist").setValue(" ");
+        mDatabase.child("username").setValue(username);
+        mDatabase.child("passcode").setValue(passcode);
         mDatabase.push();
         Constants.residentId =phone.toString();
     }

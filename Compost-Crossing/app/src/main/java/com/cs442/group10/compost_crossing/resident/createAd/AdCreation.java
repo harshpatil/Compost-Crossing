@@ -88,7 +88,7 @@ public class AdCreation extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[8];
+        drawerList = new String[9];
         drawerList[0] = Constants.HOME;
         drawerList[1] = Constants.NEWS_ARTICLE;
         drawerList[2] = Constants.YOUR_ACTIVE_ADS;
@@ -97,6 +97,7 @@ public class AdCreation extends AppCompatActivity {
         drawerList[5] = Constants.NEARBY_COMPOSTERS;
         drawerList[6] = Constants.SETTINGS;
         drawerList[7] = Constants.BACK;
+        drawerList[8] = Constants.SIGNOUT;
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -217,6 +218,12 @@ public class AdCreation extends AppCompatActivity {
             Intent intent = new Intent(this, ResidentListViewActivity.class);
             startActivity(intent);
 
+        }
+        else if(position == 8){
+
+            Constants.loginflag=0;
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
 
     }

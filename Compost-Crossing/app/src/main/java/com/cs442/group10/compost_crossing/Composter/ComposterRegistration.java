@@ -21,6 +21,8 @@ public class ComposterRegistration extends AppCompatActivity {
     public EditText city;
     public EditText state;
     public EditText zipcode;
+    public EditText username;
+    public EditText passcode;
     DbMain db;
 
     @Override
@@ -39,15 +41,20 @@ public class ComposterRegistration extends AppCompatActivity {
                 city = (EditText)findViewById(R.id.city);
                 state = (EditText)findViewById(R.id.state);
                 zipcode = (EditText)findViewById(R.id.zipcode);
+                username = (EditText)findViewById(R.id.username);
+                passcode = (EditText)findViewById(R.id.password);
                 if(name.getText().length() != 0 &&
                         phone.getText().length() != 0  &&
                         address.getText().length() != 0  &&
                         city.getText().length() != 0  &&
                         state.getText().length() != 0  &&
-                        zipcode.getText().length() != 0 ) {
-                    db.insertComposter("", name.getText().toString(), phone.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), address.getText().toString());
-                    writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString());
-
+                        zipcode.getText().length() != 0 &&
+                        username.getText().length() != 0  &&
+                        passcode.getText().length() != 0
+                        ) {
+                    db.insertComposter("", name.getText().toString(), phone.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), address.getText().toString(),username.getText().toString(),passcode.getText().toString());
+                    writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(),username.getText().toString(),passcode.getText().toString());
+                    Constants.loginflag=1;
                     Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
                     startActivity(composterListViewIntent);
                 }
@@ -60,7 +67,7 @@ public class ComposterRegistration extends AppCompatActivity {
 
     }
 
-    protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode){
+    protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode ,String username, String passcode){
 
         String url ="composterRegisteration/"+ phone;
         final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference(url);
@@ -71,6 +78,8 @@ public class ComposterRegistration extends AppCompatActivity {
         mDatabase.child("state").setValue(state);
         mDatabase.child("zipcode").setValue(zipcode);
         mDatabase.child("adlist").setValue(" ");
+        mDatabase.child("username").setValue(username);
+        mDatabase.child("passcode").setValue(passcode);
         mDatabase.push();
         Constants.composterId = phone.toString();
         Constants.composterZip=zipcode.toString();

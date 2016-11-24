@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cs442.group10.compost_crossing">
 
-    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -29,19 +29,26 @@
         <activity android:name=".Composter.ComposterRegistration" />
         <activity
             android:name=".newsArticle.Article"
-            android:theme="@style/NoTitleTheme">
-        </activity>
+            android:theme="@style/NoTitleTheme" />
+
         <service android:name=".newsArticle.ArticleNotificationService" />
-        <receiver android:name=".newsArticle.MyAlarm" android:process=":remote" />
+
+        <receiver
+            android:name=".newsArticle.MyAlarm"
+            android:process=":remote" />
+
         <activity android:name=".resident.historyPage.ResidentAdsHistory" />
         <activity android:name=".resident.nearByComposter.NearByComposter" />
-        <activity android:name=".resident.createAd.AdCreation"></activity>
-        <activity android:name=".Composter.ComposterListViewActivity"></activity>
-        <activity android:name=".resident.ResidentRegisteration"></activity>
-        <activity android:name=".preferences.MyPreferenceActivity" android:theme="@style/PreferencesTheme"></activity>
-
+        <activity android:name=".resident.createAd.AdCreation" />
+        <activity android:name=".Composter.ComposterListViewActivity" />
+        <activity android:name=".resident.ResidentRegisteration" />
+        <activity
+            android:name=".preferences.MyPreferenceActivity"
+            android:theme="@style/PreferencesTheme" />
         <activity android:name=".Composter.historyPage.ComposterAdsHistory" />
         <activity android:name=".Composter.nearbyResident.NearByResident" />
+        <activity android:name=".Composter.composter_login" />
+        <activity android:name=".resident.ResidentLogin"></activity>
     </application>
 
 </manifest>
