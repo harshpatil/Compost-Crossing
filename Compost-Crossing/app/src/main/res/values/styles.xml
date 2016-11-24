@@ -14,7 +14,7 @@
     </style>
 
     <style name="PreferencesTheme">
-        <item name="android:background">@color/buttonBackground</item>
+        <item name="android:background">@color/cast_intro_overlay_background_color</item>
 
     </style>
 
@@ -42,6 +42,5 @@
     <style name="CustomText2" parent="TextAppearance.ShowcaseView.Detail.Light">
         <item name="android:textColor">#8affffff</item>
     </style>
-
 
 </resources>

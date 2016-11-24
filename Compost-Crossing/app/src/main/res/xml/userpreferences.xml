@@ -8,6 +8,7 @@
         android:title="Enable/Disable Notification"
         android:summary="Unselect checkbox to disable notification"
         android:defaultValue="true"
+        android:textColor="@color/cast_intro_overlay_background_color"
         />
 
   </PreferenceCategory>
