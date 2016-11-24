@@ -1,10 +1,12 @@
 package com.cs442.group10.compost_crossing.Composter;
 
-import android.app.Fragment;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cs442.group10.compost_crossing.AdDetail;
-import com.cs442.group10.compost_crossing.Composter.historyPage.CompostorHistoryFragment;
 import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.R;
 import com.google.firebase.database.DataSnapshot;
@@ -153,20 +154,30 @@ public class ComposterListViewFragment extends Fragment {
                                 listView.setAdapter(composterListViewAdapter);
                                 composterListViewAdapter.notifyDataSetChanged();
 
+                                final CompostDetailViewFragment detailViewFragment = (CompostDetailViewFragment) getFragmentManager().findFragmentById(R.id.compostDetailViewContainer);
                                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long itemId) {
-                                        Intent compostDetailIntent = new Intent(getActivity().getApplicationContext(), CompostDetailActivity.class);
-                                        Bundle compostAdBundle = new Bundle();
-                                        compostAdBundle.putSerializable("compostAd", compostAdDetailList.get(position));
-                                        compostDetailIntent.putExtras(compostAdBundle);
-                                        startActivity(compostDetailIntent);
+                                        if(getResources().getConfiguration().orientation != Configuration.ORIENTATION_PORTRAIT && detailViewFragment!= null){
+                                            detailViewFragment.adDetail = compostAdDetailList.get(position);
+                                            detailViewFragment.setCompostDetailViewValues();
+                                        } else {
+                                            Intent compostDetailIntent = new Intent(getActivity().getApplicationContext(), CompostDetailActivity.class);
+                                            Bundle compostAdBundle = new Bundle();
+                                            compostAdBundle.putSerializable("compostAd", compostAdDetailList.get(position));
+                                            compostDetailIntent.putExtras(compostAdBundle);
+                                            startActivity(compostDetailIntent);
+                                       }
                                     }
                                 });
                             }
                         }
                         if(compostAdDetailList.size() > 0){
+                            CompostDetailViewFragment detailViewFragment = (CompostDetailViewFragment) getFragmentManager().findFragmentById(R.id.compostDetailViewContainer);
                             composterListViewFragment.listView.setBackgroundResource(0);
+                            if(getResources().getConfiguration().orientation != Configuration.ORIENTATION_PORTRAIT && detailViewFragment != null){
+                                detailViewFragment.adDetail = compostAdDetailList.get(0);
+                            }
                         }
                     }
                 }

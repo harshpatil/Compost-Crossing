@@ -126,7 +126,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Weight : 20 pounds\nCost:$1/pound\nDrop:Available"
                     android:gravity="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </LinearLayout>
