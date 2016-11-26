@@ -3,11 +3,12 @@ package com.cs442.group10.compost_crossing.Composter.nearbyResident;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,9 +24,6 @@ import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
-import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
-import com.cs442.group10.compost_crossing.resident.historyPage.ResidentAdsHistory;
-import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -170,7 +168,7 @@ public class NearByResident extends AppCompatActivity {
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_audiotrack, R.string.drawer_open, R.string.drawer_close) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.drawer, R.string.drawer_open, R.string.drawer_close) {
 
             public void onDrawerClosed(View view) {
 
@@ -183,6 +181,17 @@ public class NearByResident extends AppCompatActivity {
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onClickingBackButton(){

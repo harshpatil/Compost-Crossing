@@ -7,10 +7,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,7 +32,7 @@ import com.github.amlcurran.showcaseview.targets.ViewTarget;
  * {@link ComposterListViewActivity} - List view activity for Composter Ad lookup.
  * @author Chethan
  */
-public class ComposterListViewActivity extends FragmentActivity {
+public class ComposterListViewActivity extends AppCompatActivity {
 
     private ListView mDrawerList;
     private String[] drawerList;
@@ -97,19 +97,20 @@ public class ComposterListViewActivity extends FragmentActivity {
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_audiotrack, R.string.drawer_open, R.string.drawer_close) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.drawer, R.string.drawer_open, R.string.drawer_close) {
 
             public void onDrawerClosed(View view) {
-
                 invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
-
                 invalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
 
         SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity", MODE_PRIVATE);
         boolean isFirstRun = sharedPreferences.getBoolean("firstrun", true);
@@ -119,6 +120,14 @@ public class ComposterListViewActivity extends FragmentActivity {
             showFirstShowCase();
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onBackCompostListView(View view){

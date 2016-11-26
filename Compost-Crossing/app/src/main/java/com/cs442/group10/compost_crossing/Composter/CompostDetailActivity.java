@@ -4,17 +4,17 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.text.util.Linkify;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.cs442.group10.compost_crossing.AdDetail;
 import com.cs442.group10.compost_crossing.Composter.historyPage.ComposterAdsHistory;
@@ -29,7 +29,7 @@ import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
  * {@link CompostDetailActivity} - Activity to display compost ad details
  * @author Chethan
  */
-public class CompostDetailActivity extends FragmentActivity {
+public class CompostDetailActivity extends AppCompatActivity {
 
     private ListView mDrawerList;
     private String[] drawerList;
@@ -72,7 +72,7 @@ public class CompostDetailActivity extends FragmentActivity {
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_audiotrack, R.string.drawer_open, R.string.drawer_close) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.drawer, R.string.drawer_open, R.string.drawer_close) {
 
             public void onDrawerClosed(View view) {
                 invalidateOptionsMenu();
@@ -82,7 +82,19 @@ public class CompostDetailActivity extends FragmentActivity {
                 invalidateOptionsMenu();
             }
         };
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**

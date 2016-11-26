@@ -11,6 +11,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -19,15 +20,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity;
+import com.cs442.group10.compost_crossing.Composter.ComposterRegistration;
 import com.cs442.group10.compost_crossing.DB.DbMain;
 import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
-import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
-import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.cs442.group10.compost_crossing.newsArticle.MyAlarm;
-import com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity;
-import com.cs442.group10.compost_crossing.Composter.ComposterRegistration;
+import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
 import com.cs442.group10.compost_crossing.resident.ResidentRegisteration;
+import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.SimpleShowcaseEventListener;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
@@ -119,19 +120,22 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_audiotrack, R.string.drawer_open, R.string.drawer_close) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.drawer, R.string.drawer_open, R.string.drawer_close) {
 
             public void onDrawerClosed(View view) {
-
                 invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
-
                 invalidateOptionsMenu();
             }
+
         };
+
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
 
         SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.MainActivity", MODE_PRIVATE);
         boolean isFirstRun = sharedPreferences.getBoolean("firstrun", true);
@@ -140,6 +144,14 @@ public class MainActivity extends AppCompatActivity {
             sharedPreferences.edit().putBoolean("firstrun", false).commit();
             showFirstShowCase();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onClickingReadArticleButton() {

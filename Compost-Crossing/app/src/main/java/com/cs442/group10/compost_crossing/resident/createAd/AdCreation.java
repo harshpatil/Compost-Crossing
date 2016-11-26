@@ -1,12 +1,14 @@
 package com.cs442.group10.compost_crossing.resident.createAd;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -104,16 +106,28 @@ public class AdCreation extends AppCompatActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_audiotrack, R.string.drawer_open, R.string.drawer_close) {
 
             public void onDrawerClosed(View view) {
-
                 invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
-
                 invalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.MainActivity", MODE_PRIVATE);
+        boolean isFirstRun = sharedPreferences.getBoolean("firstrun", true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
