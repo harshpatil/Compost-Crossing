@@ -82,6 +82,7 @@ public class CompostDetailViewFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), ComposterListViewActivity.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
             }
         });
 
@@ -101,9 +102,10 @@ public class CompostDetailViewFragment extends Fragment {
                         Log.i("Compost Crossing", "Sms sent to " + adDetail.getOwnerPhone() + " Successfully!");
                     }
 
-                    Toast.makeText(getActivity().getBaseContext(), R.string.CompostAcceptedSuccessMsg, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getBaseContext(), "Compost Accepted Successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity().getApplicationContext(), ComposterListViewActivity.class);
                     startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
                 } else {
                     Toast.makeText(getContext(), R.string.selectCompostMessage,Toast.LENGTH_SHORT).show();
                 }
@@ -112,6 +114,9 @@ public class CompostDetailViewFragment extends Fragment {
         return mainView;
     }
 
+    /**
+     * Method to set compost item clicked in compost detail screen.
+     */
     public void setCompostDetailViewValues() {
         TextView composterNameTextView = (TextView) mainView.findViewById(R.id.composterName);
         TextView composterPhNoTextView = (TextView) mainView.findViewById(R.id.composterPhNo);

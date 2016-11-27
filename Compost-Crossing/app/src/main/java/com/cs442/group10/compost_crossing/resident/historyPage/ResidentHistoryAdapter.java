@@ -51,7 +51,7 @@ public class ResidentHistoryAdapter extends ArrayAdapter<Ads> {
 
         adTitle.setText("Title : "+ ads.getTitle());
         boughtBy.setText("Bought By : "+ String.valueOf(ads.getBuyerName()));
-        compostWeight.setText("Weight : "+ String.valueOf(ads.getWeight()) + " pounds");
+        compostWeight.setText("Weight : "+ String.valueOf(ads.getWeight()) + " lbs");
         compostPrice.setText("Cost : $"+ String.valueOf(ads.getCost()));
         imageView.setImageResource(ads.getImageId());
 

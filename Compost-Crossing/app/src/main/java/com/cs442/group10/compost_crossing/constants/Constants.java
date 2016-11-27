@@ -24,4 +24,6 @@ public class Constants {
     public static String residentId = "";
     public static String residentName = "";
     public static String composterZip="";
+    public static int loginflag=0;
+    public static String SIGNOUT = "Logout";
 }

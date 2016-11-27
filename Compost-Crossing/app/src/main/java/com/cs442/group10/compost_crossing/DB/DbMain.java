@@ -28,6 +28,8 @@ public class DbMain extends SQLiteOpenHelper {
     public static final String COMPOST_REGISTER_COLUMN_STATE = "state";
     public static final String COMPOST_REGISTER_COLUMN_ZIPCODE = "zipcode";
     public static final String COMPOST_REGISTER_COLUMN_ADDRESS = "address";
+    public static final String COMPOST_REGISTER_COLUMN_username = "username";
+    public static final String COMPOST_REGISTER_COLUMN_passcode = "passcode";
 
     public DbMain(Context context)
     {
@@ -38,12 +40,12 @@ public class DbMain extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table composter_register " +
-                        "(id integer primary key autoincrement, tstamp text, name text, phone text,city text,state text,zipcode text,address text)"
+                        "(id integer primary key autoincrement, tstamp text, name text, phone text,city text,state text,zipcode text,address text,username text, passcode text)"
         );
 
         db.execSQL(
                 "create table resident_register " +
-                        "(id integer primary key autoincrement, tstamp text, name text, phone text,city text,state text,zipcode text,address text)"
+                        "(id integer primary key autoincrement, tstamp text, name text, phone text,city text,state text,zipcode text,address text,username text, passcode text)"
         );
     }
 
@@ -54,7 +56,7 @@ public class DbMain extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertComposter (String tstamp, String name, String phone, String city,String state, String zipcode,String address)
+    public boolean insertComposter (String tstamp, String name, String phone, String city,String state, String zipcode,String address,String username, String passcode)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -65,12 +67,14 @@ public class DbMain extends SQLiteOpenHelper {
         contentValues.put("state", state);
         contentValues.put("zipcode", zipcode);
         contentValues.put("address", address);
+        contentValues.put("username", username);
+        contentValues.put("passcode", passcode);
         db.insert("composter_register", null, contentValues);
         db.close();
         return true;
     }
 
-    public boolean insertResident (String tstamp, String name, String phone, String city, String state, String zipcode, String address)
+    public boolean insertResident (String tstamp, String name, String phone, String city, String state, String zipcode, String address,String username, String passcode)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -81,6 +85,8 @@ public class DbMain extends SQLiteOpenHelper {
         contentValues.put("city", city);
         contentValues.put("state", state);
         contentValues.put("address", address);
+        contentValues.put("username", username);
+        contentValues.put("passcode", passcode);
         db.insert("resident_register", null, contentValues);
         db.close();
         return true;
@@ -96,6 +102,38 @@ public class DbMain extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         int ordCount = (int) DatabaseUtils.queryNumEntries(db, RESIDENT_REGISTER_TABLE_NAME);
         return ordCount;
+    }
+
+    public String getComposterUserNameAndPassword(String username){
+
+        String query ="select passcode from composter_register";
+        String passcode = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor resultSet =  db.rawQuery( query, null);
+        resultSet.moveToLast();
+
+        while(resultSet.isBeforeFirst() == false){
+
+            passcode = resultSet.getString(resultSet.getColumnIndex("passcode"));
+            break;
+        }
+        return passcode;
+    }
+
+    public String getResidentUserNameAndPassword(String username){
+
+        String query ="select passcode from resident_register";
+        String passcode = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor resultSet =  db.rawQuery( query, null);
+        resultSet.moveToLast();
+
+        while(resultSet.isBeforeFirst() == false){
+
+            passcode = resultSet.getString(resultSet.getColumnIndex("passcode"));
+            break;
+        }
+        return passcode;
     }
 
     public Integer deleteAllTables()

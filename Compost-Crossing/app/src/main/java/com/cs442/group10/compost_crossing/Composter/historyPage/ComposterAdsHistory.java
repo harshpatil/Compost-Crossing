@@ -169,7 +169,7 @@ public class ComposterAdsHistory extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[7];
+        drawerList = new String[8];
         drawerList[0] = Constants.HOME;
         drawerList[1] = Constants.NEWS_ARTICLE;
         drawerList[2] = Constants.COMPOSTER_VIEW_ADS;
@@ -177,6 +177,7 @@ public class ComposterAdsHistory extends AppCompatActivity {
         drawerList[4] = Constants.YOUR_PURCHASE_HISTORY;
         drawerList[5] = Constants.SETTINGS;
         drawerList[6] = Constants.BACK;
+        drawerList[7] = Constants.SIGNOUT;
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -211,6 +212,7 @@ public class ComposterAdsHistory extends AppCompatActivity {
 
         Intent intent = new Intent(this, ComposterListViewActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -256,6 +258,13 @@ public class ComposterAdsHistory extends AppCompatActivity {
         } else if(position == 6){
 
             Intent intent = new Intent(this, ComposterListViewActivity.class);
+            startActivity(intent);
+
+        }
+        else if(position == 7){
+
+            Constants.loginflag=0;
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
 
         }
