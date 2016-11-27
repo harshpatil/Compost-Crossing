@@ -108,7 +108,7 @@
             android:layout_below="@+id/phoneNumber"/>
 
         <EditText
-            android:inputType="text"
+            android:inputType="number"
             android:id="@+id/zipcode"
             android:layout_width="match_parent"
             android:layout_height="0dp"

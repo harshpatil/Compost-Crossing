@@ -120,6 +120,38 @@ public class DbMain extends SQLiteOpenHelper {
         return passcode;
     }
 
+    public String getComposterUserName(){
+
+        String query ="select username from composter_register";
+        String username = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor resultSet =  db.rawQuery( query, null);
+        resultSet.moveToLast();
+
+        while(resultSet.isBeforeFirst() == false){
+
+            username = resultSet.getString(resultSet.getColumnIndex("username"));
+            break;
+        }
+        return username;
+    }
+
+    public String getResidentUserName(){
+
+        String query ="select username from resident_register";
+        String username = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor resultSet =  db.rawQuery( query, null);
+        resultSet.moveToLast();
+
+        while(resultSet.isBeforeFirst() == false){
+
+            username = resultSet.getString(resultSet.getColumnIndex("username"));
+            break;
+        }
+        return username;
+    }
+
     public String getResidentUserNameAndPassword(String username){
 
         String query ="select passcode from resident_register";
