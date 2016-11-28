@@ -192,6 +192,9 @@ public class ResidentAdsHistory extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Method to show Resident Ad List on click of back button.
+     */
     public void onClickingBackButton(){
 
         Intent intent = new Intent(this, ResidentListViewActivity.class);
@@ -199,6 +202,9 @@ public class ResidentAdsHistory extends AppCompatActivity {
         overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
     }
 
+    /**
+     * Item Click Listener to navigate to specific screen.
+     */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -206,6 +212,10 @@ public class ResidentAdsHistory extends AppCompatActivity {
         }
     }
 
+    /**
+     * Show Activity based on item clicked in the drawer
+     * @param position
+     */
     private void selectItem(int position) {
 
         if(position==0){

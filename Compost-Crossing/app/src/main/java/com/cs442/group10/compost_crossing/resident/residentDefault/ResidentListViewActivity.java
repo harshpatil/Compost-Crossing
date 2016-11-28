@@ -143,6 +143,9 @@ public class ResidentListViewActivity extends AppCompatActivity {
     public void navigateToNewAdForm(View v){
     }
 
+    /**
+     * Method to show history orders that was purchased.
+     */
     public void onClickHistoryButton(){
 
         Intent intent = new Intent(this, ResidentAdsHistory.class);
@@ -150,6 +153,9 @@ public class ResidentListViewActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
     }
 
+    /**
+     * Method to show Near by Composters on click of NearBy Composter button.
+     */
     public void onClickNearByComposterButton(){
 
         Intent intent = new Intent(this, NearByComposter.class);
@@ -157,6 +163,9 @@ public class ResidentListViewActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
     }
 
+    /**
+     * Method to show New Ad screen on click of Post New Ad button.
+     */
     public void onClickingPostNewAd(){
 
         Intent intent = new Intent(this, AdCreation.class);
@@ -164,6 +173,9 @@ public class ResidentListViewActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
     }
 
+    /**
+     * Item Click Listener to navigate to specific screen.
+     */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -171,6 +183,10 @@ public class ResidentListViewActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Show Activity based on item clicked in the drawer
+     * @param position
+     */
     private void selectItem(int position) {
 
         if(position==0){

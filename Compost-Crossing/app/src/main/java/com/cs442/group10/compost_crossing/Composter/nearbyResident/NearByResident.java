@@ -194,12 +194,17 @@ public class NearByResident extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Method to show Compost List View screen on click of back button in Near by Resident screen
+     */
     public void onClickingBackButton(){
-
         Intent intent = new Intent(this, ComposterListViewActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Item Click Listener to navigate to specific screen.
+     */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -207,6 +212,10 @@ public class NearByResident extends AppCompatActivity {
         }
     }
 
+    /**
+     * Show Activity based on item clicked in the drawer
+     * @param position
+     */
     private void selectItem(int position) {
 
         if(position==0){

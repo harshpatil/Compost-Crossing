@@ -272,6 +272,4 @@ public class CompostDetailViewFragment extends Fragment {
         }
         return responseStringBuilder.toString();
     }
-
-
 }

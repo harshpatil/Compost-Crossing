@@ -125,6 +125,12 @@ public class ResidentListViewFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Method to set random image for the resident ads.
+     * @param adDetail
+     * @param imageId
+     * @return
+     */
     private int setRandomImageId(AdDetail adDetail, int imageId) {
         switch (imageId%10){
             case 0 : adDetail.setImageId(R.drawable.compost_1); break;

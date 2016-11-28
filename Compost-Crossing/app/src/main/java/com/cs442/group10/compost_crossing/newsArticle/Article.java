@@ -57,13 +57,6 @@ public class Article extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
-//        WriteArticleToDB writeArticleToDB = new WriteArticleToDB();
-//        try{
-//            writeArticleToDB.writeToDb();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.news_article);

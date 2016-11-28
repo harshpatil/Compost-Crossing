@@ -106,10 +106,6 @@ public class CompostDetailActivity extends AppCompatActivity {
         onBackPressed();
     }
 
-    public void backToAdPage(View view) {
-        navigateToComposterListViewActivity();
-    }
-
     @Override
     public void onBackPressed() {
         navigateToComposterListViewActivity();
@@ -123,6 +119,9 @@ public class CompostDetailActivity extends AppCompatActivity {
         startActivity(composterListViewIntent);
     }
 
+    /**
+     * Item Click Listener to navigate to specific screen.
+     */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -130,6 +129,10 @@ public class CompostDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Show Activity based on item clicked in the drawer
+     * @param position
+     */
     private void selectItem(int position) {
 
         if(position==0){
@@ -177,5 +180,4 @@ public class CompostDetailActivity extends AppCompatActivity {
 
         }
     }
-
 }

@@ -48,6 +48,6 @@ public class composter_login extends AppCompatActivity {
                 }
             }
 
-            });
+        });
     }
 }
