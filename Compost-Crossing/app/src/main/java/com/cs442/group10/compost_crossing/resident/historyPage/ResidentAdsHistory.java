@@ -86,7 +86,7 @@ public class ResidentAdsHistory extends AppCompatActivity {
 
                 loadingLayout.setVisibility(View.GONE);
 
-                if(dataSnapshot.getValue() != null && dataSnapshot.getValue() != " " && !dataSnapshot.getValue().getClass().equals(String.class)) {
+                if(residentHistoryFragment.isVisible() && dataSnapshot.getValue() != null && dataSnapshot.getValue() != " " && !dataSnapshot.getValue().getClass().equals(String.class)) {
 
                     Map<String, Map<String,String>> compostInfoMap = (Map<String, Map<String,String>>) dataSnapshot.getValue();
 
