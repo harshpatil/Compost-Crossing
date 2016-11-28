@@ -217,7 +217,7 @@ public class ResidentListViewActivity extends AppCompatActivity {
         }
         else if(position == 8){
 
-            Constants.loginflag=0;
+            Constants.loginflagforresident=0;
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
 

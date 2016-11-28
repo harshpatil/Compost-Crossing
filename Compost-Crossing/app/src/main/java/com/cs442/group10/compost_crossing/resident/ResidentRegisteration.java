@@ -56,7 +56,7 @@ public class ResidentRegisteration extends AppCompatActivity {
                 )  {
                     db.insertResident("", name.getText().toString(), phone.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), zipcode.getText().toString(),username.getText().toString(),passcode.getText().toString());
                     writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(),username.getText().toString(),passcode.getText().toString());
-                    Constants.loginflag=1;
+                    Constants.loginflagforresident=1;
                     Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
                     startActivity(residentListViewIntent);
                 }

@@ -37,7 +37,7 @@ public class ResidentLogin extends AppCompatActivity {
                     String dbpasscode = db.getResidentUserNameAndPassword(username.getText().toString());
                     String userid = db.getResidentUserName();
                     if(dbpasscode.equals(passcode.getText().toString())&& userid.equals(username.getText().toString())){
-                        Constants.loginflag=1;
+                        Constants.loginflagforresident=1;
                         db.setComposterUserDetails();//Sets the composter name,id and zip - Chethan
                         Intent composterListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
                         startActivity(composterListViewIntent);
