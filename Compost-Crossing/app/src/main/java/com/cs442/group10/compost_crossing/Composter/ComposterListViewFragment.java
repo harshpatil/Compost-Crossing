@@ -133,6 +133,7 @@ public class ComposterListViewFragment extends Fragment {
                                     }
                                 }
 
+                                //condition to show near by resident ads
                                 if (condition) {
                                     String weight = adDetailsMap.get(WEIGHT_COL);
                                     String title = adDetailsMap.get(TITLE_COL);

@@ -131,10 +131,6 @@ public class ComposterListViewActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onBackCompostListView(View view){
-        navigateToMainActivity();
-    }
-
     @Override
     public void onBackPressed() {
         navigateToMainActivity();
@@ -146,6 +142,9 @@ public class ComposterListViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Item Click Listener to navigate to specific screen.
+     */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -153,6 +152,10 @@ public class ComposterListViewActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Show Activity based on item clicked in the drawer
+     * @param position
+     */
     private void selectItem(int position) {
 
         if(position==0){
@@ -201,6 +204,9 @@ public class ComposterListViewActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to show Ad History on click of History button.
+     */
     public void onClickHistoryButton(){
 
         Intent intent = new Intent(this, ComposterAdsHistory.class);
@@ -208,6 +214,9 @@ public class ComposterListViewActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
     }
 
+    /**
+     * Method to Filter Near by Resident Ads to the Composter.
+     */
     public void onClickNearByResidentButton(){
 
         Intent intent = new Intent(this, ComposterListViewActivity.class);
@@ -215,6 +224,9 @@ public class ComposterListViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Method to show all the Resident Ads to the Composter.
+     */
     public void onClickAllResidentButton(){
         Intent intent = new Intent(this, ComposterListViewActivity.class);
         startActivity(intent);

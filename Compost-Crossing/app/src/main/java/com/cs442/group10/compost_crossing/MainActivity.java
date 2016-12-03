@@ -104,12 +104,12 @@ public class MainActivity extends AppCompatActivity {
                 String id = db.getResidentID();
                 Constants.residentId = id;
 
-                if (count >= 1&& Constants.loginflag == 0) {
+                if (count >= 1&& Constants.loginflagforresident == 0) {
                     db.setComposterUserDetails();//Sets the composter name,id and zip - Chethan
                     Intent composterListViewIntent = new Intent(getBaseContext(), ResidentLogin.class);
                     startActivity(composterListViewIntent);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
-                }else if(count >= 1&& Constants.loginflag == 1){
+                }else if(count >= 1&& Constants.loginflagforresident == 1){
                     Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
                     startActivity(residentListViewIntent);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
@@ -168,6 +168,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Method to show Compost article screen.
+     */
     public void onClickingReadArticleButton() {
 
         Intent readArticleIntent = new Intent(this, Article.class);
@@ -197,6 +200,9 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendarAlarm.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
     }
 
+    /**
+     * Item Click Listener to navigate to specific screen.
+     */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -204,6 +210,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Show Activity based on item clicked in the drawer
+     * @param position
+     */
     private void selectItem(int position) {
 
         if (position == 0) {

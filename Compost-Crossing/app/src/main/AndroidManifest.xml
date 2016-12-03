@@ -28,8 +28,8 @@
         <activity android:name=".Composter.CompostDetailActivity" />
         <activity android:name=".Composter.ComposterRegistration" />
         <activity
-            android:name=".newsArticle.Article"
-            android:theme="@style/NoTitleTheme" />
+            android:name=".newsArticle.Article" />
+            <!--android:theme="@style/NoTitleTheme" />-->
 
         <service android:name=".newsArticle.ArticleNotificationService" />
 

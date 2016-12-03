@@ -137,6 +137,9 @@ public class AdCreation extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Method to write Ad details to database.
+     */
     protected void writeToDB(){
 
         String adId = UUID.randomUUID().toString();
@@ -175,13 +178,9 @@ public class AdCreation extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickingBackButton(){
-
-        Intent intent = new Intent(this, ResidentListViewActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
-    }
-
+    /**
+     * Item Click Listener to navigate to specific screen.
+     */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -189,6 +188,10 @@ public class AdCreation extends AppCompatActivity {
         }
     }
 
+    /**
+     * Show Activity based on item clicked in the drawer
+     * @param position
+     */
     private void selectItem(int position) {
 
         if(position==0){
@@ -235,7 +238,7 @@ public class AdCreation extends AppCompatActivity {
         }
         else if(position == 8){
 
-            Constants.loginflag=0;
+            Constants.loginflagforresident=0;
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }

@@ -56,6 +56,19 @@ public class DbMain extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     * Method to write composter user profile data to local database.
+     * @param tstamp
+     * @param name
+     * @param phone
+     * @param city
+     * @param state
+     * @param zipcode
+     * @param address
+     * @param username
+     * @param passcode
+     * @return
+     */
     public boolean insertComposter (String tstamp, String name, String phone, String city,String state, String zipcode,String address,String username, String passcode)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -74,6 +87,19 @@ public class DbMain extends SQLiteOpenHelper {
         return true;
     }
 
+    /**
+     * Method to write resident user profile data to local database.
+     * @param tstamp
+     * @param name
+     * @param phone
+     * @param city
+     * @param state
+     * @param zipcode
+     * @param address
+     * @param username
+     * @param passcode
+     * @return
+     */
     public boolean insertResident (String tstamp, String name, String phone, String city, String state, String zipcode, String address,String username, String passcode)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -92,18 +118,31 @@ public class DbMain extends SQLiteOpenHelper {
         return true;
     }
 
+    /**
+     * Method that gives the count of number of entries in Composter Registration table.
+     * @return int
+     */
     public int numberOfDataComposter(){
         SQLiteDatabase db = this.getReadableDatabase();
         int ordCount = (int) DatabaseUtils.queryNumEntries(db, COMPOST_REGISTER_TABLE_NAME);
         return ordCount;
     }
 
+    /**
+     * Method that gives the count of number of entries in Resident Registration table.
+     * @return int
+     */
     public int numberOfDataResident(){
         SQLiteDatabase db = this.getReadableDatabase();
         int ordCount = (int) DatabaseUtils.queryNumEntries(db, RESIDENT_REGISTER_TABLE_NAME);
         return ordCount;
     }
 
+    /**
+     * Method to get composter password from local database.
+     * @param username
+     * @return String
+     */
     public String getComposterUserNameAndPassword(String username){
 
         String query ="select passcode from composter_register";
@@ -120,6 +159,51 @@ public class DbMain extends SQLiteOpenHelper {
         return passcode;
     }
 
+    /**
+     * Method to get composter username from local database
+     * @return String
+     */
+    public String getComposterUserName(){
+
+        String query ="select username from composter_register";
+        String username = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor resultSet =  db.rawQuery( query, null);
+        resultSet.moveToLast();
+
+        while(resultSet.isBeforeFirst() == false){
+
+            username = resultSet.getString(resultSet.getColumnIndex("username"));
+            break;
+        }
+        return username;
+    }
+
+    /**
+     * Method to get resident username from local database.
+     * @return String
+     */
+    public String getResidentUserName(){
+
+        String query ="select username from resident_register";
+        String username = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor resultSet =  db.rawQuery( query, null);
+        resultSet.moveToLast();
+
+        while(resultSet.isBeforeFirst() == false){
+
+            username = resultSet.getString(resultSet.getColumnIndex("username"));
+            break;
+        }
+        return username;
+    }
+
+    /**
+     * Method to get resident password from local database.
+     * @param username
+     * @return String
+     */
     public String getResidentUserNameAndPassword(String username){
 
         String query ="select passcode from resident_register";
@@ -136,41 +220,10 @@ public class DbMain extends SQLiteOpenHelper {
         return passcode;
     }
 
-    public Integer deleteAllTables()
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("resident_register",null,null);
-//        db.delete("composter_register",null,null);
-        return 0;
-    }
-
-    public ArrayList<Spanned> getAllOrders()
-    {
-        ArrayList<Spanned> array_list = new ArrayList<Spanned>();
-        String retString = "";
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from composter_register", null );
-        res.moveToFirst();
-
-        while(res.isAfterLast() == false){
-
-            String id  = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_ID));
-            String time = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_NAME));
-            String items = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_PHONE));
-            String cost = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_STATE));
-
-            String htmlString = "<br/><font color=\"#4153B6\"><b><i>Transaction Id: </font></i></b>" + id
-                    + "<br/><font color=\"#4153B6\"><b><i>Dish(es): </font></i></b>" + items
-                    + "<br/><font color=\"#4153B6\"><b><i>Total: </font></i></b>" + "$" + cost
-                    + "<br/><font color=\"#4153B6\"><b><i>Time Log: </font></i></b>" + time + "<br/>";
-
-            array_list.add(Html.fromHtml(htmlString));
-            res.moveToNext();
-        }
-        return array_list;
-    }
-
+    /**
+     * Method to get Resident Phone number.
+     * @return String
+     */
     public String getResidentPhoneNumber(){
 
         String phoneNumber = "";
@@ -186,6 +239,10 @@ public class DbMain extends SQLiteOpenHelper {
         return phoneNumber;
     }
 
+    /**
+     * Method to get Resident Zip code.
+     * @return
+     */
     public String getResidentZipCode(){
 
         String zipCode = "";
@@ -202,6 +259,10 @@ public class DbMain extends SQLiteOpenHelper {
         return zipCode;
     }
 
+    /**
+     * Method to get composter zip code.
+     * @return
+     */
     public String getComposterZipCode(){
 
         String zipCode = "";
@@ -218,6 +279,9 @@ public class DbMain extends SQLiteOpenHelper {
         return zipCode;
     }
 
+    /**
+     * Method to set Composter user details.
+     */
     public void setComposterUserDetails()
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -231,6 +295,10 @@ public class DbMain extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Method to get Resident Phone number.
+     * @return
+     */
     public String getResidentID()
     {
         ArrayList<Spanned> array_list = new ArrayList<Spanned>();

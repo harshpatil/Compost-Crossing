@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by cheth on 11/8/2016.
+ * Created by Chethan on 11/8/2016.
  */
 
 public class ComposterListViewAdapter extends BaseAdapter{
@@ -29,7 +29,6 @@ public class ComposterListViewAdapter extends BaseAdapter{
     public ComposterListViewAdapter(Context context, int resource, Activity activity, List<AdDetail> compostAdDetailList) {
         super();
         this.compostAdDetailList = compostAdDetailList;
-        //super(context,resource,compostAdDetailList);
         this.activity = activity;
     }
 

@@ -67,6 +67,17 @@ public class ComposterRegistration extends AppCompatActivity {
 
     }
 
+    /**
+     * Method to create a new Composter profile and write to the local database.
+     * @param name
+     * @param phone
+     * @param address
+     * @param city
+     * @param state
+     * @param zipcode
+     * @param username
+     * @param passcode
+     */
     protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode ,String username, String passcode){
 
         String url ="composterRegisteration/"+ phone;

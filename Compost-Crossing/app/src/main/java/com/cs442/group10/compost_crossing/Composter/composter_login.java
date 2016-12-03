@@ -34,7 +34,8 @@ public class composter_login extends AppCompatActivity {
                 if(username.getText().length() != 0 &&
                         passcode.getText().length() != 0 ){
                     String dbpasscode = db.getComposterUserNameAndPassword(username.getText().toString());
-                    if(dbpasscode.equals(passcode.getText().toString())){
+                    String userid = db.getComposterUserName();
+                    if(dbpasscode.equals(passcode.getText().toString()) && userid.equals(username.getText().toString()) ){
                         Constants.loginflag=1;
                         db.setComposterUserDetails();//Sets the composter name,id and zip - Chethan
                         Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
@@ -47,6 +48,6 @@ public class composter_login extends AppCompatActivity {
                 }
             }
 
-            });
+        });
     }
 }

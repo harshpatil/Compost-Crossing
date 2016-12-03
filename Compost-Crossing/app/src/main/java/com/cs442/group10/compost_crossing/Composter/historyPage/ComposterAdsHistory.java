@@ -78,7 +78,7 @@ public class ComposterAdsHistory extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue() != null && dataSnapshot.getValue() != " " && !dataSnapshot.getValue().getClass().equals(String.class)) {
+                if(composterHistoryFragment.isVisible() && dataSnapshot.getValue() != null && dataSnapshot.getValue() != " " && !dataSnapshot.getValue().getClass().equals(String.class)) {
 
                     loadingLayout.setVisibility(View.GONE);
                 Map<String, Map<String,String>> compostInfoMap = (Map<String, Map<String,String>>) dataSnapshot.getValue();
