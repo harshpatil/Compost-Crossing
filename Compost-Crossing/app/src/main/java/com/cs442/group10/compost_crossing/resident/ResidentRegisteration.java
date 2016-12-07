@@ -70,9 +70,9 @@ public class ResidentRegisteration extends AppCompatActivity {
 
     }
 
-    protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode,String username, String passcode){
+    protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode,String username, String passcode) {
 
-        String url ="residentRegisteration/"+ phone;
+        String url = "residentRegisteration/" + phone;
         final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference(url);
         mDatabase.child("name").setValue(name);
         mDatabase.child("phone").setValue(phone);
@@ -84,6 +84,6 @@ public class ResidentRegisteration extends AppCompatActivity {
         mDatabase.child("username").setValue(username);
         mDatabase.child("passcode").setValue(passcode);
         mDatabase.push();
-        Constants.residentId =phone.toString();
+        Constants.residentId = phone.toString();
     }
 }

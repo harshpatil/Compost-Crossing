@@ -78,9 +78,9 @@ public class ComposterRegistration extends AppCompatActivity {
      * @param username
      * @param passcode
      */
-    protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode ,String username, String passcode){
+    protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode ,String username, String passcode) {
 
-        String url ="composterRegisteration/"+ phone;
+        String url = "composterRegisteration/" + phone;
         final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference(url);
         mDatabase.child("name").setValue(name);
         mDatabase.child("phone").setValue(phone);
@@ -93,7 +93,7 @@ public class ComposterRegistration extends AppCompatActivity {
         mDatabase.child("passcode").setValue(passcode);
         mDatabase.push();
         Constants.composterId = phone.toString();
-        Constants.composterZip=zipcode.toString();
+        Constants.composterZip = zipcode.toString();
 
     }
 }

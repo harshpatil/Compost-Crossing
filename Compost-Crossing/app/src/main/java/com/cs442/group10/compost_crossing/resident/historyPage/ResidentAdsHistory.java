@@ -182,6 +182,7 @@ public class ResidentAdsHistory extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
+        getSupportActionBar().setTitle(R.string.residentViewTitle);
     }
 
     @Override
