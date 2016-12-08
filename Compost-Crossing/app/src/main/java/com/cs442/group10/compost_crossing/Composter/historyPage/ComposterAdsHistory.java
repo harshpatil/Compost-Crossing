@@ -159,8 +159,6 @@ public class ComposterAdsHistory extends AppCompatActivity {
 
         Log.i("ADSLIST", String.valueOf(adsList.size()));
 
-
-
         backButton = (Button) findViewById(R.id.backButtonComposterHistoryPage);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

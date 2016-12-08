@@ -8,7 +8,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="11"
+        android:weightSum="10.6"
         >
 
         <TextView
@@ -44,10 +44,10 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Given Name"
+            android:gravity="center"
             />
 
         <EditText
-            android:inputType="phone"
             android:id="@+id/phoneNumber"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -55,6 +55,8 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Contact Number"
+            android:inputType="number"
+            android:gravity="center"
             android:maxLength="10" />
 
         <EditText
@@ -66,6 +68,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Address"
+            android:gravity="center"
             />
 
         <EditText
@@ -77,6 +80,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="City"
+            android:gravity="center"
             />
 
         <EditText
@@ -88,6 +92,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="State"
+            android:gravity="center"
             />
 
 
@@ -100,6 +105,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Zipcode"
+            android:gravity="center"
             />
 
         <EditText
@@ -111,6 +117,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="User Name"
+            android:gravity="center"
             android:layout_below="@+id/address"/>
 
 
@@ -123,6 +130,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Password"
+            android:gravity="center"
             android:layout_below="@+id/address"/>
 
 
