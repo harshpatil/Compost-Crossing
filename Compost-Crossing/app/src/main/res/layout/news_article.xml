@@ -91,7 +91,7 @@
             android:layout_width="match_parent"
             android:textColor="@color/buttonText"
             android:text="@string/article_page_button_text"
-            android:background="@color/buttonBackground"
+            android:background="@drawable/button_bg"
             android:textSize="16dp"
             android:gravity="center"
             android:layout_height="0dp"

@@ -16,7 +16,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:textColor="@color/buttonText"
-            android:background="@color/buttonBackground"
+            android:background="@drawable/button_bg"
             android:textSize="20dp"
             android:textAlignment="center"
             android:gravity="center"
@@ -146,7 +146,7 @@
             android:layout_marginTop="5dp"
             android:id="@+id/createProfileButton"
             android:textColor="@color/buttonText"
-            android:background="@color/buttonBackground"
+            android:background="@drawable/button_bg"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
