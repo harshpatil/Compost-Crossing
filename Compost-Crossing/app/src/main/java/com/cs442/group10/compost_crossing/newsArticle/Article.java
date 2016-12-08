@@ -3,6 +3,7 @@ package com.cs442.group10.compost_crossing.newsArticle;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -25,6 +26,9 @@ import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.SimpleShowcaseEventListener;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -128,10 +132,12 @@ public class Article extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[3];
+        drawerList = new String[4];
         drawerList[0] = Constants.HOME;
         drawerList[1] = Constants.NEWS_ARTICLE;
         drawerList[2] = Constants.SETTINGS;
+        drawerList[3] = Constants.HELP;
+
 
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
@@ -153,6 +159,14 @@ public class Article extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.newsArticle.Article", MODE_PRIVATE);
+        boolean isFirstRun = sharedPreferences.getBoolean("firstrun", true);
+        if (isFirstRun) {
+
+            sharedPreferences.edit().putBoolean("firstrun", false).commit();
+            showFirstShowCase();
+        }
     }
 
     @Override
@@ -194,6 +208,65 @@ public class Article extends AppCompatActivity {
             Intent i = new Intent(this, c);
             startActivityForResult(i, SHOW_PREFERENCES);
 
+        } else if(position == 3){
+
+            SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.newsArticle.Article", MODE_PRIVATE);
+            sharedPreferences.edit().putBoolean("firstrun", true).commit();
+            Intent intent = new Intent(this, Article.class);
+            startActivity(intent);
         }
+    }
+
+    private void showFirstShowCase(){
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(articleBody))
+                .hideOnTouchOutside()
+                .setContentTitle("Scroll down to read entire article")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showSecondShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+    private void showSecondShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(goToHomePageButton))
+                .hideOnTouchOutside()
+                .setContentTitle("Click this button to go back to Home page")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showThirdShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+    private void showThirdShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(mDrawerLayout))
+                .hideOnTouchOutside()
+                .setContentTitle("Slide from left to navigate between screens")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                    }
+
+                })
+                .build();
     }
 }

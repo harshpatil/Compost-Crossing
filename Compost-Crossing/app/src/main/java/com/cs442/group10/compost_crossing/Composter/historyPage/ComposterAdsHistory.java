@@ -2,6 +2,7 @@ package com.cs442.group10.compost_crossing.Composter.historyPage;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -26,6 +27,9 @@ import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
 import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
 import com.cs442.group10.compost_crossing.resident.nearByComposter.NearByComposter;
 import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.SimpleShowcaseEventListener;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -169,7 +173,7 @@ public class ComposterAdsHistory extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[8];
+        drawerList = new String[9];
         drawerList[0] = Constants.HOME;
         drawerList[1] = Constants.NEWS_ARTICLE;
         drawerList[2] = Constants.COMPOSTER_VIEW_ADS;
@@ -178,6 +182,7 @@ public class ComposterAdsHistory extends AppCompatActivity {
         drawerList[5] = Constants.SETTINGS;
         drawerList[6] = Constants.BACK;
         drawerList[7] = Constants.SIGNOUT;
+        drawerList[8] = Constants.HELP;
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -198,6 +203,14 @@ public class ComposterAdsHistory extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.Composter.historyPage.ComposterAdsHistory", MODE_PRIVATE);
+        boolean isFirstRun = sharedPreferences.getBoolean("firstrun", true);
+        if (isFirstRun) {
+
+            sharedPreferences.edit().putBoolean("firstrun", false).commit();
+            showFirstShowCase();
+        }
     }
 
     @Override
@@ -260,13 +273,55 @@ public class ComposterAdsHistory extends AppCompatActivity {
             Intent intent = new Intent(this, ComposterListViewActivity.class);
             startActivity(intent);
 
-        }
-        else if(position == 7){
+        } else if(position == 7){
 
             Constants.loginflag=0;
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
 
+        } else if(position == 8){
+
+            SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.Composter.historyPage.ComposterAdsHistory", MODE_PRIVATE);
+            sharedPreferences.edit().putBoolean("firstrun", true).commit();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
         }
     }
+
+    private void showFirstShowCase(){
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(mDrawerLayout))
+                .hideOnTouchOutside()
+                .setContentTitle("This is the list of your purchase history")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showSecondShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+    private void showSecondShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(backButton))
+                .hideOnTouchOutside()
+                .setContentTitle("Click this button to go back to Composter dashboard")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                    }
+
+                })
+                .build();
+    }
+
 }

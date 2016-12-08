@@ -1,6 +1,7 @@
 package com.cs442.group10.compost_crossing.Composter;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.SimpleShowcaseEventListener;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 /**
  * {@link CompostDetailActivity} - Activity to display compost ad details
@@ -88,6 +92,14 @@ public class CompostDetailActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.Composter.CompostDetailActivity", MODE_PRIVATE);
+        boolean isFirstRun = sharedPreferences.getBoolean("firstrun", true);
+        if (isFirstRun) {
+
+            sharedPreferences.edit().putBoolean("firstrun", false).commit();
+            showFirstShowCase();
+        }
     }
 
     @Override
@@ -171,13 +183,48 @@ public class CompostDetailActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ComposterListViewActivity.class);
             startActivity(intent);
 
-        }
-        else if(position == 7){
+        } else if(position == 7){
 
             Constants.loginflag=0;
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
 
         }
+    }
+
+    private void showFirstShowCase(){
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(mDrawerLayout))
+                .hideOnTouchOutside()
+                .setContentTitle("Slide from left to navigate between screens")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showSecondShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+    private void showSecondShowCase() {
+
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)//
+                .setTarget(new ViewTarget(mDrawerLayout))
+                .hideOnTouchOutside()
+                .setContentTitle("Click on Accept Compost to purchase an Ad")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                    }
+
+                })
+                .build();
     }
 }

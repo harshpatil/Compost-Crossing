@@ -125,10 +125,11 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[3];
+        drawerList = new String[4];
         drawerList[0] = Constants.HOME;
         drawerList[1] = Constants.NEWS_ARTICLE;
         drawerList[2] = Constants.SETTINGS;
+        drawerList[3] = Constants.HELP;
 
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
@@ -232,6 +233,12 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(this, c);
             startActivityForResult(i, SHOW_PREFERENCES);
 
+        } else if(position == 3){
+
+            SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.MainActivity", MODE_PRIVATE);
+            sharedPreferences.edit().putBoolean("firstrun", true).commit();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -241,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                 .setStyle(R.style.CustomShowcaseTheme2)
                 .setTarget(new ViewTarget(composterButton))
                 .hideOnTouchOutside()
-                .setContentTitle("Click the button if you are a composter.")
+                .setContentTitle("Click this button if you are a Composter")
                 .setShowcaseEventListener(new SimpleShowcaseEventListener() {
 
                     @Override
@@ -259,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
                 .setStyle(R.style.CustomShowcaseTheme2)
                 .setTarget(new ViewTarget(residentButton))
                 .hideOnTouchOutside()
-                .setContentTitle("Click the button to go back to course list.")
+                .setContentTitle("Click this button if you are a Resident")
                 .setShowcaseEventListener(new SimpleShowcaseEventListener() {
 
                     @Override
@@ -277,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
                 .setStyle(R.style.CustomShowcaseTheme2)//moduleListView.getChildAt(0).findViewById(R.id.editModuleButtonView))
                 .setTarget(new ViewTarget(readArticle))
                 .hideOnTouchOutside()
-                .setContentTitle("Click to edit the module details.")
+                .setContentTitle("Click this button to read Compost News Article")
                 .setShowcaseEventListener(new SimpleShowcaseEventListener() {
 
                     @Override
