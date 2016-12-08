@@ -70,7 +70,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:ems="10"
-                android:hint="Pickup Location (Street, House #)"
+                android:hint="Pickup Location"
                 android:textColorHint="#f1434343"/>
 
             <EditText
@@ -83,7 +83,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:ems="10"
-                android:hint="City (Chicago)"
+                android:hint="City"
                 android:textColorHint="#f1434343"/>
 
             <EditText
@@ -96,7 +96,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:ems="10"
-                android:hint="State (Illinois)"
+                android:hint="State"
                 android:textColorHint="#f1434343"/>
 
 
@@ -111,7 +111,7 @@
                 android:layout_marginRight="10dp"
                 android:inputType="number"
                 android:ems="10"
-                android:hint="Zip Code (60616)"
+                android:hint="Zip Code"
                 android:textColor="#000000"
                 android:textColorHint="#f1434343"
                 android:maxLength="10" />
