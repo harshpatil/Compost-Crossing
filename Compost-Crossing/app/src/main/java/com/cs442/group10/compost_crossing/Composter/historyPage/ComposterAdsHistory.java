@@ -18,15 +18,11 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity;
-import com.cs442.group10.compost_crossing.Composter.nearbyResident.NearByResident;
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
 import com.cs442.group10.compost_crossing.newsArticle.Article;
 import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
-import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
-import com.cs442.group10.compost_crossing.resident.nearByComposter.NearByComposter;
-import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.SimpleShowcaseEventListener;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
@@ -252,7 +248,8 @@ public class ComposterAdsHistory extends AppCompatActivity {
 
         } else if(position == 3){
 
-            Intent intent=new Intent(this, NearByResident.class);
+            Intent intent = new Intent(this, ComposterListViewActivity.class);
+            intent.putExtra("showNearby", true);
             startActivity(intent);
 
         } else if(position == 4){

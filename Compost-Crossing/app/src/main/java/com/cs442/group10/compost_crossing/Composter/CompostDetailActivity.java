@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,7 +18,6 @@ import android.widget.ListView;
 
 import com.cs442.group10.compost_crossing.AdDetail;
 import com.cs442.group10.compost_crossing.Composter.historyPage.ComposterAdsHistory;
-import com.cs442.group10.compost_crossing.Composter.nearbyResident.NearByResident;
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
@@ -165,7 +163,8 @@ public class CompostDetailActivity extends AppCompatActivity {
 
         } else if(position == 3){
 
-            Intent intent=new Intent(this, NearByResident.class);
+            Intent intent = new Intent(this, ComposterListViewActivity.class);
+            intent.putExtra("showNearby", true);
             startActivity(intent);
 
         } else if(position == 4){
