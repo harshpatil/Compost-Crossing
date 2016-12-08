@@ -76,7 +76,7 @@ public class ResidentListViewActivity extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_module_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_module_list);
 
-        drawerList = new String[9];
+        drawerList = new String[10];
         drawerList[0] = Constants.HOME;
         drawerList[1] = Constants.NEWS_ARTICLE;
         drawerList[2] = Constants.YOUR_ACTIVE_ADS;
@@ -86,6 +86,7 @@ public class ResidentListViewActivity extends AppCompatActivity {
         drawerList[6] = Constants.SETTINGS;
         drawerList[7] = Constants.BACK;
         drawerList[8] = Constants.SIGNOUT;
+        drawerList[9] = Constants.HELP;
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_list_item, drawerList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -230,15 +231,19 @@ public class ResidentListViewActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ResidentListViewActivity.class);
             startActivity(intent);
 
-        }
-        else if(position == 8){
+        } else if(position == 8){
 
             Constants.loginflagforresident=0;
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
 
-        }
+        } else if(position == 9){
 
+            SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.residentDefault.ResidentListViewActivity", MODE_PRIVATE);
+            sharedPreferences.edit().putBoolean("residentFirstrun", true).commit();
+            Intent intent = new Intent(this, ResidentListViewActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void showFirstShowCase(){

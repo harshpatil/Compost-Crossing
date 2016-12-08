@@ -2,6 +2,7 @@ package com.cs442.group10.compost_crossing.resident.nearByComposter;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -25,6 +26,9 @@ import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
 import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
 import com.cs442.group10.compost_crossing.resident.historyPage.ResidentAdsHistory;
 import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.SimpleShowcaseEventListener;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -171,6 +175,14 @@ public class NearByComposter extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.resident.NearByComposter", MODE_PRIVATE);
+        boolean isFirstRun = sharedPreferences.getBoolean("residentFirstrun", true);
+        if (isFirstRun) {
+
+            sharedPreferences.edit().putBoolean("residentFirstrun", false).commit();
+            showFirstShowCase();
+        }
     }
 
     @Override
@@ -257,4 +269,40 @@ public class NearByComposter extends AppCompatActivity {
 
         }
     }
+
+    private void showFirstShowCase(){
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(mDrawerLayout))
+                .hideOnTouchOutside()
+                .setContentTitle("Here you will see the list of composters who are near to you")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showSecondShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+    private void showSecondShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(backButton))
+                .hideOnTouchOutside()
+                .setContentTitle("Click here to go back to Resident dashboard")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                    }
+
+                })
+                .build();
+    }
+
 }

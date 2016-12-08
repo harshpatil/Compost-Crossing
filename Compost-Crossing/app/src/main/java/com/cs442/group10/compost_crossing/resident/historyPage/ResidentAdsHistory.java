@@ -2,6 +2,7 @@ package com.cs442.group10.compost_crossing.resident.historyPage;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -25,6 +26,9 @@ import com.cs442.group10.compost_crossing.preferences.MyPreferenceActivity;
 import com.cs442.group10.compost_crossing.resident.createAd.AdCreation;
 import com.cs442.group10.compost_crossing.resident.nearByComposter.NearByComposter;
 import com.cs442.group10.compost_crossing.resident.residentDefault.ResidentListViewActivity;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.SimpleShowcaseEventListener;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -182,6 +186,14 @@ public class ResidentAdsHistory extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.resident.ResidentAdsHistory", MODE_PRIVATE);
+        boolean isFirstRun = sharedPreferences.getBoolean("residentHistoryFirstrun", true);
+        if (isFirstRun) {
+
+            sharedPreferences.edit().putBoolean("residentHistoryFirstrun", false).commit();
+            showFirstShowCase();
+        }
     }
 
     @Override
@@ -268,4 +280,40 @@ public class ResidentAdsHistory extends AppCompatActivity {
 
         }
     }
+
+    private void showFirstShowCase(){
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(mDrawerLayout))
+                .hideOnTouchOutside()
+                .setContentTitle("Here you will see list of your sold ads")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        showSecondShowCase();
+                    }
+
+                })
+                .build();
+    }
+
+    private void showSecondShowCase() {
+        new ShowcaseView.Builder(this)
+                .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setTarget(new ViewTarget(backButton))
+                .hideOnTouchOutside()
+                .setContentTitle("Click here to go back to Resident dashboard")
+                .setShowcaseEventListener(new SimpleShowcaseEventListener() {
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                    }
+
+                })
+                .build();
+    }
+
 }
