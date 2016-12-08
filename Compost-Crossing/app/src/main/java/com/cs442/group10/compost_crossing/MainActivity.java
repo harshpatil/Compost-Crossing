@@ -104,17 +104,15 @@ public class MainActivity extends AppCompatActivity {
                 String id = db.getResidentID();
                 Constants.residentId = id;
 
-                if (count >= 1&& Constants.loginflagforresident == 0) {
-                    db.setComposterUserDetails();//Sets the composter name,id and zip - Chethan
+                if (count >= 1 && Constants.loginflagforresident == 0) {
                     Intent composterListViewIntent = new Intent(getBaseContext(), ResidentLogin.class);
                     startActivity(composterListViewIntent);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
-                }else if(count >= 1&& Constants.loginflagforresident == 1){
+                } else if (count >= 1 && Constants.loginflagforresident == 1) {
                     Intent residentListViewIntent = new Intent(getBaseContext(), ResidentListViewActivity.class);
                     startActivity(residentListViewIntent);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
-                }
-                else {
+                } else {
                     Intent residentregistration = new Intent(getApplicationContext(), ResidentRegisteration.class);
                     startActivity(residentregistration);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);

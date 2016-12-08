@@ -30,38 +30,40 @@ public class ComposterRegistration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_composter_registeration);
         db = new DbMain(this);
-        final Button createProfileButton= (Button)findViewById(R.id.createProfileButton);
+        final Button createProfileButton = (Button) findViewById(R.id.createProfileButton);
 
         createProfileButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
-                name = (EditText)findViewById(R.id.firstName);
-                phone = (EditText)findViewById(R.id.phoneNumber);
-                address = (EditText)findViewById(R.id.address);
-                city = (EditText)findViewById(R.id.city);
-                state = (EditText)findViewById(R.id.state);
-                zipcode = (EditText)findViewById(R.id.zipcode);
-                username = (EditText)findViewById(R.id.username);
-                passcode = (EditText)findViewById(R.id.password);
-                if(name.getText().length() != 0 &&
-                        phone.getText().length() != 0  &&
-                        address.getText().length() != 0  &&
-                        city.getText().length() != 0  &&
-                        state.getText().length() != 0  &&
+                name = (EditText) findViewById(R.id.firstName);
+                phone = (EditText) findViewById(R.id.phoneNumber);
+                address = (EditText) findViewById(R.id.address);
+                city = (EditText) findViewById(R.id.city);
+                state = (EditText) findViewById(R.id.state);
+                zipcode = (EditText) findViewById(R.id.zipcode);
+                username = (EditText) findViewById(R.id.username);
+                passcode = (EditText) findViewById(R.id.password);
+                if (name.getText().length() != 0 &&
+                        phone.getText().length() != 0 &&
+                        address.getText().length() != 0 &&
+                        city.getText().length() != 0 &&
+                        state.getText().length() != 0 &&
                         zipcode.getText().length() != 0 &&
-                        username.getText().length() != 0  &&
+                        username.getText().length() != 0 &&
                         passcode.getText().length() != 0
                         ) {
-                    db.insertComposter("", name.getText().toString(), phone.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), address.getText().toString(),username.getText().toString(),passcode.getText().toString());
-                    writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(),username.getText().toString(),passcode.getText().toString());
-                    Constants.loginflag=1;
-                    Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
-                    startActivity(composterListViewIntent);
-                }
-                else{
+                    if (zipcode.getText().length() >= Constants.ZIP_CODE_MIN_LENGTH) {
+                        db.insertComposter("", name.getText().toString(), phone.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), address.getText().toString(), username.getText().toString(), passcode.getText().toString());
+                        writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), username.getText().toString(), passcode.getText().toString());
+                        Constants.loginflag = 1;
+                        Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
+                        startActivity(composterListViewIntent);
+                    } else {
+                        Toast.makeText(getApplication(), R.string.zipCodeInvalidMsg, Toast.LENGTH_LONG).show();
+                    }
+                } else {
                     Toast.makeText(getApplication(), "Please fill the form completely", Toast.LENGTH_LONG).show();
                 }
-                //sint count = db.numberOfentries();
             }
         });
 
@@ -78,9 +80,9 @@ public class ComposterRegistration extends AppCompatActivity {
      * @param username
      * @param passcode
      */
-    protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode ,String username, String passcode){
+    protected void writetoDB( String name, String phone, String address, String city, String state, String zipcode ,String username, String passcode) {
 
-        String url ="composterRegisteration/"+ phone;
+        String url = "composterRegisteration/" + phone;
         final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference(url);
         mDatabase.child("name").setValue(name);
         mDatabase.child("phone").setValue(phone);
@@ -93,7 +95,7 @@ public class ComposterRegistration extends AppCompatActivity {
         mDatabase.child("passcode").setValue(passcode);
         mDatabase.push();
         Constants.composterId = phone.toString();
-        Constants.composterZip=zipcode.toString();
+        Constants.composterZip = zipcode.toString();
 
     }
 }

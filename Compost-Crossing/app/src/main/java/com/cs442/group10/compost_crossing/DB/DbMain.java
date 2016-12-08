@@ -3,6 +3,8 @@ package com.cs442.group10.compost_crossing.DB;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -30,6 +32,7 @@ public class DbMain extends SQLiteOpenHelper {
     public static final String COMPOST_REGISTER_COLUMN_ADDRESS = "address";
     public static final String COMPOST_REGISTER_COLUMN_username = "username";
     public static final String COMPOST_REGISTER_COLUMN_passcode = "passcode";
+    public static final String RESIDENT_REGISTER_COLUMN_NAME = "name";
 
     public DbMain(Context context)
     {
@@ -311,8 +314,41 @@ public class DbMain extends SQLiteOpenHelper {
         while(res.isAfterLast() == false){
 
             phone  = res.getString(res.getColumnIndex(COMPOST_REGISTER_COLUMN_PHONE));
+            Constants.residentName = res.getString(res.getColumnIndex(RESIDENT_REGISTER_COLUMN_NAME));
             break;
         }
         return phone;
+    }
+
+    public Map<String,String> getComposterDetails(){
+
+        String query ="select "+COMPOST_REGISTER_COLUMN_username+","+COMPOST_REGISTER_COLUMN_passcode+" from composter_register";
+        Map<String,String> userCredentialsMap = new HashMap<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor resultSet =  db.rawQuery( query, null);
+        resultSet.moveToLast();
+
+        while(resultSet.isBeforeFirst() == false){
+            userCredentialsMap.put("userName", resultSet.getString(0));
+            userCredentialsMap.put("password", resultSet.getString(1));
+            break;
+        }
+        return userCredentialsMap;
+    }
+
+    public Map<String,String> getResidentDetails(){
+
+        String query ="select username,passcode from resident_register";
+        Map<String,String> userCredentialsMap = new HashMap<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor resultSet =  db.rawQuery( query, null);
+        resultSet.moveToLast();
+
+        while(resultSet.isBeforeFirst() == false){
+            userCredentialsMap.put("userName", resultSet.getString(0));
+            userCredentialsMap.put("password", resultSet.getString(1));
+            break;
+        }
+        return userCredentialsMap;
     }
 }

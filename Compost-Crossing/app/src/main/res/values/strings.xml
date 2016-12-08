@@ -31,4 +31,11 @@
     <string name="exitMessage">Please click BACK again to exit</string>
     <string name="selectCompostMessage">Select a Compost from the list</string>
     <string name="CompostAcceptedSuccessMsg">Compost Accepted Successfully</string>
+    <string name="forgot_user_credentials">Forgot User Credentials?</string>
+    <string name="composterViewTitle">Composter Dashboard</string>
+    <string name="residentViewTitle">Resident Dashboard</string>
+    <string name="emptyLoginDetailsMsg">Username or Password is not entered!</string>
+    <string name="incorrectUserCredentialsMsg">Incorrect Password or User Name</string>
+    <string name="completeFormMsg">Please fill the form completely</string>
+    <string name="zipCodeInvalidMsg">Zipcode should comprise of at least 5 digits</string>
 </resources>

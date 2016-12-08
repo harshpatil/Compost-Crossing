@@ -186,6 +186,7 @@ public class ResidentAdsHistory extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
+        getSupportActionBar().setTitle(R.string.residentViewTitle);
 
         SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.resident.ResidentAdsHistory", MODE_PRIVATE);
         boolean isFirstRun = sharedPreferences.getBoolean("residentHistoryFirstrun", true);
