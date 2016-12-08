@@ -253,7 +253,8 @@ public class NearByResident extends AppCompatActivity {
 
         } else if(position == 3){
 
-            Intent intent=new Intent(this, NearByResident.class);
+            Intent intent = new Intent(this, ComposterListViewActivity.class);
+            intent.putExtra("showNearby", true);
             startActivity(intent);
 
         } else if(position == 4){

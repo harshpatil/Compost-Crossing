@@ -86,42 +86,62 @@ public class NearByComposter extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if (nearByComposterFragment.isVisible()) {
+                    loadingLayout.setVisibility(View.GONE);
+                    Map<String, Map<String, String>> compostInfoMap = (Map<String, Map<String, String>>) dataSnapshot.getValue();
 
-                loadingLayout.setVisibility(View.GONE);
-                Map<String, Map<String,String>> compostInfoMap = (Map<String, Map<String,String>>) dataSnapshot.getValue();
+                    for (Map.Entry<String, Map<String, String>> compostAdListMap : compostInfoMap.entrySet()) {
 
-                for(Map.Entry<String, Map<String,String>> compostAdListMap: compostInfoMap.entrySet()){
-
-                    Map<String,String> compostAdMap = compostAdListMap.getValue();
-                    String zipcode = String.valueOf(compostAdMap.get("zipcode"));
-                    String composterZip = "";
-                    if(zipcode.length() >= Constants.ZIP_CODE_MIN_LENGTH) {
-                        composterZip = zipcode.substring(0, 3);
-                    }
-                    String currentUserPin = currentUserZipCode.substring(0, 3);
-                    Log.i("ResidentZIPCODE", composterZip);
-                    Log.i("ResidentZIPCODE", currentUserPin);
-
-                    if(composterZip.equals(currentUserPin)){
-
-                        composter = new Composter();
-                        switch (imageId%10){
-                            case 0 : composter.setImageId(R.drawable.company_1); break;
-                            case 1 : composter.setImageId(R.drawable.company_2); break;
-                            case 2 : composter.setImageId(R.drawable.company_3); break;
-                            case 3 : composter.setImageId(R.drawable.company_4); break;
-                            case 4 : composter.setImageId(R.drawable.company_5); break;
-                            case 5 : composter.setImageId(R.drawable.company_6); break;
-                            case 6 : composter.setImageId(R.drawable.company_7); break;
-                            case 7 : composter.setImageId(R.drawable.company_8); break;
-                            case 8 : composter.setImageId(R.drawable.company_9); break;
-                            default : composter.setImageId(R.drawable.company_10);
+                        Map<String, String> compostAdMap = compostAdListMap.getValue();
+                        String zipcode = String.valueOf(compostAdMap.get("zipcode"));
+                        String composterZip = "";
+                        if (zipcode.length() >= Constants.ZIP_CODE_MIN_LENGTH) {
+                            composterZip = zipcode.substring(0, 3);
                         }
-                        imageId ++;
-                        composter.setName(String.valueOf(compostAdMap.get("name")));
-                        composter.setAddress(String.valueOf(compostAdMap.get("address")) + " " + String.valueOf(compostAdMap.get("city")) + " " + String.valueOf(compostAdMap.get("zipcode")));
-                        composterList.add(composter);
-                        nearByComposterFragment.getListView().setBackgroundResource(0);
+                        String currentUserPin = currentUserZipCode.substring(0, 3);
+                        Log.i("ResidentZIPCODE", composterZip);
+                        Log.i("ResidentZIPCODE", currentUserPin);
+
+                        if (composterZip.equals(currentUserPin)) {
+
+                            composter = new Composter();
+                            switch (imageId % 10) {
+                                case 0:
+                                    composter.setImageId(R.drawable.company_1);
+                                    break;
+                                case 1:
+                                    composter.setImageId(R.drawable.company_2);
+                                    break;
+                                case 2:
+                                    composter.setImageId(R.drawable.company_3);
+                                    break;
+                                case 3:
+                                    composter.setImageId(R.drawable.company_4);
+                                    break;
+                                case 4:
+                                    composter.setImageId(R.drawable.company_5);
+                                    break;
+                                case 5:
+                                    composter.setImageId(R.drawable.company_6);
+                                    break;
+                                case 6:
+                                    composter.setImageId(R.drawable.company_7);
+                                    break;
+                                case 7:
+                                    composter.setImageId(R.drawable.company_8);
+                                    break;
+                                case 8:
+                                    composter.setImageId(R.drawable.company_9);
+                                    break;
+                                default:
+                                    composter.setImageId(R.drawable.company_10);
+                            }
+                            imageId++;
+                            composter.setName(String.valueOf(compostAdMap.get("name")));
+                            composter.setAddress(String.valueOf(compostAdMap.get("address")) + " " + String.valueOf(compostAdMap.get("city")) + " " + String.valueOf(compostAdMap.get("zipcode")));
+                            composterList.add(composter);
+                            nearByComposterFragment.getListView().setBackgroundResource(0);
+                        }
                     }
                 }
             }

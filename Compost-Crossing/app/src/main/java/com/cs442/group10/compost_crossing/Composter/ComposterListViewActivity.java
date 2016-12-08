@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.cs442.group10.compost_crossing.Composter.historyPage.ComposterAdsHistory;
-import com.cs442.group10.compost_crossing.Composter.nearbyResident.NearByResident;
 import com.cs442.group10.compost_crossing.MainActivity;
 import com.cs442.group10.compost_crossing.R;
 import com.cs442.group10.compost_crossing.constants.Constants;
@@ -177,8 +176,7 @@ public class ComposterListViewActivity extends AppCompatActivity {
 
         } else if(position == 3){
 
-            Intent intent=new Intent(this, NearByResident.class);
-            startActivity(intent);
+            onClickNearByResidentButton();
 
         } else if(position == 4){
 
