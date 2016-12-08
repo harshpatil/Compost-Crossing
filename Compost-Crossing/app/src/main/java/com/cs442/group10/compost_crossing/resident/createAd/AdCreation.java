@@ -119,6 +119,7 @@ public class AdCreation extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
+        getSupportActionBar().setTitle(R.string.residentViewTitle);
 
         SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.MainActivity", MODE_PRIVATE);
         boolean isFirstRun = sharedPreferences.getBoolean("firstrun", true);

@@ -112,6 +112,7 @@ public class ComposterListViewActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer);
+        getSupportActionBar().setTitle(R.string.composterViewTitle);
 
         SharedPreferences sharedPreferences = getSharedPreferences("com.cs442.group10.compost_crossing.Composter.ComposterListViewActivity", MODE_PRIVATE);
         boolean isFirstRun = sharedPreferences.getBoolean("firstrun", true);
