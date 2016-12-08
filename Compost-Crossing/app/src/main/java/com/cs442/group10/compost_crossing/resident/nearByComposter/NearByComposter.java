@@ -89,8 +89,11 @@ public class NearByComposter extends AppCompatActivity {
                 for(Map.Entry<String, Map<String,String>> compostAdListMap: compostInfoMap.entrySet()){
 
                     Map<String,String> compostAdMap = compostAdListMap.getValue();
-
-                    String composterZip = String.valueOf(compostAdMap.get("zipcode")).substring(0, 3);
+                    String zipcode = String.valueOf(compostAdMap.get("zipcode"));
+                    String composterZip = "";
+                    if(zipcode.length() >= Constants.ZIP_CODE_MIN_LENGTH) {
+                        composterZip = zipcode.substring(0, 3);
+                    }
                     String currentUserPin = currentUserZipCode.substring(0, 3);
                     Log.i("ResidentZIPCODE", composterZip);
                     Log.i("ResidentZIPCODE", currentUserPin);
