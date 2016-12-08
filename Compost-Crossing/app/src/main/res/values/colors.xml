@@ -7,6 +7,10 @@
     <color name="articleHeaderNewsPage">#ffffff</color>
     <color name="articleText">#050505</color>
     <color name="buttonText">#ffffff</color>
-    <color name="buttonBackground">#5db45d</color>
-    <color name="background">#a5eda5</color>
+    <color name="buttonBackground">#62c262</color>
+    <color name="buttonBackgroundStart">#448044</color>
+    <color name="buttonBackgroundEnd">#62c262</color>
+    <color name="background">#67d167</color>
+    <color name="showcase">#b8312e2e</color>
+
 </resources>
