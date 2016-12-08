@@ -118,7 +118,7 @@ public class ComposterListViewFragment extends Fragment {
 
                                     if (bundle.getBoolean("showNearby")) {
                                         String zipCode = String.valueOf(adDetailsMap.get("zipCode"));
-                                        String adDetailsZipCode = zipCode;
+                                        String adDetailsZipCode = "";
                                         if(zipCode.length() > 3){
                                             adDetailsZipCode = zipCode.substring(0, 3);
                                         }
