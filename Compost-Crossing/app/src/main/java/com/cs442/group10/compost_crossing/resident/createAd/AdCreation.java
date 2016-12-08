@@ -78,10 +78,11 @@ public class AdCreation extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(compostTitle.getText().toString().equals("") || address.getText().toString().equals("") || weight.getText().toString().equals("") || price.getText().toString().equals("")){
-                    Toast.makeText(getApplicationContext(),"Please fill out all fields.", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                if (compostTitle.getText().toString().equals("") || address.getText().toString().equals("") || weight.getText().toString().equals("") || price.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please fill out all fields.", Toast.LENGTH_SHORT).show();
+                    } else if (zipCode.getText().length() < Constants.ZIP_CODE_MIN_LENGTH) {
+                    Toast.makeText(getApplicationContext(), R.string.zipCodeInvalidMsg, Toast.LENGTH_SHORT).show();
+                } else {
                     writeToDB();
                 }
             }

@@ -117,7 +117,11 @@ public class ComposterListViewFragment extends Fragment {
                                     Button residentAllButton = (Button) view.findViewById(R.id.btnAllResident);
 
                                     if (bundle.getBoolean("showNearby")) {
-                                        String adDetailsZipCode = String.valueOf(adDetailsMap.get("zipCode")).substring(0, 3);
+                                        String zipCode = String.valueOf(adDetailsMap.get("zipCode"));
+                                        String adDetailsZipCode = zipCode;
+                                        if(zipCode.length() > 3){
+                                            adDetailsZipCode = zipCode.substring(0, 3);
+                                        }
                                         DbMain dbMain = new DbMain(getActivity().getApplicationContext());
                                         String composterZipCode = dbMain.getComposterZipCode();
                                         if (residentAllButton.getVisibility() == View.GONE) {
