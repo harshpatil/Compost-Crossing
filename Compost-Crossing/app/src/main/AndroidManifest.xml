@@ -46,7 +46,6 @@
             android:name=".preferences.MyPreferenceActivity"
             android:theme="@style/PreferencesTheme" />
         <activity android:name=".Composter.historyPage.ComposterAdsHistory" />
-        <activity android:name=".Composter.nearbyResident.NearByResident" />
         <activity android:name=".Composter.composter_login" />
         <activity android:name=".resident.ResidentLogin"></activity>
     </application>
