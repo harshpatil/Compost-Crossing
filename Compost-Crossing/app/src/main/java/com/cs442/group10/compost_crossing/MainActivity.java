@@ -1,5 +1,6 @@
 package com.cs442.group10.compost_crossing;
 
+import android.*;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     Button composterButton;
     DbMain db;
 
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
     private ListView mDrawerList;
     private String[] drawerList;
     private DrawerLayout mDrawerLayout;
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
+        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_SEND_SMS);
         startAlarmService();
 
         readArticle = (Button) findViewById(R.id.readArticleButton);

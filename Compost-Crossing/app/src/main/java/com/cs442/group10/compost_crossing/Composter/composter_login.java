@@ -1,6 +1,7 @@
 package com.cs442.group10.compost_crossing.Composter;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -39,11 +40,16 @@ public class composter_login extends AppCompatActivity {
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
-                String composterName = Constants.composterName;
-                Map<String, String> userCredentialsMap = db.getComposterDetails();
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(Constants.composterId, null, "Hi " + composterName + ",\n Your Composter login credentials:\nUsername:" + userCredentialsMap.get("userName") + "\nPassword: " + userCredentialsMap.get("password"), null, null);
-                Toast.makeText(getApplicationContext(), "Composter User credentials will reach you shortly via registered contact number", Toast.LENGTH_SHORT).show();
+                int res = getApplicationContext().checkCallingOrSelfPermission("android.permission.SEND_SMS");
+                if (res == PackageManager.PERMISSION_GRANTED) {
+                    String composterName = Constants.composterName;
+                    Map<String, String> userCredentialsMap = db.getComposterDetails();
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(Constants.composterId, null, "Hi " + composterName + ",\n Your Composter login credentials:\nUsername:" + userCredentialsMap.get("userName") + "\nPassword: " + userCredentialsMap.get("password"), null, null);
+                    Toast.makeText(getApplicationContext(), "Composter User credentials will reach you shortly via registered contact number", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.EnableSmsPermMsg, Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -74,6 +80,10 @@ public class composter_login extends AppCompatActivity {
                         Intent composterListViewIntent = new Intent(getBaseContext(), ComposterListViewActivity.class);
                         startActivity(composterListViewIntent);
                         overridePendingTransition(R.anim.left_slide_in, R.anim.left_slide_out);
+                    } else if(username.getText().length() < 3){
+                        Toast.makeText(getApplication(), R.string.minLengthUserNameMsg, Toast.LENGTH_LONG).show();
+                    } else if(passcode.getText().length() < 3){
+                        Toast.makeText(getApplication(), R.string.minLengthPasswordMsg, Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplication(), R.string.incorrectUserCredentialsMsg, Toast.LENGTH_LONG).show();
                     }

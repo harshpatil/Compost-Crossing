@@ -54,7 +54,11 @@ public class ResidentRegisteration extends AppCompatActivity {
                         username.getText().length() != 0 &&
                         passcode.getText().length() != 0
                         ) {
-                    if (zipcode.getText().length() >= Constants.ZIP_CODE_MIN_LENGTH) {
+                    if (username.getText().length() < Constants.USER_NAME_MIN_LENGTH){
+                        Toast.makeText(getApplication(), R.string.minLengthUserNameMsg, Toast.LENGTH_LONG).show();
+                    } else if(passcode.getText().length() < Constants.PASSWORD_MIN_LENGTH){
+                        Toast.makeText(getApplication(), R.string.minLengthPasswordMsg, Toast.LENGTH_LONG).show();
+                    } else if (zipcode.getText().length() >= Constants.ZIP_CODE_MIN_LENGTH) {
                         db.insertResident("", name.getText().toString(), phone.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), zipcode.getText().toString(), username.getText().toString(), passcode.getText().toString());
                         writetoDB(name.getText().toString(), phone.getText().toString(), address.getText().toString(), city.getText().toString(), state.getText().toString(), zipcode.getText().toString(), username.getText().toString(), passcode.getText().toString());
                         Constants.loginflagforresident = 1;

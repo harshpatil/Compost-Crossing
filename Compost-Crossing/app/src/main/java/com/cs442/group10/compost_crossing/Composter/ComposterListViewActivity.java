@@ -35,7 +35,7 @@ public class ComposterListViewActivity extends AppCompatActivity {
 
     private ListView mDrawerList;
     private String[] drawerList;
-    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
+    //private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private static final int SHOW_PREFERENCES = 0;
@@ -49,7 +49,7 @@ public class ComposterListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_composter_list_view);
 
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_SEND_SMS);
+        //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_SEND_SMS);
 
        FragmentManager fragmentManager = getSupportFragmentManager();
         ComposterListViewFragment fragment = (ComposterListViewFragment) fragmentManager.findFragmentById(R.id.composterListViewFragment);

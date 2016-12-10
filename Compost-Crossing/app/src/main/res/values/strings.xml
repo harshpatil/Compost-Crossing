@@ -38,4 +38,7 @@
     <string name="incorrectUserCredentialsMsg">Incorrect Password or User Name</string>
     <string name="completeFormMsg">Please fill the form completely</string>
     <string name="zipCodeInvalidMsg">Zipcode should comprise of at least 5 digits</string>
+    <string name="minLengthUserNameMsg">Length of the username should be at least 3</string>
+    <string name="minLengthPasswordMsg">Length of the password should be at least 3</string>
+    <string name="EnableSmsPermMsg">Please enable SMS permissions for this app to receive notifications</string>
 </resources>

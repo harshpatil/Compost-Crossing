@@ -118,7 +118,8 @@
             android:layout_marginRight="15dp"
             android:hint="User Name"
             android:gravity="center"
-            android:layout_below="@+id/address"/>
+            android:layout_below="@+id/address"
+            android:maxLength="10"/>
 
 
         <EditText
@@ -131,7 +132,8 @@
             android:layout_marginRight="15dp"
             android:hint="Password"
             android:gravity="center"
-            android:layout_below="@+id/address"/>
+            android:layout_below="@+id/address"
+            android:maxLength="10"/>
 
 
         <Button

@@ -32,7 +32,8 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="35dp"
             android:hint="User Name"
-            android:layout_below="@+id/address"/>
+            android:layout_below="@+id/address"
+            android:maxLength="10" />
 
         <EditText
             android:inputType="textPassword"
@@ -44,7 +45,8 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Password"
-            android:layout_below="@+id/address"/>
+            android:layout_below="@+id/address"
+            android:maxLength="10" />
 
         <Button
             android:layout_width="match_parent"
