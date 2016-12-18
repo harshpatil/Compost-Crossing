@@ -1,4 +1,5 @@
 .idea/**
+**/.idea/**
 .idea/misc.xml
 ./.idea/**
 Compost-Crossing/.idea/gradle.xml

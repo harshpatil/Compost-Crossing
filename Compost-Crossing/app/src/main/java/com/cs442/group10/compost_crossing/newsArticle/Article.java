@@ -71,7 +71,8 @@ public class Article extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
         Date date = new Date();
         Log.i("Today's date :", dateFormat.format(date));
-        String articleNumber = dateFormat.format(date);
+//        String articleNumber = dateFormat.format(date);
+        String articleNumber = "22112016";
         Log.i("ArticleNumber : ", articleNumber);
         DateFormat format2=new SimpleDateFormat("EEEE");
         String dayOfTheWeek = format2.format(date);
