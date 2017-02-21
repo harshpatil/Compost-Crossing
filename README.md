@@ -24,10 +24,4 @@ Compost Crossing is an Android platform for Composters and Residents to buy and 
  E) Send Notification whenever new Article is available
 
 - Android features used: 
-  Preference framework
-  Service
-  Broadcast Receiver
-  Notification
-  SMS notification
-  Alarm Manager
-  Fragments
+  Preference framework, Service, Broadcast Receiver, Notification, SMS notification, Alarm Manager, Fragments
